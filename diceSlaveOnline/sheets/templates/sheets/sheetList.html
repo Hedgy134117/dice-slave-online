@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Sheet List</h1>
+    <div class="sheets">
+        {% for sheet in sheets %}
+            <div class="sheet">
+                <h2><a href="{% url 'sheets:detail' slug='sheet.slug' slug=sheet.slug %}">{{ sheet.name }}</a></h2>
+                <p>{{ sheet.name }}</p>
+                <p>{{ sheet.Class }}</p>
+                <p>{{ sheet.background }}</p>
+                <p>{{ sheet.race }}</p>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

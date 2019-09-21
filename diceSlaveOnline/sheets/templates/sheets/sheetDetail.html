@@ -1,0 +1,113 @@
+{% extends 'base.html' %}
+
+{% block nav %}
+    <li><a href="{% url 'sheets:edit' slug %}" class="button">Edit Sheet</a></li>
+{% endblock %}
+
+{% block content %}
+    <div class="sheet-main">
+    <h1>{{ sheet.name }}</h1>
+    <h2>{{ sheet.Class }}</h2>
+    <h2>{{ sheet.background }}</h2>
+    <h2>{{ sheet.race }}</h2>
+    <h3>{{ sheet.xp }}</h3>
+    <h3>{{ sheet.level }}</h3>
+    </div>
+
+    <br>
+
+    <h1>Stats</h1>
+    <p>Strength: {{ sheet.strength }} + {{ sheet.strengthMod }}</p>
+    <p>Dexterity: {{ sheet.dexterity }} + {{ sheet.dexterityMod }}</p>
+    <p>Constitution: {{ sheet.constitution }} + {{ sheet.constitutionMod }}</p>
+    <p>Intelligence: {{ sheet.intelligence }} + {{ sheet.intelligenceMod }}</p>
+    <p>Wisdom: {{ sheet.wisdom }} + {{ sheet.wisdomMod }}</p>
+    <p>Charisma: {{ sheet.charisma }} + {{ sheet.charismaMod }}</p>
+    
+    <br>
+
+    <h1>Skills</h1>
+    {% if sheet.acrobatics %}
+    <p>Acrobatics + {{ sheet.acrobaticsMod }}</p>
+    {% endif %}
+    {% if sheet.animalHandling %}
+    <p>Animal Handling + {{ sheet.animalHanding }}</p>
+    {% endif %}
+    {% if sheet.arcana %}
+    <p>Arcana + {{ sheet.arcanaMod }}</p>
+    {% endif %}
+    {% if sheet.athletics %}
+    <p>Athletics + {{ sheet.athleticsMod }}</p>
+    {% endif %}
+    {% if sheet.deception %}
+    <p>Deception + {{ sheet.deceptionMod }}</p>
+    {% endif %}
+    {% if sheet.history %}
+    <p>History + {{ sheet.historyMod }}</p>
+    {% endif %}
+    {% if sheet.insight %}
+    <p>Insight + {{ sheet.insightMod }}</p>
+    {% endif %}
+    {% if sheet.intimidation %}
+    <p>Intimidation + {{ sheet.intimidationMod }}</p>
+    {% endif %}
+    {% if sheet.investigation %}
+    <p>Investigation + {{ sheet.investigationMod }}</p>
+    {% endif %}
+    {% if sheet.medicine %}
+    <p>Medicine + {{ sheet.medicineMod }}</p>
+    {% endif %}
+    {% if sheet.nature %}
+    <p>Nature + {{ sheet.natureMod }}</p>
+    {% endif %}
+    {% if sheet.perception %}
+    <p>Perception + {{ sheet.perceptionMod }}</p>
+    {% endif %}
+    {% if sheet.performance %}
+    <p>Performance + {{ sheet.performanceMod }}</p>
+    {% endif %}
+    {% if sheet.persuasion %}
+    <p>Persuasion + {{ sheet.persuasionMod }}</p>
+    {% endif %}
+    {% if sheet.religion %}
+    <p>Religion + {{ sheet.religionMod }}</p>
+    {% endif %}
+    {% if sheet.sleightOfHand %}
+    <p>Sleight of Hand + {{ sheet.sleightOfHandMod }}</p>
+    {% endif %}
+    {% if sheet.stealth %}
+    <p>Stealth + {{ sheet.stealthMod }}</p>
+    {% endif %}
+    {% if sheet.survival %}
+    <p>Survival + {{ sheet.survivalMod }}</p>
+    {% endif %}
+
+    <br>
+
+    <p>{{ sheet.otherProficiencies }}</p>
+    <p>{{ sheet.languages }}</p>
+    <p>Equipment: {{ sheet.equipment }}</p>
+    <p>{{ sheet.copper }} copper</p>
+    <p>{{ sheet.silver }} silver</p>
+    <p>{{ sheet.gold }} gold</p>
+    <p>{{ sheet.platinum }} platinum</p>
+
+    <br>
+
+    <p>AC: {{ sheet.armorClass }}</p>
+    <p>Initiative: {{ sheet.initiative }}</p>
+    <p>Speed: {{ sheet.speed }}</p>
+    <p>HP: {{ sheet.hitPoints }} / {{ sheet.maxHitPoints }}</p>
+    <p>Hit Dice: {{ sheet.hitDice }}</p>
+    <p>Successful death saves: {{ sheet.sDeathSave1 }} {{ sheet.sDeathSave2 }} {{ sheet.sDeathSave3 }}</p>
+    <p>Failed death saves: {{ sheet.fDeathSave1 }} {{ sheet.fDeathSave2 }} {{ sheet.fDeathSave3 }} </p>
+
+    <br>
+
+    <p>{{ sheet.personalityTraits }}</p>
+    <p>{{ sheet.ideals }}</p>
+    <p>{{ sheet.bonds }}</p>
+    <p>{{ sheet.flaws }}</p>
+    <p>{{ sheet.featuresTraits }}</p>
+
+{% endblock %}

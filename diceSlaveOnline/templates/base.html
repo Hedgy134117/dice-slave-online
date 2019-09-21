@@ -1,0 +1,20 @@
+{% load static from staticfiles %}
+
+<!DOCTYPE html>
+<head>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="{% url 'sheets:list' %}" class="button">Sheet List</a></li>
+            <li><a href="{% url 'sheets:create' %}" class="button">Create Sheet</a></li>
+            {% block nav %}
+            {% endblock %}
+        </ul>
+    </nav>
+
+    {% block content %}
+    {% endblock %}
+</body>
+</html>

@@ -1,0 +1,35 @@
+body {
+   font-family: Arial;
+}
+
+nav ul {
+  display: flex;
+  justify-content: flex-end;
+  list-style: none;
+}
+
+nav li {
+  padding: 20px 5px 0px 5px;
+}
+
+.button {
+  padding: 20px;
+  border: 1px solid black;
+}
+
+label {
+   display: block;
+   padding: 5px 0px 5px 0px;
+}
+
+.sheets {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 30px;
+}
+
+.sheet {
+  padding: 10px;
+  border: 1px solid black;
+  position: relative;
+}
