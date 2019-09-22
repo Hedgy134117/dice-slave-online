@@ -5,6 +5,8 @@
         <div class="big-sheets">
             {% for sheet in sheets %}
                 <div class="big-sheet">
+                    <a class="button" href="{% url 'sheets:edit' sheet.slug  %}">Edit</a>
+
                     <div class="big-stat-section">
                         <h1 class="big-stat-main">{{ sheet.name }}</h1>
                         <hr>
