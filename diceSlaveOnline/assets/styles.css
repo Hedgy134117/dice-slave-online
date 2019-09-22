@@ -1,35 +1,81 @@
 body {
-   font-family: Arial;
+  font-family: Arial;
+  background-color: #EAE6E5;
+  color: #12130F;
+  margin: 20px;
 }
 
 nav ul {
-  display: flex;
-  justify-content: flex-end;
-  list-style: none;
+ display: flex;
+ justify-content: flex-end;
+ list-style: none;
 }
 
 nav li {
-  padding: 20px 5px 0px 5px;
+ padding: 20px 5px 0px 5px;
 }
 
 .button {
-  padding: 20px;
-  border: 1px solid black;
+ padding: 15px;
+ border: 1px solid black;
+ border-radius: 4px;
+ background-color: #12130F;
+ color: #EAE6E5;
+ font-size: 1.3em;
+ text-decoration: none;
 }
 
 label {
-   display: block;
-   padding: 5px 0px 5px 0px;
+  display: block;
+  padding: 5px 0px 5px 0px;
 }
 
 .sheets {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-gap: 30px;
+ display: grid;
+ grid-template-columns: 1fr 1fr 1fr;
+ grid-gap: 30px;
 }
 
 .sheet {
+ padding: 10px;
+ position: relative;
+ border-radius: 4px;
+ background-color: #FFFAF9;
+ box-shadow: 5px 5px 0px rgba(168, 168, 168, 0.4);
+}
+
+.sheet a {
+  color: #12130F;
+  text-decoration: none;
+}
+
+.stat-main {
+  text-align: center;
+  padding: 5px;
+  width: 100%;
+}
+
+.stat-children {
+  display: flex;
+  justify-content: space-evenly;
   padding: 10px;
-  border: 1px solid black;
-  position: relative;
+}
+
+label {
+  font-size: 24px;
+}
+
+form input[type='text'], form input[type='number'] {
+  margin: 5px 0px 5px 0px;
+  padding: 10px;
+  width: 98%;
+}
+
+input[type='checkbox'] {
+  width: 25px;
+  height: 25px;
+}
+
+.big-sheets {
+  display: flex;
 }

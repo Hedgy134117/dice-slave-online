@@ -1,0 +1,136 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Big sheet list</h1>
+        <div class="big-sheets">
+            {% for sheet in sheets %}
+                <div class="big-sheet">
+                    <div class="big-stat-section">
+                        <h1 class="big-stat-main">{{ sheet.name }}</h1>
+                        <hr>
+                        <div class="big-stat-children">
+                            <h2><b>Class: </b>{{ sheet.Class }}</h2>
+                            <h2><b>Background: </b>{{ sheet.background }}</h2>
+                            <h2><b>Race: </b>{{ sheet.race }}</h2>
+                            <h2><b>XP: </b>{{ sheet.xp }}</h3>
+                            <h2><b>Level: </b>{{ sheet.level }}</h3>
+                        </div>
+                    </div>
+                
+                    <div class="big-stat-section">
+                        <h1 class="big-stat-main">Stats</h1>
+                        <hr>
+                        <div class="big-stat-children">
+                            <p><b>Strength:</b> {{ sheet.strength }} + {{ sheet.strengthMod }}</p>
+                            <p><b>Dexterity:</b> {{ sheet.dexterity }} + {{ sheet.dexterityMod }}</p>
+                            <p><b>Constitution:</b> {{ sheet.constitution }} + {{ sheet.constitutionMod }}</p>
+                            <p><b>Intelligence:</b> {{ sheet.intelligence }} + {{ sheet.intelligenceMod }}</p>
+                            <p><b>Wisdom:</b> {{ sheet.wisdom }} + {{ sheet.wisdomMod }}</p>
+                            <p><b>Charisma:</b> {{ sheet.charisma }} + {{ sheet.charismaMod }}</p>
+                        </div>
+                    </div>
+                
+                    <div class="big-stat-section">
+                        <h1 class="big-stat-main">Skills</h1>
+                        <hr>
+                        <div class="big-stat-children">
+                            {% if sheet.acrobatics %}
+                            <p><b>Acrobatics</b>b + {{ sheet.acrobaticsMod }}</p>
+                            {% endif %}
+                            {% if sheet.animalHandling %}
+                            <p><b>Animal Handling</b> + {{ sheet.animalHanding }}</p>
+                            {% endif %}
+                            {% if sheet.arcana %}
+                            <p><b>Arcana</b> + {{ sheet.arcanaMod }}</p>
+                            {% endif %}
+                            {% if sheet.athletics %}
+                            <p><b>Athletics</b> + {{ sheet.athleticsMod }}</p>
+                            {% endif %}
+                            {% if sheet.deception %}
+                            <p><b>Deception</b> + {{ sheet.deceptionMod }}</p>
+                            {% endif %}
+                            {% if sheet.history %}
+                            <p><b>History</b> + {{ sheet.historyMod }}</p>
+                            {% endif %}
+                            {% if sheet.insight %}
+                            <p><b>Insight</b> + {{ sheet.insightMod }}</p>
+                            {% endif %}
+                            {% if sheet.intimidation %}
+                            <p><b>Intimidation</b> + {{ sheet.intimidationMod }}</p>
+                            {% endif %}
+                            {% if sheet.investigation %}
+                            <p><b>Investigation</b> + {{ sheet.investigationMod }}</p>
+                            {% endif %}
+                            {% if sheet.medicine %}
+                            <p><b>Medicine</b> + {{ sheet.medicineMod }}</p>
+                            {% endif %}
+                            {% if sheet.nature %}
+                            <p><b>Nature</b> + {{ sheet.natureMod }}</p>
+                            {% endif %}
+                            {% if sheet.perception %}
+                            <p><b>Perception</b> + {{ sheet.perceptionMod }}</p>
+                            {% endif %}
+                            {% if sheet.performance %}
+                            <p><b>Performance</b> + {{ sheet.performanceMod }}</p>
+                            {% endif %}
+                            {% if sheet.persuasion %}
+                            <p><b>Persuasion</b> + {{ sheet.persuasionMod }}</p>
+                            {% endif %}
+                            {% if sheet.religion %}
+                            <p><b>Religion</b> + {{ sheet.religionMod }}</p>
+                            {% endif %}
+                            {% if sheet.sleightOfHand %}
+                            <p><b>Sleight of Hand</b> + {{ sheet.sleightOfHandMod }}</p>
+                            {% endif %}
+                            {% if sheet.stealth %}
+                            <p><b>Stealth</b> + {{ sheet.stealthMod }}</p>
+                            {% endif %}
+                            {% if sheet.survival %}
+                            <p><b>Survival</b> + {{ sheet.survivalMod }}</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                
+                    <div class="big-stat-section">
+                        <h1 class="big-stat-main">Equipment & Money</h1>
+                        <hr>
+                        <div class="big-stat-children">
+                            <p><b>Equipment:</b> {{ sheet.equipment }}</p>
+                            <p>{{ sheet.copper }} <b>copper</b></p>
+                            <p>{{ sheet.silver }} <b>silver</b></p>
+                            <p>{{ sheet.gold }} <b>gold</b></p>
+                            <p>{{ sheet.platinum }} <b>platinum</b></p>
+                        </div>
+                    </div>
+                
+                    <div class="big-stat-section">
+                        <h1 class="big-stat-main">Fighting Stats</h1>
+                        <hr>
+                        <div class="big-stat-children">
+                            <p><b>AC:</b> {{ sheet.armorClass }}</p>
+                            <p><b>Initiative:</b> {{ sheet.initiative }}</p>
+                            <p><b>Speed:</b> {{ sheet.speed }}</p>
+                            <p><b>HP:</b> {{ sheet.hitPoints }} / {{ sheet.maxHitPoints }}</p>
+                            <p><b>Hit Dice:</b> {{ sheet.hitDice }}</p>
+                            <p><b>Successful death saves:</b> {{ sheet.sDeathSave1 }} {{ sheet.sDeathSave2 }} {{ sheet.sDeathSave3 }}</p>
+                            <p><b>Failed death saves:</b> {{ sheet.fDeathSave1 }} {{ sheet.fDeathSave2 }} {{ sheet.fDeathSave3 }} </p>
+                        </div>
+                    </div>
+                
+                    <div class="big-stat-section">
+                        <h1 class="big-stat-main">Other Stats</h1>
+                        <hr>
+                        <div class="big-stat-children">
+                            <p><b>Personality Traits: </b>{{ sheet.personalityTraits }}</p>
+                            <p><b>Ideals: </b>{{ sheet.ideals }}</p>
+                            <p><b>Bonds: </b>{{ sheet.bonds }}</p>
+                            <p><b>Flaws: </b>{{ sheet.flaws }}</p>
+                            <p><b>Features & Traits: </b>{{ sheet.featuresTraits }}</p>
+                            <p><b>Other Proficiences: </b>{{ sheet.otherProficiencies }}</p>
+                            <p><b>Languages: </b>{{ sheet.languages }}</p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+{% endblock %}

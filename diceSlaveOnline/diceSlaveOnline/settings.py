@@ -26,7 +26,8 @@ SECRET_KEY = '#urx+@636+u!%dzsn!k&ykeor-a3x*33^oak77*7zkd%fm^tzi'
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    'hedgy.pythonanywhere.com'
+    'hedgy.pythonanywhere.com',
+    'localhost'
 ]
 
 
