@@ -94,6 +94,28 @@
                     </div>
                 
                     <div class="big-stat-section">
+                        <h1 class="big-stat-main">Saving Throws</h1>
+                        {% if sheet.sStrength %}
+                        <p><b>Strength</b></p>
+                        {% endif %}
+                        {% if sheet.sDexterity %}
+                        <p><b>Dexterity</b></p>
+                        {% endif %}
+                        {% if sheet.sConstitution %}
+                        <p><b>Constitution</b></p>
+                        {% endif %}
+                        {% if sheet.sIntelligence %}
+                        <p><b>Intelligence</b></p>
+                        {% endif %}
+                        {% if sheet.sWisdom %}
+                        <p><b>Wisdom</b></p>
+                        {% endif %}
+                        {% if sheet.sCharisma %}
+                        <p><b>Charisma</b></p>
+                        {% endif %}
+                    </div>
+
+                    <div class="big-stat-section">
                         <h1 class="big-stat-main">Equipment & Money</h1>
                         <hr>
                         <div class="big-stat-children">
