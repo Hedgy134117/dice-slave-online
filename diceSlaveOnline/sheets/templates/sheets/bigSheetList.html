@@ -18,7 +18,7 @@
                             <h2><b>Level: </b>{{ sheet.level }}</h3>
                         </div>
                     </div>
-                
+
                     <div class="big-stat-section">
                         <h1 class="big-stat-main">Stats</h1>
                         <hr>
@@ -31,7 +31,7 @@
                             <p><b>Charisma:</b> {{ sheet.charisma }} + {{ sheet.charismaMod }}</p>
                         </div>
                     </div>
-                
+
                     <div class="big-stat-section">
                         <h1 class="big-stat-main">Skills</h1>
                         <hr>
@@ -92,9 +92,10 @@
                             {% endif %}
                         </div>
                     </div>
-                
+
                     <div class="big-stat-section">
                         <h1 class="big-stat-main">Saving Throws</h1>
+                        <hr>
                         {% if sheet.sStrength %}
                         <p><b>Strength</b></p>
                         {% endif %}
@@ -126,7 +127,7 @@
                             <p>{{ sheet.platinum }} <b>platinum</b></p>
                         </div>
                     </div>
-                
+
                     <div class="big-stat-section">
                         <h1 class="big-stat-main">Fighting Stats</h1>
                         <hr>
@@ -140,7 +141,7 @@
                             <p><b>Failed death saves:</b> {{ sheet.fDeathSave1 }} {{ sheet.fDeathSave2 }} {{ sheet.fDeathSave3 }} </p>
                         </div>
                     </div>
-                
+
                     <div class="big-stat-section">
                         <h1 class="big-stat-main">Other Stats</h1>
                         <hr>

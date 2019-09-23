@@ -78,4 +78,9 @@ input[type='checkbox'] {
 
 .big-sheets {
   display: flex;
+
+}
+
+.big-sheet {
+  padding: 20px;
 }
