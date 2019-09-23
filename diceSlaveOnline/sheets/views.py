@@ -9,10 +9,6 @@ def sheetList(request):
     sheets = Sheet.objects.all().order_by('name')
     return render(request, 'sheets/sheetList.html', { 'sheets': sheets })
 
-def bigSheetList(request):
-    sheets = Sheet.objects.all().order_by('name')
-    return render(request, 'sheets/bigSheetList.html', { 'sheets': sheets })
-
 def sheetDetail(request, slug):
     sheet = Sheet.objects.get(slug=slug)
     return render(request, 'sheets/sheetDetail.html', { 'sheet': sheet, 'slug': slug })
