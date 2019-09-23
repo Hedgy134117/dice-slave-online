@@ -98,3 +98,33 @@ class Sheet(models.Model):
 
     def __str__(self):
         return self.name
+
+# class Attack(models.Model):
+#     characterSheetChoices = []
+#     for sheet in Sheet.objects.all().order_by('name'):
+#         characterSheetChoices.append((sheet.slug, sheet.name))
+
+#     characterSheet = models.CharField(choices=characterSheetChoices, max_length=100)
+#     attackName = models.CharField(max_length=100)
+#     attackDamage = models.CharField(max_length=100)
+    
+#     attackTypeChoices = [
+#         ('acid', 'Acid'),
+#         ('bludgeoning', 'Bludgeoning'),
+#         ('cold', 'Cold'),
+#         ('fire', 'Fire'),
+#         ('force', 'Force'),
+#         ('lightning', 'Lightning'),
+#         ('necrotic', 'Necrotic'),
+#         ('piercing', 'Piercing'),
+#         ('poison', 'Poison'),
+#         ('psychic', 'Psychic'),
+#         ('radiant', 'Radiant'),
+#         ('slashing', 'Slashing'),
+#         ('thunder', 'Thunder')
+#     ]
+    
+#     attackType = models.CharField(choices=attackTypeChoices, max_length=100)
+
+#     def __str__(self):
+#         return self.attackName
