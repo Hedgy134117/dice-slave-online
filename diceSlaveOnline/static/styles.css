@@ -5,6 +5,13 @@ body {
   margin: 20px;
 }
 
+footer {
+    text-align: center;
+    width: 100%;
+    padding: 2px;
+    margin: 20px 0px 0px 0px;
+}
+
 nav ul {
  display: flex;
  justify-content: flex-end;
@@ -25,9 +32,26 @@ nav li {
  text-decoration: none;
 }
 
+.popout {
+ border-radius: 4px;
+ background-color: #FFFAF9;
+ box-shadow: 5px 5px 0px rgba(168, 168, 168, 0.4);
+}
+
+.inverted-popout {
+ border-radius: 4px;
+ background-color: #000506;
+ color: #FFFAF9;
+ box-shadow: 5px 5px 0px rgba(168, 168, 168, 0.4);
+ text-align: center;
+ padding: 5px;
+ margin: 30px 0px 20px 0px;
+}
+
 label {
   display: block;
   padding: 5px 0px 5px 0px;
+  font-size: 24px;
 }
 
 .sheets {
@@ -39,14 +63,17 @@ label {
 .sheet {
  padding: 10px;
  position: relative;
- border-radius: 4px;
- background-color: #FFFAF9;
- box-shadow: 5px 5px 0px rgba(168, 168, 168, 0.4);
 }
 
 .sheet a {
-  color: #12130F;
-  text-decoration: none;
+ color: #12130F;
+ text-decoration: none;
+ padding: 5px;
+ border: 1px solid black;
+ border-radius: 4px;
+ background-color: #12130F;
+ color: #EAE6E5;
+ text-decoration: none;
 }
 
 .stat-main {
@@ -61,10 +88,6 @@ label {
   padding: 10px;
 }
 
-label {
-  font-size: 24px;
-}
-
 form input[type='text'], form input[type='number'] {
   margin: 5px 0px 5px 0px;
   padding: 10px;
@@ -74,13 +97,4 @@ form input[type='text'], form input[type='number'] {
 input[type='checkbox'] {
   width: 25px;
   height: 25px;
-}
-
-.big-sheets {
-  display: flex;
-
-}
-
-.big-sheet {
-  padding: 20px;
 }
