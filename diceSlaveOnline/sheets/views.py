@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 
-from .models import Sheet #, Attack
+from .models import Sheet
 from . import forms
 
 # Create your views here.
@@ -11,13 +11,6 @@ def sheetList(request):
 
 def sheetDetail(request, slug):
     sheet = Sheet.objects.get(slug=slug)
-    # attacks = []
-    # for attack in Attack.objects.all():
-    #     if attack.characterSheet == slug:
-    #         attacks.append(attack)
-
-    # print (attacks)
-    # 'attacks': attacks,
     return render(request, 'sheets/sheetDetail.html', { 'sheet': sheet, 'slug': slug })
 
 def createSheet(request):
@@ -39,7 +32,7 @@ def editSheet(request, slug):
 
         if form.is_valid():
             form.save()
-            return redirect('sheets:list')
+            return redirect('sheets:detail', slug=slug)
     else:
         form = forms.CreateSheet(instance=sheet)
     return render(request, 'sheets/editSheet.html', { 'form': form, 'slug': slug })

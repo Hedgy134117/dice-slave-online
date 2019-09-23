@@ -25,12 +25,12 @@ class Sheet(models.Model):
     wisdomMod = models.IntegerField()
     charismaMod = models.IntegerField()
 
-    sStrength = models.BooleanField()
-    sDexterity = models.BooleanField()
-    sConstitution = models.BooleanField()
-    sIntelligence = models.BooleanField()
-    sWisdom = models.BooleanField()
-    sCharisma = models.BooleanField()
+    sStrength = models.BooleanField(verbose_name="Saving Throw: Strength")
+    sDexterity = models.BooleanField(verbose_name="Saving Throw: Dexterity")
+    sConstitution = models.BooleanField(verbose_name="Saving Throw: Constitution")
+    sIntelligence = models.BooleanField(verbose_name="Saving Throw: Intelligence")
+    sWisdom = models.BooleanField(verbose_name="Saving Throw: Wisdom")
+    sCharisma = models.BooleanField(verbose_name="Saving Throw: Charisma")
 
     acrobatics = models.BooleanField()
     animalHandling = models.BooleanField()
@@ -69,6 +69,32 @@ class Sheet(models.Model):
     stealthMod = models.IntegerField()
     survivalMod = models.IntegerField()
 
+    attackTypeChoices = [
+        ('N/A', 'N/A'),
+        ('acid', 'Acid'),
+        ('bludgeoning', 'Bludgeoning'),
+        ('cold', 'Cold'),
+        ('fire', 'Fire'),
+        ('force', 'Force'),
+        ('lightning', 'Lightning'),
+        ('necrotic', 'Necrotic'),
+        ('piercing', 'Piercing'),
+        ('poison', 'Poison'),
+        ('psychic', 'Psychic'),
+        ('radiant', 'Radiant'),
+        ('slashing', 'Slashing'),
+        ('thunder', 'Thunder')
+    ]
+    attack1Name = models.CharField(max_length=100, verbose_name="First attack name", default="")
+    attack1Damage = models.CharField(max_length=100, verbose_name="First attack damage (dice)", default="1d6")
+    attack1Type = models.CharField(choices=attackTypeChoices, max_length=100, verbose_name="First attack type", default="")
+    attack2Name = models.CharField(max_length=100, verbose_name="Second attack name", default="")
+    attack2Damage = models.CharField(max_length=100, verbose_name="Second attack damage (dice)", default="1d6")
+    attack2Type = models.CharField(choices=attackTypeChoices, max_length=100, verbose_name="Second attack type", default="")
+    attack3Name = models.CharField(max_length=100, verbose_name="Third attack name", default="")
+    attack3Damage = models.CharField(max_length=100, verbose_name="Third attack damage (dice)", default="1d6")
+    attack3Type = models.CharField(choices=attackTypeChoices, max_length=100, verbose_name="Third attack type", default="")
+
     otherProficiencies = models.CharField(max_length=250)
     languages = models.CharField(max_length=250)
     equipment = models.CharField(max_length=250)
@@ -98,33 +124,3 @@ class Sheet(models.Model):
 
     def __str__(self):
         return self.name
-
-# class Attack(models.Model):
-#     characterSheetChoices = []
-#     for sheet in Sheet.objects.all().order_by('name'):
-#         characterSheetChoices.append((sheet.slug, sheet.name))
-
-#     characterSheet = models.CharField(choices=characterSheetChoices, max_length=100)
-#     attackName = models.CharField(max_length=100)
-#     attackDamage = models.CharField(max_length=100)
-    
-#     attackTypeChoices = [
-#         ('acid', 'Acid'),
-#         ('bludgeoning', 'Bludgeoning'),
-#         ('cold', 'Cold'),
-#         ('fire', 'Fire'),
-#         ('force', 'Force'),
-#         ('lightning', 'Lightning'),
-#         ('necrotic', 'Necrotic'),
-#         ('piercing', 'Piercing'),
-#         ('poison', 'Poison'),
-#         ('psychic', 'Psychic'),
-#         ('radiant', 'Radiant'),
-#         ('slashing', 'Slashing'),
-#         ('thunder', 'Thunder')
-#     ]
-    
-#     attackType = models.CharField(choices=attackTypeChoices, max_length=100)
-
-#     def __str__(self):
-#         return self.attackName
