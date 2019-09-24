@@ -5,170 +5,137 @@
 {% endblock %}
 
 {% block content %}
-    <div class="stat-section">
-        <h1 class="stat-main inverted-popout">{{ sheet.name }}</h1>
-        <div class="stat-children popout">
+    <h1 class="stat-main inverted-popout">{{ sheet.name }}</h1>
+    <div class="stat">
+        <div class="stat-section popout">
+            <h1>Info</h1>
             <h2><b>Class: </b>{{ sheet.Class }}</h2>
             <h2><b>Background: </b>{{ sheet.background }}</h2>
             <h2><b>Race: </b>{{ sheet.race }}</h2>
             <h2><b>XP: </b>{{ sheet.xp }}</h3>
             <h2><b>Level: </b>{{ sheet.level }}</h3>
         </div>
-    </div>
-
-    <div class="stat-section">
-        <div class="popout">
-            <h1 class="stat-main">Stats</h1>
-            <div class="stat-children">
-                <p><b>Strength:</b> {{ sheet.strength }} + {{ sheet.strengthMod }}</p>
-                <p><b>Dexterity:</b> {{ sheet.dexterity }} + {{ sheet.dexterityMod }}</p>
-                <p><b>Constitution:</b> {{ sheet.constitution }} + {{ sheet.constitutionMod }}</p>
-                <p><b>Intelligence:</b> {{ sheet.intelligence }} + {{ sheet.intelligenceMod }}</p>
-                <p><b>Wisdom:</b> {{ sheet.wisdom }} + {{ sheet.wisdomMod }}</p>
-                <p><b>Charisma:</b> {{ sheet.charisma }} + {{ sheet.charismaMod }}</p>
-            </div>
+        <div class="stat-section popout">
+            <h1>Stats</h1>
+            <p><b>Strength:</b> {{ sheet.strength }} + {{ sheet.strengthMod }}</p>
+            <p><b>Dexterity:</b> {{ sheet.dexterity }} + {{ sheet.dexterityMod }}</p>
+            <p><b>Constitution:</b> {{ sheet.constitution }} + {{ sheet.constitutionMod }}</p>
+            <p><b>Intelligence:</b> {{ sheet.intelligence }} + {{ sheet.intelligenceMod }}</p>
+            <p><b>Wisdom:</b> {{ sheet.wisdom }} + {{ sheet.wisdomMod }}</p>
+            <p><b>Charisma:</b> {{ sheet.charisma }} + {{ sheet.charismaMod }}</p>
         </div>
-    </div>
-
-    <div class="stat-section">
-        <div class="popout">
-            <h1 class="stat-main">Skills</h1>
-            <div class="stat-children">
-                {% if sheet.acrobatics %}
-                <p><b>Acrobatics</b>b + {{ sheet.acrobaticsMod }}</p>
-                {% endif %}
-                {% if sheet.animalHandling %}
-                <p><b>Animal Handling</b> + {{ sheet.animalHanding }}</p>
-                {% endif %}
-                {% if sheet.arcana %}
-                <p><b>Arcana</b> + {{ sheet.arcanaMod }}</p>
-                {% endif %}
-                {% if sheet.athletics %}
-                <p><b>Athletics</b> + {{ sheet.athleticsMod }}</p>
-                {% endif %}
-                {% if sheet.deception %}
-                <p><b>Deception</b> + {{ sheet.deceptionMod }}</p>
-                {% endif %}
-                {% if sheet.history %}
-                <p><b>History</b> + {{ sheet.historyMod }}</p>
-                {% endif %}
-                {% if sheet.insight %}
-                <p><b>Insight</b> + {{ sheet.insightMod }}</p>
-                {% endif %}
-                {% if sheet.intimidation %}
-                <p><b>Intimidation</b> + {{ sheet.intimidationMod }}</p>
-                {% endif %}
-                {% if sheet.investigation %}
-                <p><b>Investigation</b> + {{ sheet.investigationMod }}</p>
-                {% endif %}
-                {% if sheet.medicine %}
-                <p><b>Medicine</b> + {{ sheet.medicineMod }}</p>
-                {% endif %}
-                {% if sheet.nature %}
-                <p><b>Nature</b> + {{ sheet.natureMod }}</p>
-                {% endif %}
-                {% if sheet.perception %}
-                <p><b>Perception</b> + {{ sheet.perceptionMod }}</p>
-                {% endif %}
-                {% if sheet.performance %}
-                <p><b>Performance</b> + {{ sheet.performanceMod }}</p>
-                {% endif %}
-                {% if sheet.persuasion %}
-                <p><b>Persuasion</b> + {{ sheet.persuasionMod }}</p>
-                {% endif %}
-                {% if sheet.religion %}
-                <p><b>Religion</b> + {{ sheet.religionMod }}</p>
-                {% endif %}
-                {% if sheet.sleightOfHand %}
-                <p><b>Sleight of Hand</b> + {{ sheet.sleightOfHandMod }}</p>
-                {% endif %}
-                {% if sheet.stealth %}
-                <p><b>Stealth</b> + {{ sheet.stealthMod }}</p>
-                {% endif %}
-                {% if sheet.survival %}
-                <p><b>Survival</b> + {{ sheet.survivalMod }}</p>
-                {% endif %}
-            </div>
+        <div class="stat-section popout">
+            <h1>Skills</h1>
+            {% if sheet.acrobatics %}
+            <p><b>Acrobatics</b>b + {{ sheet.acrobaticsMod }}</p>
+            {% endif %}
+            {% if sheet.animalHandling %}
+            <p><b>Animal Handling</b> + {{ sheet.animalHanding }}</p>
+            {% endif %}
+            {% if sheet.arcana %}
+            <p><b>Arcana</b> + {{ sheet.arcanaMod }}</p>
+            {% endif %}
+            {% if sheet.athletics %}
+            <p><b>Athletics</b> + {{ sheet.athleticsMod }}</p>
+            {% endif %}
+            {% if sheet.deception %}
+            <p><b>Deception</b> + {{ sheet.deceptionMod }}</p>
+            {% endif %}
+            {% if sheet.history %}
+            <p><b>History</b> + {{ sheet.historyMod }}</p>
+            {% endif %}
+            {% if sheet.insight %}
+            <p><b>Insight</b> + {{ sheet.insightMod }}</p>
+            {% endif %}
+            {% if sheet.intimidation %}
+            <p><b>Intimidation</b> + {{ sheet.intimidationMod }}</p>
+            {% endif %}
+            {% if sheet.investigation %}
+            <p><b>Investigation</b> + {{ sheet.investigationMod }}</p>
+            {% endif %}
+            {% if sheet.medicine %}
+            <p><b>Medicine</b> + {{ sheet.medicineMod }}</p>
+            {% endif %}
+            {% if sheet.nature %}
+            <p><b>Nature</b> + {{ sheet.natureMod }}</p>
+            {% endif %}
+            {% if sheet.perception %}
+            <p><b>Perception</b> + {{ sheet.perceptionMod }}</p>
+            {% endif %}
+            {% if sheet.performance %}
+            <p><b>Performance</b> + {{ sheet.performanceMod }}</p>
+            {% endif %}
+            {% if sheet.persuasion %}
+            <p><b>Persuasion</b> + {{ sheet.persuasionMod }}</p>
+            {% endif %}
+            {% if sheet.religion %}
+            <p><b>Religion</b> + {{ sheet.religionMod }}</p>
+            {% endif %}
+            {% if sheet.sleightOfHand %}
+            <p><b>Sleight of Hand</b> + {{ sheet.sleightOfHandMod }}</p>
+            {% endif %}
+            {% if sheet.stealth %}
+            <p><b>Stealth</b> + {{ sheet.stealthMod }}</p>
+            {% endif %}
+            {% if sheet.survival %}
+            <p><b>Survival</b> + {{ sheet.survivalMod }}</p>
+            {% endif %}
         </div>
-    </div>
-
-    <div class="stat-section">
-        <div class="popout">
-            <h1 class="stat-main">Attacks</h1>
-            <div style="padding: 10px; text-align: center;">
-                <h3>{{ sheet.attack1Name }} | {{ sheet.attack1Damage }} | {{ sheet.attack1Type.capitalize }}</h3>
-                <h3>{{ sheet.attack2Name }} | {{ sheet.attack2Damage }} | {{ sheet.attack2Type.capitalize }}</h3>
-                <h3>{{ sheet.attack3Name }} | {{ sheet.attack3Damage }} | {{ sheet.attack3Type.capitalize }}</h3>
-            </div>
+        <div class="stat-section popout">
+            <h1>Attacks</h1>
+            <h3>{{ sheet.attack1Name }} | {{ sheet.attack1Damage }} | {{ sheet.attack1Type.capitalize }}</h3>
+            <h3>{{ sheet.attack2Name }} | {{ sheet.attack2Damage }} | {{ sheet.attack2Type.capitalize }}</h3>
+            <h3>{{ sheet.attack3Name }} | {{ sheet.attack3Damage }} | {{ sheet.attack3Type.capitalize }}</h3>
         </div>
-    </div>
-
-    <div class="stat-section">
-        <div class="popout">
-            <h1 class="stat-main">Saving Throws</h1>
-            <div class="stat-children">
-                {% if sheet.sStrength %}
-                <p><b>Strength</b></p>
-                {% endif %}
-                {% if sheet.sDexterity %}
-                <p><b>Dexterity</b></p>
-                {% endif %}
-                {% if sheet.sConstitution %}
-                <p><b>Constitution</b></p>
-                {% endif %}
-                {% if sheet.sIntelligence %}
-                <p><b>Intelligence</b></p>
-                {% endif %}
-                {% if sheet.sWisdom %}
-                <p><b>Wisdom</b></p>
-                {% endif %}
-                {% if sheet.sCharisma %}
-                <p><b>Charisma</b></p>
-                {% endif %}
-            </div>
+        <div class="stat-section popout">
+            <h1>Saving</h1>
+            <h1>Throws</h1>
+            {% if sheet.sStrength %}
+            <p><b>Strength</b></p>
+            {% endif %}
+            {% if sheet.sDexterity %}
+            <p><b>Dexterity</b></p>
+            {% endif %}
+            {% if sheet.sConstitution %}
+            <p><b>Constitution</b></p>
+            {% endif %}
+            {% if sheet.sIntelligence %}
+            <p><b>Intelligence</b></p>
+            {% endif %}
+            {% if sheet.sWisdom %}
+            <p><b>Wisdom</b></p>
+            {% endif %}
+            {% if sheet.sCharisma %}
+            <p><b>Charisma</b></p>
+            {% endif %}
         </div>
-    </div>
-
-    <div class="stat-section">
-        <div class="popout">
-            <h1 class="stat-main">Equipment & Money</h1>
-            <div class="stat-children">
-                <p><b>Equipment:</b> {{ sheet.equipment }}</p>
-                <p>{{ sheet.copper }} <b>copper</b></p>
-                <p>{{ sheet.silver }} <b>silver</b></p>
-                <p>{{ sheet.gold }} <b>gold</b></p>
-                <p>{{ sheet.platinum }} <b>platinum</b></p>
-            </div>
+        <div class="stat-section popout">
+            <h1>Equipment & Money</h1>
+            <p><b>Equipment:</b> {{ sheet.equipment }}</p>
+            <p>{{ sheet.copper }} <b>copper</b></p>
+            <p>{{ sheet.silver }} <b>silver</b></p>
+            <p>{{ sheet.gold }} <b>gold</b></p>
+            <p>{{ sheet.platinum }} <b>platinum</b></p>
         </div>
-    </div>
-
-    <div class="stat-section">
-        <div class="popout">
-            <h1 class="stat-main">Fighting Stats</h1>
-            <div class="stat-children">
-                <p><b>AC:</b> {{ sheet.armorClass }}</p>
-                <p><b>Initiative:</b> {{ sheet.initiative }}</p>
-                <p><b>Speed:</b> {{ sheet.speed }}</p>
-                <p><b>HP:</b> {{ sheet.hitPoints }} / {{ sheet.maxHitPoints }}</p>
-                <p><b>Hit Dice:</b> {{ sheet.hitDice }}</p>
-                <p><b>Successful death saves:</b> {{ sheet.sDeathSave1 }} {{ sheet.sDeathSave2 }} {{ sheet.sDeathSave3 }}</p>
-                <p><b>Failed death saves:</b> {{ sheet.fDeathSave1 }} {{ sheet.fDeathSave2 }} {{ sheet.fDeathSave3 }} </p>
-            </div>
+        <div class="stat-section popout">
+            <h1>Fighting Stats</h1>
+            <p><b>AC:</b> {{ sheet.armorClass }}</p>
+            <p><b>Initiative:</b> {{ sheet.initiative }}</p>
+            <p><b>Speed:</b> {{ sheet.speed }}</p>
+            <p><b>HP:</b> {{ sheet.hitPoints }} / {{ sheet.maxHitPoints }}</p>
+            <p><b>Hit Dice:</b> {{ sheet.hitDice }}</p>
+            <p><b>Successful death saves:</b> {{ sheet.sDeathSave1 }} {{ sheet.sDeathSave2 }} {{ sheet.sDeathSave3 }}</p>
+            <p><b>Failed death saves:</b> {{ sheet.fDeathSave1 }} {{ sheet.fDeathSave2 }} {{ sheet.fDeathSave3 }} </p>
         </div>
-    </div>
-
-    <div class="stat-section">
-        <div class="popout">
-            <h1 class="stat-main">Other Stats</h1>
-            <div class="stat-children">
-                <p><b>Personality Traits: </b>{{ sheet.personalityTraits }}</p>
-                <p><b>Ideals: </b>{{ sheet.ideals }}</p>
-                <p><b>Bonds: </b>{{ sheet.bonds }}</p>
-                <p><b>Flaws: </b>{{ sheet.flaws }}</p>
-                <p><b>Features & Traits: </b>{{ sheet.featuresTraits }}</p>
-                <p><b>Other Proficiences: </b>{{ sheet.otherProficiencies }}</p>
-                <p><b>Languages: </b>{{ sheet.languages }}</p>
-            </div>
+        <div class="stat-section popout">
+            <h1>Other Stats</h1>
+            <p><b>Personality Traits: </b>{{ sheet.personalityTraits }}</p>
+            <p><b>Ideals: </b>{{ sheet.ideals }}</p>
+            <p><b>Bonds: </b>{{ sheet.bonds }}</p>
+            <p><b>Flaws: </b>{{ sheet.flaws }}</p>
+            <p><b>Features & Traits: </b>{{ sheet.featuresTraits }}</p>
+            <p><b>Other Proficiences: </b>{{ sheet.otherProficiencies }}</p>
+            <p><b>Languages: </b>{{ sheet.languages }}</p>
         </div>
     </div>
 

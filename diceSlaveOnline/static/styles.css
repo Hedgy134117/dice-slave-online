@@ -76,16 +76,22 @@ label {
  text-decoration: none;
 }
 
+.stat {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
 .stat-main {
   text-align: center;
   padding: 5px;
   width: 100%;
 }
 
-.stat-children {
-  display: flex;
-  justify-content: space-evenly;
-  padding: 10px;
+.stat-section {
+    padding: 10px;
+    margin: 10px;
 }
 
 form input[type='text'], form input[type='number'] {
