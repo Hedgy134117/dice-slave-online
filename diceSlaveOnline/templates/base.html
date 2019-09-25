@@ -8,7 +8,13 @@
     <nav>
         <ul>
             <li><a href="{% url 'sheets:list' %}" class="button">Sheet List</a></li>
+            {% if user.is_authenticated %}
             <li><a href="{% url 'sheets:create' %}" class="button">Create Sheet</a></li>
+            <li><a href="{% url 'accounts:logout' %}" class="button">Logout</a></li>
+            {% else %}
+            <li><a href="{% url 'accounts:login' %}" class="button">Login</a></li>
+            <li><a href="{% url 'accounts:signup' %}" class="button">Sign Up</a></li>
+            {% endif %}
             {% block nav %}
             {% endblock %}
         </ul>
