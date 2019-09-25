@@ -72,32 +72,6 @@ class Sheet(models.Model):
     stealthMod = models.IntegerField()
     survivalMod = models.IntegerField()
 
-    attackTypeChoices = [
-        ('N/A', 'N/A'),
-        ('acid', 'Acid'),
-        ('bludgeoning', 'Bludgeoning'),
-        ('cold', 'Cold'),
-        ('fire', 'Fire'),
-        ('force', 'Force'),
-        ('lightning', 'Lightning'),
-        ('necrotic', 'Necrotic'),
-        ('piercing', 'Piercing'),
-        ('poison', 'Poison'),
-        ('psychic', 'Psychic'),
-        ('radiant', 'Radiant'),
-        ('slashing', 'Slashing'),
-        ('thunder', 'Thunder')
-    ]
-    attack1Name = models.CharField(max_length=100, verbose_name="First attack name", default="")
-    attack1Damage = models.CharField(max_length=100, verbose_name="First attack damage (dice)", default="1d6")
-    attack1Type = models.CharField(choices=attackTypeChoices, max_length=100, verbose_name="First attack type", default="")
-    attack2Name = models.CharField(max_length=100, verbose_name="Second attack name", default="")
-    attack2Damage = models.CharField(max_length=100, verbose_name="Second attack damage (dice)", default="1d6")
-    attack2Type = models.CharField(choices=attackTypeChoices, max_length=100, verbose_name="Second attack type", default="")
-    attack3Name = models.CharField(max_length=100, verbose_name="Third attack name", default="")
-    attack3Damage = models.CharField(max_length=100, verbose_name="Third attack damage (dice)", default="1d6")
-    attack3Type = models.CharField(choices=attackTypeChoices, max_length=100, verbose_name="Third attack type", default="")
-
     otherProficiencies = models.CharField(max_length=250)
     languages = models.CharField(max_length=250)
     equipment = models.CharField(max_length=250)
