@@ -2,7 +2,9 @@
 
 {% block nav %}
     {% if user.is_authenticated %}
-    <li><a href="{% url 'sheets:edit' slug %}" class="button">Edit Sheet</a></li>
+        {% if sheet.author == request.user %}
+        <li><a href="{% url 'sheets:edit' slug %}" class="button">Edit Sheet</a></li>
+        {% endif %}
     {% endif %}
 {% endblock %}
 

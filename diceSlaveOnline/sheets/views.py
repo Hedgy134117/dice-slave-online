@@ -11,7 +11,7 @@ def sheetList(request):
 
 def sheetDetail(request, slug):
     sheet = Sheet.objects.get(slug=slug)
-    return render(request, 'sheets/sheetDetail.html', { 'sheet': sheet, 'slug': slug })
+    return render(request, 'sheets/sheetDetail.html', { 'sheet': sheet, 'slug': slug, 'request': request })
 
 def createSheet(request):
     if request.method == 'POST':
