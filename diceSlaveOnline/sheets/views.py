@@ -16,6 +16,7 @@ def sheetDetail(request, slug):
 def createSheet(request):
     if request.method == 'POST':
         form = forms.CreateSheet(request.POST)
+        form.author = request.user
 
         if form.is_valid():
             form.save()
@@ -27,13 +28,16 @@ def createSheet(request):
 def editSheet(request, slug):
     sheet = Sheet.objects.get(slug=slug)
 
-    if request.method == 'POST':
-        form = forms.CreateSheet(request.POST, instance=sheet)
+    if request.user == sheet.author:
+        if request.method == 'POST':
+            form = forms.CreateSheet(request.POST, instance=sheet)
 
-        if form.is_valid():
-            form.save()
-            return redirect('sheets:detail', slug=slug)
+            if form.is_valid():
+                form.save()
+                return redirect('sheets:detail', slug=slug)
+        else:
+            form = forms.CreateSheet(instance=sheet)
+        return render(request, 'sheets/editSheet.html', { 'form': form, 'slug': slug })
     else:
-        form = forms.CreateSheet(instance=sheet)
-    return render(request, 'sheets/editSheet.html', { 'form': form, 'slug': slug })
+        return redirect('sheets:list')
 
