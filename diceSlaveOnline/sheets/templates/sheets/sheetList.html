@@ -1,18 +1,25 @@
 {% extends 'base.html' %}
 
+{% block title %}Sheet List{% endblock %}
+
 {% block content %}
-    <h1 class="inverted-popout">Sheet List</h1>
-    <div class="sheets">
-        {% for sheet in sheets %}
-            <div class="sheet popout">
-                <h2><a href="{% url 'sheets:detail' slug='sheet.slug' slug=sheet.slug %}">
-                    {{ sheet.name }} {{ sheet.hitPoints }} / {{ sheet.maxHitPoints }}
-                </a></h2>
-                <p><i>Lvl {{ sheet.level }} ({{ sheet.xp }})</i></p>
-                <p>{{ sheet.Class }}</p>
-                <p>{{ sheet.background }}</p>
-                <p>{{ sheet.race }}</p>
-            </div>
-        {% endfor %}
-    </div>
+    <h1 class="inverted-popout" style="font-size: 50px;">Sheet List</h1>
+    {% for group in groups %}
+        <h1 class="inverted-popout">{{ group.name }}</h2>
+        <div class="sheets">
+            {% for sheet in sheets %}
+                {% ifequal sheet.sheetGroupValue group.sheetGroupName %}
+                    <div class="sheet popout">
+                        <h2><a href="{% url 'sheets:detail' slug='sheet.slug' slug=sheet.slug %}">
+                            {{ sheet.name }} {{ sheet.hitPoints }} / {{ sheet.maxHitPoints }}
+                        </a></h2>
+                        <p><i>Lvl {{ sheet.level }} ({{ sheet.xp }})</i></p>
+                        <p>{{ sheet.Class }}</p>
+                        <p>{{ sheet.background }}</p>
+                        <p>{{ sheet.race }}</p>
+                    </div>
+                {% endifequal %}
+            {% endfor %}
+        </div>
+    {% endfor %}
 {% endblock %}

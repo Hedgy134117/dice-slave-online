@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 
+{% block title %}{{ sheet.name }}{% endblock %}
+
 {% block nav %}
     {% if user.is_authenticated %}
         {% if sheet.author == request.user %}

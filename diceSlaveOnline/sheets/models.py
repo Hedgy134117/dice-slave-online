@@ -2,10 +2,25 @@ from django.db import models
 from django.contrib.auth.models import User
 
 # Create your models here.
+class SheetGroup(models.Model):
+    name = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.name
+
+    def sheetGroupName(self):
+        return str(self.name)
+
 class Sheet(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
 
     name = models.CharField(max_length=100)
+
+    # for sheetGroup in SheetGroup.objects.all().order_by('name'):
+    #     groupOptions.append((sheetGroup.name, sheetGroup.name))
+
+    sheetGroup = models.ManyToManyField(SheetGroup)
+
     slug = models.SlugField(default="")
 
     Class = models.CharField(max_length=100)
@@ -101,3 +116,10 @@ class Sheet(models.Model):
 
     def __str__(self):
         return self.name
+
+    def sheetGroupValue(self):
+        groups = ''
+        for group in self.sheetGroup.all():
+            groups += group.name + " "
+
+        return groups[0:len(groups)-1]

@@ -32,6 +32,16 @@ nav li {
  text-decoration: none;
 }
 
+.logout-button {
+  padding: 15px;
+ border: 1px solid black;
+ border-radius: 4px;
+ background-color: #cc3300;
+ color: #EAE6E5;
+ font-size: 1.3em;
+ text-decoration: none;
+}
+
 .popout {
  border-radius: 4px;
  background-color: #FFFAF9;

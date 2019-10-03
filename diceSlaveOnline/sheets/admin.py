@@ -1,6 +1,6 @@
 from django.contrib import admin
-from .models import Sheet #, Attack
+from .models import Sheet, SheetGroup
 
 # Register your models here.
 admin.site.register(Sheet)
-#admin.site.register(Attack)
+admin.site.register(SheetGroup)
