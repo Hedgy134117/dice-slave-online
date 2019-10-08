@@ -20,6 +20,8 @@ def createSheet(request):
     if request.method == 'POST':
         form = forms.CreateSheet(request.POST)
         form.author = request.user
+        for group in SheetGroup.objects.all().order_by('name'):
+            form.sheetGroup.add(group)
 
         if form.is_valid():
             form.save()
@@ -32,12 +34,6 @@ def editSheet(request, slug):
     call_command('makemigrations')
     call_command('migrate')
 
-    sheet = Sheet.objects.get(slug=slug)
-
-    for group in SheetGroup.objects.all().order_by('name'):
-        sheet.sheetGroup.add(group)
-
-    sheet.save()
     sheet = Sheet.objects.get(slug=slug)
 
     if request.user == sheet.author:

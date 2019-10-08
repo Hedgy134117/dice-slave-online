@@ -3,7 +3,7 @@
 {% block title %}Sheet List{% endblock %}
 
 {% block content %}
-    <h1 class="inverted-popout" style="font-size: 50px;">Sheet List</h1>
+    <h1 style="font-size: 50px;"><span class="inverted-popout">Sheet List</span></h1>
     {% for group in groups %}
         <h1 class="inverted-popout">{{ group.name }}</h2>
         <div class="sheets">
@@ -13,7 +13,7 @@
                         <h2><a href="{% url 'sheets:detail' slug='sheet.slug' slug=sheet.slug %}">
                             {{ sheet.name }} {{ sheet.hitPoints }} / {{ sheet.maxHitPoints }}
                         </a></h2>
-                        <p><i>Lvl {{ sheet.level }} ({{ sheet.xp }})</i></p>
+                        <p><i>Lvl {{ sheet.level }} <progress value="{{ sheet.xp }}" max="{% widthratio sheet.level 1 300 %}"></progress> ( {{ sheet.xp }} / {% widthratio sheet.level 1 300 %} )</i></p>
                         <p>{{ sheet.Class }}</p>
                         <p>{{ sheet.background }}</p>
                         <p>{{ sheet.race }}</p>
