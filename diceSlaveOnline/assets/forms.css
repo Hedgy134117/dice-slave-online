@@ -1,0 +1,16 @@
+label {
+    display: block;
+    padding: 5px 0px 5px 0px;
+    font-size: 24px;
+}
+  
+form input[type='text'], form input[type='number'] {
+    margin: 5px 0px 5px 0px;
+    padding: 10px;
+    width: 98%;
+}
+  
+input[type='checkbox'] {
+    width: 25px;
+    height: 25px;
+}

@@ -1,116 +1,63 @@
+:root {
+  --rounded: 30px;
+  --less-rounded: 15px;
+}
+
 body {
-  font-family: Arial;
-  background-color: #EAE6E5;
-  color: #12130F;
-  margin: 20px;
+font-family: Arial;
+background: #EE6D66;
+color: #12130F;
+margin: 20px;
 }
 
 footer {
-    text-align: center;
-    width: 100%;
-    padding: 2px;
-    margin: 20px 0px 0px 0px;
-}
-
-nav ul {
- display: flex;
- justify-content: flex-end;
- list-style: none;
-}
-
-nav li {
- padding: 20px 5px 0px 5px;
+  text-align: center;
+  padding: 2px;
+  margin: 20px 0px 0px 0px;
 }
 
 .button {
- padding: 15px;
- border: 1px solid black;
- border-radius: 4px;
- background-color: #12130F;
- color: #EAE6E5;
- font-size: 1.3em;
- text-decoration: none;
+padding: 15px;
+border: 1px solid black;
+border-radius: var(--rounded);
+background-color: #12130F;
+color: #EAE6E5;
+font-size: 1.3em;
+text-decoration: none;
 }
 
 .logout-button {
-  padding: 15px;
- border: 1px solid black;
- border-radius: 4px;
- background-color: #cc3300;
- color: #EAE6E5;
- font-size: 1.3em;
- text-decoration: none;
+padding: 15px;
+border: 1px solid black;
+border-radius: var(--rounded);
+background-color: #cc3300;
+color: #EAE6E5;
+font-size: 1.3em;
+text-decoration: none;
 }
 
 .popout {
- border-radius: 4px;
- background-color: #FFFAF9;
- box-shadow: 5px 5px 0px rgba(168, 168, 168, 0.4);
+border-radius: var(--rounded);
+background-color: #FFFFFF;
+box-shadow: 5px 5px 0px rgba(0, 0, 0, 0.4);
 }
 
 .inverted-popout {
- border-radius: 4px;
- background-color: #000506;
- color: #FFFAF9;
- box-shadow: 5px 5px 0px rgba(168, 168, 168, 0.4);
- text-align: center;
- padding: 5px;
- margin: 30px 0px 20px 0px;
-}
+/*border-radius: var(--less-rounded);*/
+/*background-color: #000506;*/
+/*color: #FFFAF9;*/
+/*box-shadow: 5px 5px 0px rgba(168, 168, 168, 0.4);*/
+/*text-align: center;*/
+/*padding: 5px;*/
+/*margin: 30px 0px 20px 0px;*/
+/*width: 200px;*/
 
-label {
-  display: block;
-  padding: 5px 0px 5px 0px;
-  font-size: 24px;
-}
+display: table;
+margin: 30px auto 20px auto;
 
-.sheets {
- display: grid;
- grid-template-columns: 1fr 1fr 1fr;
- grid-gap: 30px;
-}
-
-.sheet {
- padding: 10px;
- position: relative;
-}
-
-.sheet a {
- color: #12130F;
- text-decoration: none;
- padding: 5px;
- border: 1px solid black;
- border-radius: 4px;
- background-color: #12130F;
- color: #EAE6E5;
- text-decoration: none;
-}
-
-.stat {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.stat-main {
-  text-align: center;
-  padding: 5px;
-  width: 100%;
-}
-
-.stat-section {
-    padding: 10px;
-    margin: 10px;
-}
-
-form input[type='text'], form input[type='number'] {
-  margin: 5px 0px 5px 0px;
-  padding: 10px;
-  width: 98%;
-}
-
-input[type='checkbox'] {
-  width: 25px;
-  height: 25px;
+text-align: center;
+background-color: #000506;
+color: #FFFAF9;
+border-radius: var(--less-rounded);
+padding: 10px 20px 10px 20px;
 }
