@@ -125,17 +125,21 @@
             {% endif %}
             <h2>New list</h2>
             {% for item in equipment %}
-                <p>{{ item.amount }} {{ item.name }}</p>
+                <div class="item">
+                    <p class="item-name">{{ item.amount }} {{ item.name }}</p>
+                    {% if user.is_authenticated %}
+                        {% if sheet.author == request.user %}
+                            <p><a class="item-edit" href="{% url 'sheets:editItem' item.name slug %}">Edit</a></p>
+                            <p><a class="item-remove" href="{% url 'sheets:removeItem' item.name slug %}">Remove</a></p>
+                        {% endif %}
+                    {% endif %}
+                </div>
             {% empty %}
                 <p>No equipment</p>
             {% endfor %}
             {% if user.is_authenticated %}
                 {% if sheet.author == request.user %}
-                    <div class="flex">
-                        <a href="{% url 'sheets:addItem' slug %}">Add</a>
-                        <a href="#"><strike>Edit</strike></a>
-                        <a href="#"><strike>Remove</strike></a>
-                    </div>
+                    <a href="{% url 'sheets:addItem' slug %}">Add</a>
                 {% endif %}
             {% endif %}
         </div>

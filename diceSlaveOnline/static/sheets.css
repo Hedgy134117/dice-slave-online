@@ -51,6 +51,20 @@ progress[value]::-webkit-progress-value {
     background-color: #4FB95C;
 }
 
-.flex {
-    display: flex;
+.item {
+    display: grid;
+    grid-template-columns: 50% 25% 25%;
+    grid-template-areas: "name edit remove"
+}
+
+.item-name {
+    grid-area: name;
+}
+
+.item-edit {
+    grid-area: edit;
+}
+
+.item-remove {
+    grid-area: remove;
 }

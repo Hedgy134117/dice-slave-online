@@ -77,3 +77,31 @@ def addItem(request, slug):
         return render(request, 'sheets/addItem.html', { 'form': form, 'slug': slug })
     else:
         return redirect('sheets:list')
+
+def editItem(request, name, slug):
+    sheet = Sheet.objects.get(slug=slug)
+    item = Item.objects.get(name=name, sht=sheet)
+
+    if request.user == sheet.author:
+        if request.method == 'POST':
+            form = forms.AddItem(request.POST)
+
+            if form.is_valid():
+                instance = form.save(commit=False)
+                instance.sht = sheet
+                item.delete()
+                instance.save()
+                return redirect('sheets:detail', slug=slug)
+        else:
+            form = forms.AddItem(instance=item)
+            return render(request, 'sheets/editItem.html', { 'form': form, 'item': item, 'slug': slug })
+    else:
+        return redirect('sheets:list')
+
+def removeItem(request, name, slug):
+    sheet = Sheet.objects.get(slug=slug)
+    item = Item.objects.get(name=name, sht=sheet)
+
+    item.delete()
+    return redirect('sheets:detail', slug=slug)
+
