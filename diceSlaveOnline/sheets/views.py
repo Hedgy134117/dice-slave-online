@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 
-from .models import Sheet, SheetGroup
+from .models import Sheet, SheetGroup, Item
 from . import forms
 
 from django.core.management import call_command
@@ -9,19 +9,26 @@ from django.core.management import call_command
 # Create your views here.
 def sheetList(request):
     sheets = Sheet.objects.all().order_by('name')
-    groups = SheetGroup.objects.all().order_by('name')
+    groups = SheetGroup.objects.all()
     return render(request, 'sheets/sheetList.html', { 'sheets': sheets, 'groups': groups })
 
 def sheetDetail(request, slug):
     sheet = Sheet.objects.get(slug=slug)
-    return render(request, 'sheets/sheetDetail.html', { 'sheet': sheet, 'slug': slug, 'request': request })
+    itemList = Item.objects.all()
+    equipment = []
+    for item in itemList:
+        if item.sht == sheet:
+            equipment.append(item)
+    return render(request, 'sheets/sheetDetail.html', { 'sheet': sheet, 'equipment': equipment, 'slug': slug, 'request': request })
 
 def createSheet(request):
+    form = forms.CreateSheet()
+    # for group in SheetGroup.objects.all().order_by('name'):
+    #     form.sheetGroup.add(group)
+
     if request.method == 'POST':
         form = forms.CreateSheet(request.POST)
         form.author = request.user
-        for group in SheetGroup.objects.all().order_by('name'):
-            form.sheetGroup.add(group)
 
         if form.is_valid():
             form.save()
@@ -50,3 +57,23 @@ def editSheet(request, slug):
     else:
         return redirect('sheets:list')
 
+def addItem(request, slug):
+    sheet = Sheet.objects.get(slug=slug)
+    form = forms.AddItem()
+
+    if request.user == sheet.author:
+        if request.method == 'POST':
+            form = forms.AddItem(request.POST)
+
+            if form.is_valid():
+                instance = form.save(commit=False)
+                instance.sht = Sheet.objects.get(slug=slug)
+                instance.save()
+
+                return redirect('sheets:detail', slug=slug)
+        else:
+            form = forms.AddItem()
+            form.sht = Sheet.objects.get(slug=slug)
+        return render(request, 'sheets/addItem.html', { 'form': form, 'slug': slug })
+    else:
+        return redirect('sheets:list')

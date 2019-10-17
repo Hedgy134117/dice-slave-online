@@ -8,7 +8,7 @@ class SheetGroup(models.Model):
     def __str__(self):
         return self.name
 
-    def sheetGroupName(self):
+    def SheetGroupName(self):
         return str(self.name)
 
 class Sheet(models.Model):
@@ -16,14 +16,11 @@ class Sheet(models.Model):
 
     name = models.CharField(max_length=100)
 
-    # for sheetGroup in SheetGroup.objects.all().order_by('name'):
-    #     groupOptions.append((sheetGroup.name, sheetGroup.name))
-
-    sheetGroup = models.ManyToManyField(SheetGroup)
+    sheetGroup = models.ForeignKey("SheetGroup", on_delete=models.CASCADE, default=1)
 
     slug = models.SlugField(default="")
 
-    Class = models.CharField(max_length=100)
+    Class = models.CharField(max_length=100, default="")
     background = models.CharField(max_length=100)
     race = models.CharField(max_length=100)
     xp = models.IntegerField()
@@ -118,8 +115,12 @@ class Sheet(models.Model):
         return self.name
 
     def sheetGroupValue(self):
-        groups = ''
-        for group in self.sheetGroup.all():
-            groups += group.name + " "
+        return str(self.sheetGroup)
 
-        return groups[0:len(groups)-1]
+class Item(models.Model):
+    sht = models.ForeignKey(Sheet, on_delete=models.CASCADE, blank=True, null=True, editable=False)
+    name = models.CharField(max_length=100)
+    amount = models.IntegerField(default=1)
+
+    def __str__(self):
+        return self.name

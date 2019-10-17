@@ -11,7 +11,7 @@
 {% endblock %}
 
 {% block content %}
-    <h1 class="stat-main inverted-popout">{{ sheet.name }}</h1>
+    <h1 class="stat-main"><span class="inverted-popout">{{ sheet.name }}</span></h1>
     <div class="stat">
         <div class="stat-section popout">
             <h1>Info</h1>
@@ -110,12 +110,34 @@
             {% endif %}
         </div>
         <div class="stat-section popout">
-            <h1>Equipment & Money</h1>
-            <p><b>Equipment:</b> {{ sheet.equipment }}</p>
+            <h1>Money</h1>
             <p>{{ sheet.copper }} <b>copper</b></p>
             <p>{{ sheet.silver }} <b>silver</b></p>
             <p>{{ sheet.gold }} <b>gold</b></p>
             <p>{{ sheet.platinum }} <b>platinum</b></p>
+        </div>
+        <div class="stat-section popout">
+            <h1>Equipment</h1>
+            {% if sheet.equipment != "" %}
+            <h2>Old list</h2>
+            <p>{{ sheet.equipment }}</p>
+            <p style='color:red;'>please don't use this old list and use the new list below</p>
+            {% endif %}
+            <h2>New list</h2>
+            {% for item in equipment %}
+                <p>{{ item.amount }} {{ item.name }}</p>
+            {% empty %}
+                <p>No equipment</p>
+            {% endfor %}
+            {% if user.is_authenticated %}
+                {% if sheet.author == request.user %}
+                    <div class="flex">
+                        <a href="{% url 'sheets:addItem' slug %}">Add</a>
+                        <a href="#"><strike>Edit</strike></a>
+                        <a href="#"><strike>Remove</strike></a>
+                    </div>
+                {% endif %}
+            {% endif %}
         </div>
         <div class="stat-section popout">
             <h1>Fighting Stats</h1>

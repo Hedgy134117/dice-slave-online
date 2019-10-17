@@ -8,7 +8,7 @@
         <h1 class="inverted-popout">{{ group.name }}</h2>
         <div class="sheets">
             {% for sheet in sheets %}
-                {% ifequal sheet.sheetGroupValue group.sheetGroupName %}
+                {% if sheet.sheetGroupValue == group.SheetGroupName %}
                     <div class="sheet popout">
                         <h2><a href="{% url 'sheets:detail' slug='sheet.slug' slug=sheet.slug %}">
                             {{ sheet.name }} {{ sheet.hitPoints }} / {{ sheet.maxHitPoints }}
@@ -18,7 +18,7 @@
                         <p>{{ sheet.background }}</p>
                         <p>{{ sheet.race }}</p>
                     </div>
-                {% endifequal %}
+                {% endif %}
             {% endfor %}
         </div>
     {% endfor %}

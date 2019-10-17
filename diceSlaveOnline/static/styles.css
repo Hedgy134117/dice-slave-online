@@ -61,3 +61,8 @@ color: #FFFAF9;
 border-radius: var(--less-rounded);
 padding: 10px 20px 10px 20px;
 }
+
+a {
+    text-decoration: underline;
+    color: #7F7F7F;
+}
