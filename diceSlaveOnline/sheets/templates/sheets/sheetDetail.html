@@ -5,7 +5,7 @@
 {% block nav %}
     {% if user.is_authenticated %}
         {% if sheet.author == request.user %}
-        <li><a href="{% url 'sheets:edit' slug %}" class="button">Edit Sheet</a></li>
+        <li><a href="{% url 'sheets:edit' slug %}">Edit Sheet</a></li>
         {% endif %}
     {% endif %}
 {% endblock %}
@@ -32,8 +32,9 @@
         </div>
         <div class="stat-section popout">
             <h1>Skills</h1>
+            <h2>Old List</h2>
             {% if sheet.acrobatics %}
-            <p><b>Acrobatics</b>b + {{ sheet.acrobaticsMod }}</p>
+            <p><b>Acrobatics</b> + {{ sheet.acrobaticsMod }}</p>
             {% endif %}
             {% if sheet.animalHandling %}
             <p><b>Animal Handling</b> + {{ sheet.animalHanding }}</p>
@@ -86,6 +87,26 @@
             {% if sheet.survival %}
             <p><b>Survival</b> + {{ sheet.survivalMod }}</p>
             {% endif %}
+            <p style='color:red;'>please don't use this old list and use the new list below</p>
+
+            <h2>New List</h2>
+            {% for skill in skills %}
+                {% if skill.sht == sheet %}
+                    <div class="skill">
+                        <p class="skill-name"><b>{{ skill.get_name_display }}</b> + {{ skill.mod }}</p>
+                        {% if user.is_authenticated %}
+                            {% if sheet.author == request.user %}
+                                <p class="skill-remove"><a href="{% url 'sheets:removeSkill' skill.name slug %}">Remove</a></p>
+                            {% endif %}
+                        {% endif %}
+                    </div>
+                {% endif %}
+            {% endfor %}
+                    {% if user.is_authenticated %}
+                        {% if sheet.author == request.user %}
+                            <p style="text-align: center;"><a href="{% url 'sheets:addSkill' slug %}">Add</a></p>
+                        {% endif %}
+                    {% endif %}
         </div>
         <div class="stat-section popout">
             <h1>Saving</h1>
@@ -139,7 +160,7 @@
             {% endfor %}
             {% if user.is_authenticated %}
                 {% if sheet.author == request.user %}
-                    <a href="{% url 'sheets:addItem' slug %}">Add</a>
+                    <p style="text-align: center;"><a href="{% url 'sheets:addItem' slug %}">Add</a></p>
                 {% endif %}
             {% endif %}
         </div>

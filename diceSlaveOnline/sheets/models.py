@@ -117,6 +117,36 @@ class Sheet(models.Model):
     def sheetGroupValue(self):
         return str(self.sheetGroup)
 
+class Skill(models.Model):
+    sht = models.ForeignKey(Sheet, on_delete=models.CASCADE, blank=True, null=True, editable=False)
+
+    nameChoices = [
+        ('acrobatics', 'Acrobatics'),
+        ('animalHandling', 'Animal Handling'),
+        ('arcana', 'Arcana'),
+        ('athletics', 'Athletics'),
+        ('deception', 'Deception'),
+        ('history', 'History'),
+        ('insight', 'Insight'),
+        ('intimidation', 'Intimidation'),
+        ('investigation', 'Investigation'),
+        ('medicine', 'Medicine'),
+        ('nature', 'Nature'),
+        ('perception', 'Perception'),
+        ('performance', 'Performance'),
+        ('persuasion', 'Persuasion'),
+        ('religion', 'Religion'),
+        ('sleightOfHand', 'Sleight of Hand'),
+        ('stealth', 'Stealth'),
+        ('survival', 'Survival'),
+    ]
+
+    name = models.CharField(max_length=100, choices=nameChoices, default="")
+    mod = models.IntegerField()
+
+    def __str__(self):
+        return self.name
+
 class Item(models.Model):
     sht = models.ForeignKey(Sheet, on_delete=models.CASCADE, blank=True, null=True, editable=False)
     name = models.CharField(max_length=100)

@@ -6,34 +6,34 @@
     <link rel="stylesheet" href="{% static 'nav.css' %}">
     <link rel="stylesheet" href="{% static 'sheets.css' %}">
     <link rel="stylesheet" href="{% static 'forms.css' %}">
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.css">
+    <!--<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.css">-->
     <title>{% block title %}{% endblock %}</title>
 </head>
 <body>
-    <nav class="animated fadeInLeft">
-        <ul>
-            <li><a href="{% url 'sheets:list' %}" class="button">Sheet List</a></li>
-            {% if user.is_authenticated %}
-            <li><a href="{% url 'sheets:create' %}" class="button">Create Sheet</a></li>
-            {% else %}
-            <li><a href="{% url 'accounts:login' %}" class="button">Login</a></li>
-            <li><a href="{% url 'accounts:signup' %}" class="button">Sign Up</a></li>
-            {% endif %}
-            {% block nav %}
-            {% endblock %}
-            {% if user.is_authenticated %}
-            <li><a href="{% url 'accounts:logout' %}" class="logout-button">Logout</a></li>
-            {% endif %}
-        </ul>
-    </nav>
-
-    <div class="animated fadeInRight">
-        {% block content %}
+    <ul class="nav">
+        <li><a href="{% url 'sheets:list' %}" class="">Sheet List</a></li>
+        {% if user.is_authenticated %}
+        <li><a href="{% url 'sheets:create' %}" class="">Create Sheet</a></li>
+        {% else %}
+        <li><a href="{% url 'accounts:login' %}" class="">Login</a></li>
+        <li><a href="{% url 'accounts:signup' %}" class="">Sign Up</a></li>
+        {% endif %}
+        {% block nav %}
         {% endblock %}
-    </div>
+        {% if user.is_authenticated %}
+        <li><a href="{% url 'accounts:logout' %}" class="nav-logout">Logout</a></li>
+        {% endif %}
+    </ul>
 
-    <footer>
-        <p><span class="popout" style="padding: 25px;">Website made by <a href="https://github.com/Hedgy134117/">Graham Smith</a></span></p>
-    </footer>
+    <div style="margin-left:10%;padding:1px 16px;">
+        <div class="fadeInRight">
+            {% block content %}
+            {% endblock %}
+        </div>
+
+        <footer>
+            <p><span class="popout" style="padding: 25px;">Website made by <a href="https://github.com/Hedgy134117/">Graham Smith</a></span></p>
+        </footer>
+    </div>
 </body>
 </html>

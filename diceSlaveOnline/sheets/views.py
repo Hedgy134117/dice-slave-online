@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 
-from .models import Sheet, SheetGroup, Item
+from .models import Sheet, SheetGroup, Item, Skill
 from . import forms
 
 from django.core.management import call_command
@@ -19,7 +19,8 @@ def sheetDetail(request, slug):
     for item in itemList:
         if item.sht == sheet:
             equipment.append(item)
-    return render(request, 'sheets/sheetDetail.html', { 'sheet': sheet, 'equipment': equipment, 'slug': slug, 'request': request })
+    skills = Skill.objects.all()
+    return render(request, 'sheets/sheetDetail.html', { 'sheet': sheet, 'equipment': equipment, 'slug': slug, 'request': request, 'skills': skills })
 
 def createSheet(request):
     form = forms.CreateSheet()
@@ -105,3 +106,27 @@ def removeItem(request, name, slug):
     item.delete()
     return redirect('sheets:detail', slug=slug)
 
+def addSkill(request, slug):
+    sheet = Sheet.objects.get(slug=slug)
+
+    if request.user == sheet.author:
+        if request.method == 'POST':
+            form  = forms.AddSkill(request.POST)
+
+            if form.is_valid():
+                instance = form.save(commit=False)
+                instance.sht = sheet
+                instance.save()
+                return redirect('sheets:detail', slug=slug)
+        else:
+            form = forms.AddSkill()
+            return render(request, 'sheets/addSkill.html', { 'form': form, 'slug': slug })
+    else:
+        return redirect('sheets:list')
+
+def removeSkill(request, name, slug):
+    sheet = Sheet.objects.get(slug=slug)
+    skill = Skill.objects.get(name=name, sht=sheet)
+
+    skill.delete()
+    return redirect('sheets:detail', slug=slug)

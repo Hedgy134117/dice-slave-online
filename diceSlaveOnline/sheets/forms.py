@@ -10,3 +10,8 @@ class CreateSheet(forms.ModelForm):
     class Meta:
         model = models.Sheet
         fields = '__all__'
+
+class AddSkill(forms.ModelForm):
+    class Meta:
+        model = models.Skill
+        fields = '__all__'

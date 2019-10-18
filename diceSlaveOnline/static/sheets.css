@@ -1,8 +1,12 @@
 .sheets {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
     grid-gap: 30px;
     }
+
+@media (pointer:coarse) {
+    .sheets {grid-template-columns: 1fr;}
+}
 
 .sheet {
     padding: 10px;

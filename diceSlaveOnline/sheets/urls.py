@@ -10,5 +10,7 @@ urlpatterns = [
     path('addItem/<slug:slug>/', views.addItem, name='addItem'),
     path('editItem/<str:name>/<slug:slug>/', views.editItem, name='editItem'),
     path('removeItem/<str:name>/<slug:slug>/', views.removeItem, name='removeItem'),
+    path('addSkill/<slug:slug>/', views.addSkill, name='addSkill'),
+    path('removeSkill/<str:name>/<slug:slug>/', views.removeSkill, name='removeSkill'),
     path('<slug:slug>/', views.sheetDetail, name="detail")
 ]
