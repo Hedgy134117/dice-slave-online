@@ -72,3 +72,9 @@ progress[value]::-webkit-progress-value {
 .item-remove {
     grid-area: remove;
 }
+
+.skill {
+    display: grid;
+    grid-template-columns: 75% 25%;
+}
+

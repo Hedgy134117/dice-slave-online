@@ -6,8 +6,8 @@
     <h1 style="font-size: 50px;"><span class="inverted-popout">Sheet List</span></h1>
     <div class="inverted-popout">
         <h3>Migration Progress</h3>
-        <p>New Equipment Section <progress value="6" max="11"></progress> 54%</p>
-        <p>New Skills Section <progress value="4" max="11"></progress> 36%</p>
+        <p>New Equipment Section <progress value="7" max="10"></progress> 70%</p>
+        <p>New Skills Section <progress value="6" max="10"></progress> 60%</p>
         <p><b>Please update your sheet!</b></p>
     </div>
     {% for group in groups %}
@@ -19,7 +19,41 @@
                         <h2><a href="{% url 'sheets:detail' slug='sheet.slug' slug=sheet.slug %}">
                             {{ sheet.name }} {{ sheet.hitPoints }} / {{ sheet.maxHitPoints }}
                         </a></h2>
-                        <p><i>Lvl {{ sheet.level }} <progress value="{{ sheet.xp }}" max="{% widthratio sheet.level 1 300 %}"></progress> ( {{ sheet.xp }} / {% widthratio sheet.level 1 300 %} )</i></p>
+                        <p><i>Lvl {{ sheet.level }}
+                            {% if sheet.level == 1 %}
+                            <progress value="{{ sheet.xp }}" max=300></progress>
+                            {% endif %}
+                            {% if sheet.level == 2 %}
+                            <progress value="{{ sheet.xp }}" max=900></progress>
+                            {% endif %}
+                            {% if sheet.level == 3 %}
+                            <progress value="{{ sheet.xp }}" max=2700></progress>
+                            {% endif %}
+                            {% if sheet.level == 4 %}
+                            <progress value="{{ sheet.xp }}" max=6500></progress>
+                            {% endif %}
+                            {% if sheet.level == 5 %}
+                            <progress value="{{ sheet.xp }}" max=14000></progress>
+                            {% endif %}
+
+                        ( {{ sheet.xp }} /
+                            {% if sheet.level == 1 %}
+                            300
+                            {% endif %}
+                            {% if sheet.level == 2 %}
+                            900
+                            {% endif %}
+                            {% if sheet.level == 3 %}
+                            2700
+                            {% endif %}
+                            {% if sheet.level == 4 %}
+                            6500
+                            {% endif %}
+                            {% if sheet.level == 5 %}
+                            14000
+                            {% endif %}
+
+                        )</i></p>
                         <p>{{ sheet.Class }}</p>
                         <p>{{ sheet.background }}</p>
                         <p>{{ sheet.race }}</p>
