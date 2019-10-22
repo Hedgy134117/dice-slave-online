@@ -1,4 +1,4 @@
-from django.http import HttpResponse
+from django.contrib import messages
 from django.shortcuts import render, redirect
 
 from .models import Sheet, SheetGroup, Item, Skill
@@ -69,6 +69,10 @@ def addItem(request, slug):
             if form.is_valid():
                 instance = form.save(commit=False)
                 instance.sht = Sheet.objects.get(slug=slug)
+
+                if Item.objects.filter(sht=instance.sht, name=instance.name).exists():
+                    return redirect('sheets:detail', slug=slug)
+
                 instance.save()
 
                 return redirect('sheets:detail', slug=slug)

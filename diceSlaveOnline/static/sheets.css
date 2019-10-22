@@ -31,6 +31,10 @@
       align-items: center;
 }
 
+@media (pointer:coarse) {
+    .stat { display: block; }
+}
+
 .stat-main {
     text-align: center;
     padding: 5px;

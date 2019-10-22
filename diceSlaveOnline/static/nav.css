@@ -1,8 +1,12 @@
+:root {
+    --nav-width: 10%;
+}
+
 ul {
   list-style-type: none;
   margin: 0;
   padding: 0;
-  width: 10%;
+  width: var(--nav-width);
   background-color: #f1f1f1;
   height: 100%; /* Full height */
   position: fixed; /* Make it stick, even on scroll */
@@ -14,6 +18,16 @@ ul {
   color: #000;
   padding: 8px 16px;
   text-decoration: none;
+}
+
+.main {
+    margin-left: var(--nav-width);
+    padding: 1px 16px;
+}
+
+@media (pointer:coarse) {
+    .nav li a { font-size: 4em; }
+    :root { --nav-width: 25%; }
 }
 
 .nav li a:hover {
