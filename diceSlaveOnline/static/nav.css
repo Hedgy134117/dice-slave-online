@@ -26,7 +26,7 @@ ul {
 }
 
 @media (pointer:coarse) {
-    .nav li a { font-size: 4em; }
+    .nav li a { font-size: 4em; border: 1px solid black; }
     :root { --nav-width: 25%; }
 }
 
