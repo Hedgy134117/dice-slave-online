@@ -1,7 +1,7 @@
 from django.contrib import messages
 from django.shortcuts import render, redirect
 
-from .models import Sheet, SheetGroup, Item, Skill
+from .models import *
 from . import forms
 
 from django.core.management import call_command
@@ -20,7 +20,17 @@ def sheetDetail(request, slug):
         if item.sht == sheet:
             equipment.append(item)
     skills = Skill.objects.all()
-    return render(request, 'sheets/sheetDetail.html', { 'sheet': sheet, 'equipment': equipment, 'slug': slug, 'request': request, 'skills': skills })
+    spells = Spell.objects.all().order_by('level')
+    return render(
+        request, 'sheets/sheetDetail.html', {
+            'sheet': sheet,
+            'equipment': equipment,
+            'slug': slug,
+            'request': request,
+            'skills': skills,
+            'spells': spells,
+        })
+
 
 def createSheet(request):
     form = forms.CreateSheet()
@@ -134,3 +144,21 @@ def removeSkill(request, name, slug):
 
     skill.delete()
     return redirect('sheets:detail', slug=slug)
+
+def addSpell(request, slug):
+    sheet = Sheet.objects.get(slug=slug)
+
+    if request.user == sheet.author:
+        if request.method == 'POST':
+            form = forms.AddSpell(request.POST)
+
+            if form.is_valid():
+                instance = form.save(commit=False)
+                instance.sht = sheet
+                instance.save()
+                return redirect('sheets:detail', slug=slug)
+        else:
+            form = forms.AddSpell()
+            return render(request, 'sheets/addSpell.html', { 'form': form, 'slug': slug })
+    else:
+        return redirect('sheets:list')

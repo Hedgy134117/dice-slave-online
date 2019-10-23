@@ -6,6 +6,11 @@ class AddItem(forms.ModelForm):
         model = models.Item
         fields = '__all__'
 
+class AddSpell(forms.ModelForm):
+    class Meta:
+        model = models.Spell
+        fields = '__all__'
+
 class CreateSheet(forms.ModelForm):
     class Meta:
         model = models.Sheet

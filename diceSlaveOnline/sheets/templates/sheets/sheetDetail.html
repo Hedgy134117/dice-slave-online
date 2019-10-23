@@ -32,64 +32,6 @@
         </div>
         <div class="stat-section popout">
             <h1>Skills</h1>
-            <h2>Old List</h2>
-            {% if sheet.acrobatics %}
-            <p><b>Acrobatics</b> + {{ sheet.acrobaticsMod }}</p>
-            {% endif %}
-            {% if sheet.animalHandling %}
-            <p><b>Animal Handling</b> + {{ sheet.animalHanding }}</p>
-            {% endif %}
-            {% if sheet.arcana %}
-            <p><b>Arcana</b> + {{ sheet.arcanaMod }}</p>
-            {% endif %}
-            {% if sheet.athletics %}
-            <p><b>Athletics</b> + {{ sheet.athleticsMod }}</p>
-            {% endif %}
-            {% if sheet.deception %}
-            <p><b>Deception</b> + {{ sheet.deceptionMod }}</p>
-            {% endif %}
-            {% if sheet.history %}
-            <p><b>History</b> + {{ sheet.historyMod }}</p>
-            {% endif %}
-            {% if sheet.insight %}
-            <p><b>Insight</b> + {{ sheet.insightMod }}</p>
-            {% endif %}
-            {% if sheet.intimidation %}
-            <p><b>Intimidation</b> + {{ sheet.intimidationMod }}</p>
-            {% endif %}
-            {% if sheet.investigation %}
-            <p><b>Investigation</b> + {{ sheet.investigationMod }}</p>
-            {% endif %}
-            {% if sheet.medicine %}
-            <p><b>Medicine</b> + {{ sheet.medicineMod }}</p>
-            {% endif %}
-            {% if sheet.nature %}
-            <p><b>Nature</b> + {{ sheet.natureMod }}</p>
-            {% endif %}
-            {% if sheet.perception %}
-            <p><b>Perception</b> + {{ sheet.perceptionMod }}</p>
-            {% endif %}
-            {% if sheet.performance %}
-            <p><b>Performance</b> + {{ sheet.performanceMod }}</p>
-            {% endif %}
-            {% if sheet.persuasion %}
-            <p><b>Persuasion</b> + {{ sheet.persuasionMod }}</p>
-            {% endif %}
-            {% if sheet.religion %}
-            <p><b>Religion</b> + {{ sheet.religionMod }}</p>
-            {% endif %}
-            {% if sheet.sleightOfHand %}
-            <p><b>Sleight of Hand</b> + {{ sheet.sleightOfHandMod }}</p>
-            {% endif %}
-            {% if sheet.stealth %}
-            <p><b>Stealth</b> + {{ sheet.stealthMod }}</p>
-            {% endif %}
-            {% if sheet.survival %}
-            <p><b>Survival</b> + {{ sheet.survivalMod }}</p>
-            {% endif %}
-            <p style='color:red;'>please don't use this old list and use the new list below</p>
-
-            <h2>New List</h2>
             {% for skill in skills %}
                 {% if skill.sht == sheet %}
                     <div class="skill">
@@ -139,12 +81,6 @@
         </div>
         <div class="stat-section popout">
             <h1>Equipment</h1>
-            {% if sheet.equipment != "" %}
-            <h2>Old list</h2>
-            <p>{{ sheet.equipment }}</p>
-            <p style='color:red;'>please don't use this old list and use the new list below</p>
-            {% endif %}
-            <h2>New list</h2>
             {% for item in equipment %}
                 <div class="item">
                     <p class="item-name">{{ item.amount }} {{ item.name }}</p>
@@ -155,8 +91,6 @@
                         {% endif %}
                     {% endif %}
                 </div>
-            {% empty %}
-                <p>No equipment</p>
             {% endfor %}
             {% if user.is_authenticated %}
                 {% if sheet.author == request.user %}
@@ -164,6 +98,28 @@
                 {% endif %}
             {% endif %}
         </div>
+        <div class="stat-section popout">
+            <h1>Spells</h1>
+            {% for spell in spells %}
+                {% if spell.sht == sheet %}
+                <div class="spell">
+                    <p class="spell-name"><a href="{{ spell.reference }}">{{ spell.name }}</a></p>
+                    <p class="spell-level">{{ spell.get_level_display }}</p>
+                    {% if user.is_authenticated %}
+                        {% if sheet.author == request.user %}
+                            <p><a class="spell-remove" href="#"><s>Remove</s></a></p>
+                        {% endif %}
+                    {% endif %}
+                </div>
+                {% endif %}
+            {% endfor %}
+            {% if user.is_authenticated %}
+                {% if sheet.author == request.user %}
+                    <p style="text-align: center;"><a href="{% url 'sheets:addSpell' slug %}">Add</a></p>
+                {% endif %}
+            {% endif %}
+        </div>
+
         <div class="stat-section popout">
             <h1>Fighting Stats</h1>
             <p><b>AC:</b> {{ sheet.armorClass }}</p>

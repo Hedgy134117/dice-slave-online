@@ -79,6 +79,26 @@ class Sheet(models.Model):
     def sheetGroupValue(self):
         return str(self.sheetGroup)
 
+class Spell(models.Model):
+    sht = models.ForeignKey(Sheet, on_delete=models.CASCADE, blank=True, null=True, editable=False)
+    name = models.CharField(max_length=50)
+    reference = models.URLField(max_length=200, verbose_name="Link for Reference")
+    
+    level_choices = (
+        ('cantrip', 'Cantrip'),
+        ('1', '1st'),
+        ('2', '2nd'),
+        ('3', '3rd'),
+        ('4', '4th'),
+        ('5', '5th'),
+        ('6', '6th'),
+        ('7', '7th'),
+        ('8', '8th'),
+        ('9', '9th')
+    )
+    level = models.CharField(max_length=100, choices=level_choices, default='cantrip')
+
+
 class Skill(models.Model):
     sht = models.ForeignKey(Sheet, on_delete=models.CASCADE, blank=True, null=True, editable=False)
 

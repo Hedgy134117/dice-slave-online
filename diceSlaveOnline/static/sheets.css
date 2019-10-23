@@ -82,3 +82,7 @@ progress[value]::-webkit-progress-value {
     grid-template-columns: 75% 25%;
 }
 
+.spell {
+    display: grid;
+    grid-template-columns: 50% 25% 25%;
+}
