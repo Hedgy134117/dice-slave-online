@@ -51,28 +51,6 @@
                     {% endif %}
         </div>
         <div class="stat-section popout">
-            <h1>Saving</h1>
-            <h1>Throws</h1>
-            {% if sheet.sStrength %}
-            <p><b>Strength</b></p>
-            {% endif %}
-            {% if sheet.sDexterity %}
-            <p><b>Dexterity</b></p>
-            {% endif %}
-            {% if sheet.sConstitution %}
-            <p><b>Constitution</b></p>
-            {% endif %}
-            {% if sheet.sIntelligence %}
-            <p><b>Intelligence</b></p>
-            {% endif %}
-            {% if sheet.sWisdom %}
-            <p><b>Wisdom</b></p>
-            {% endif %}
-            {% if sheet.sCharisma %}
-            <p><b>Charisma</b></p>
-            {% endif %}
-        </div>
-        <div class="stat-section popout">
             <h1>Money</h1>
             <p>{{ sheet.copper }} <b>copper</b></p>
             <p>{{ sheet.silver }} <b>silver</b></p>
@@ -107,7 +85,7 @@
                     <p class="spell-level">{{ spell.get_level_display }}</p>
                     {% if user.is_authenticated %}
                         {% if sheet.author == request.user %}
-                            <p><a class="spell-remove" href="#"><s>Remove</s></a></p>
+                            <p class="spell-remove"><a href="{% url 'sheets:removeSpell' spell.name slug %}">Remove</a></p>
                         {% endif %}
                     {% endif %}
                 </div>
@@ -129,6 +107,25 @@
             <p><b>Hit Dice:</b> {{ sheet.hitDice }}</p>
             <p><b>Successful death saves:</b> {{ sheet.sDeathSave1 }} {{ sheet.sDeathSave2 }} {{ sheet.sDeathSave3 }}</p>
             <p><b>Failed death saves:</b> {{ sheet.fDeathSave1 }} {{ sheet.fDeathSave2 }} {{ sheet.fDeathSave3 }} </p>
+            <h2>Saving Throws</h2>
+            {% if sheet.sStrength %}
+            <p><b>Strength</b></p>
+            {% endif %}
+            {% if sheet.sDexterity %}
+            <p><b>Dexterity</b></p>
+            {% endif %}
+            {% if sheet.sConstitution %}
+            <p><b>Constitution</b></p>
+            {% endif %}
+            {% if sheet.sIntelligence %}
+            <p><b>Intelligence</b></p>
+            {% endif %}
+            {% if sheet.sWisdom %}
+            <p><b>Wisdom</b></p>
+            {% endif %}
+            {% if sheet.sCharisma %}
+            <p><b>Charisma</b></p>
+            {% endif %}
         </div>
         <div class="stat-section popout">
             <h1>Other Stats</h1>

@@ -16,6 +16,7 @@ urlpatterns = [
     path('removeSkill/<str:name>/<slug:slug>/', views.removeSkill, name='removeSkill'),
 
     path('addSpell/<slug:slug>/', views.addSpell, name='addSpell'),
+    path('removeSpell/<str:name>/<slug:slug>/', views.removeSpell, name='removeSpell'),
 
     path('<slug:slug>/', views.sheetDetail, name="detail")
 ]

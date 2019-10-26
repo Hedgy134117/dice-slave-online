@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block title %}{{request.user}}{% endblock %}
+
+{% block content %}
+    <h1><span class="inverted-popout">Welcome back, {{request.user}}</span></h1>
+
+    <div class="sheets">
+    {% for sheet in sheets %}
+        <div class="sheet popout">
+            <h2><a href="{% url 'sheets:detail' slug='sheet.slug' slug=sheet.slug %}">
+                {{ sheet.name }} {{ sheet.hitPoints }} / {{ sheet.maxHitPoints }}
+            </a></h2>
+            <p><i>Lvl {{ sheet.level }}
+                {% if sheet.level == 1 %}
+                <progress value="{{ sheet.xp }}" max=300></progress>
+                {% endif %}
+                {% if sheet.level == 2 %}
+                <progress value="{{ sheet.xp }}" max=900></progress>
+                {% endif %}
+                {% if sheet.level == 3 %}
+                <progress value="{{ sheet.xp }}" max=2700></progress>
+                {% endif %}
+                {% if sheet.level == 4 %}
+                <progress value="{{ sheet.xp }}" max=6500></progress>
+                {% endif %}
+                {% if sheet.level == 5 %}
+                <progress value="{{ sheet.xp }}" max=14000></progress>
+                {% endif %}
+
+            ( {{ sheet.xp }} /
+                {% if sheet.level == 1 %}
+                300
+                {% endif %}
+                {% if sheet.level == 2 %}
+                900
+                {% endif %}
+                {% if sheet.level == 3 %}
+                2700
+                {% endif %}
+                {% if sheet.level == 4 %}
+                6500
+                {% endif %}
+                {% if sheet.level == 5 %}
+                14000
+                {% endif %}
+
+            )</i></p>
+            <p>{{ sheet.Class }}</p>
+            <p>{{ sheet.background }}</p>
+            <p>{{ sheet.race }}</p>
+        </div>
+    {% endfor %}
+    </div>
+{% endblock %}

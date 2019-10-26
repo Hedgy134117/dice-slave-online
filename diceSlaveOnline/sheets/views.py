@@ -1,7 +1,7 @@
 from django.contrib import messages
 from django.shortcuts import render, redirect
 
-from .models import *
+from .models import Sheet, SheetGroup, Item, Skill, Spell
 from . import forms
 
 from django.core.management import call_command
@@ -162,3 +162,10 @@ def addSpell(request, slug):
             return render(request, 'sheets/addSpell.html', { 'form': form, 'slug': slug })
     else:
         return redirect('sheets:list')
+
+def removeSpell(request, name, slug):
+    sheet = Sheet.objects.get(slug=slug)
+    spell = Spell.objects.get(name=name, sht=sheet)
+
+    spell.delete()
+    return redirect('sheets:detail', slug=slug)
