@@ -31,6 +31,7 @@
     <ul class="nav">
         <li><a href="{% url 'sheets:list' %}" class="">Sheet List</a></li>
         {% if user.is_authenticated %}
+        <li><a href="{% url 'profile' user.username %}">My Profile</a></li>
         <li><a href="{% url 'sheets:create' %}" class="">Create Sheet</a></li>
         {% else %}
         <li><a href="{% url 'accounts:login' %}" class="">Login</a></li>

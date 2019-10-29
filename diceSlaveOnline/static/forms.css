@@ -3,13 +3,24 @@ label {
     padding: 5px 0px 5px 0px;
     font-size: 24px;
 }
-  
+
 form input[type='text'], form input[type='number'] {
     margin: 5px 0px 5px 0px;
     padding: 10px;
-    width: 98%;
+    width: 50%;
 }
-  
+
+input[type='submit'] {
+    margin: 10px;
+    margin-bottom: 0px;
+    padding: 10px;
+    width: 100%;
+}
+
+.double-form p input {
+    width: 25%;
+}
+
 input[type='checkbox'] {
     width: 25px;
     height: 25px;

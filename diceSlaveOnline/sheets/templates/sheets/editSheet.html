@@ -4,11 +4,86 @@
 
 {% block content %}
     <div class="edit-sheet">
-        <h2>Edit a Player Sheet</h2>
         <form class="site-form" action="{% url 'sheets:edit' slug %}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
-            {{ form }}
-            <input type="submit" value="Edit">
+            <input type="submit" value="Finish">
+            <h1 class="stat-main"><span class="inverted-popout">{{ form.name }}</span></h1>
+    <div class="stat">
+        <div class="stat-section popout">
+            <h1>Info</h1>
+            <h2><b>Class: </b>{{ form.Class }}</h2>
+            <h2><b>Background: </b>{{ form.background }}</h2>
+            <h2><b>Race: </b>{{ form.race }}</h2>
+            <h2><b>XP: </b>{{ form.xp }}</h3>
+            <h2><b>Level: </b>{{ form.level }}</h3>
+        </div>
+        <div class="stat-section popout">
+            <div class="double-form">
+                <h1>Stats</h1>
+                <p><b>Strength:</b> {{ form.strength }} + {{ form.strengthMod }}</p>
+                <p><b>Dexterity:</b> {{ form.dexterity }} + {{ form.dexterityMod }}</p>
+                <p><b>Constitution:</b> {{ form.constitution }} + {{ form.constitutionMod }}</p>
+                <p><b>Intelligence:</b> {{ form.intelligence }} + {{ form.intelligenceMod }}</p>
+                <p><b>Wisdom:</b> {{ form.wisdom }} + {{ form.wisdomMod }}</p>
+                <p><b>Charisma:</b> {{ form.charisma }} + {{ form.charismaMod }}</p>
+            </div>
+        </div>
+        <div class="stat-section popout">
+            <h1>Skills</h1>
+            {% for skill in skills %}
+                {% if skill.sht == sheet %}
+                    <div class="skill">
+                        <p class="skill-name"><b>{{ skill.get_name_display }}</b> + {{ skill.mod }}</p>
+                        {% if user.is_authenticated %}
+                            {% if sheet.author == request.user %}
+                                <p class="skill-remove"><a href="{% url 'sheets:removeSkill' skill.name slug %}">Remove</a></p>
+                            {% endif %}
+                        {% endif %}
+                    </div>
+                {% endif %}
+            {% endfor %}
+                    {% if user.is_authenticated %}
+                        {% if sheet.author == request.user %}
+                            <p style="text-align: center;"><a href="{% url 'sheets:addSkill' slug %}">Add</a></p>
+                        {% endif %}
+                    {% endif %}
+        </div>
+        <div class="stat-section popout">
+            <h1>Money</h1>
+            <p>{{ form.copper }} <b>copper</b></p>
+            <p>{{ form.silver }} <b>silver</b></p>
+            <p>{{ form.gold }} <b>gold</b></p>
+            <p>{{ form.platinum }} <b>platinum</b></p>
+        </div>
+        <div class="stat-section popout">
+            <h1>Fighting Stats</h1>
+            <p><b>AC:</b> {{ form.armorClass }}</p>
+            <p><b>Initiative:</b> {{ form.initiative }}</p>
+            <p><b>Speed:</b> {{ form.speed }}</p>
+            <div class="double-form"><p><b>HP:</b> {{ form.hitPoints }} / {{ form.maxHitPoints }}</p></div>
+            <p><b>Hit Dice:</b> {{ form.hitDice }}</p>
+            <p><b>Successful death saves:</b> {{ form.sDeathSave1 }} {{ form.sDeathSave2 }} {{ form.sDeathSave3 }}</p>
+            <p><b>Failed death saves:</b> {{ form.fDeathSave1 }} {{ form.fDeathSave2 }} {{ form.fDeathSave3 }} </p>
+            <h2>Saving Throws</h2>
+            <p><b>{{ form.sStrength }} Strength</b></p>
+            <p><b>{{ form.sDexterity }} Dexterity</b></p>
+            <p><b>{{ form.sConstitution }} Constitution</b></p>
+            <p><b>{{ form.sIntelligence }} Intelligence</b></p>
+            <p><b>{{ form.sWisdom }} Wisdom</b></p>
+            <p><b>{{ form.sCharisma }} Charisma</b></p>
+        </div>
+        <div class="stat-section popout">
+            <h1>Other Stats</h1>
+            <p><b>Personality Traits: </b>{{ form.personalityTraits }}</p>
+            <p><b>Ideals: </b>{{ form.ideals }}</p>
+            <p><b>Bonds: </b>{{ form.bonds }}</p>
+            <p><b>Flaws: </b>{{ form.flaws }}</p>
+            <p><b>Features & Traits: </b>{{ form.featuresTraits }}</p>
+            <p><b>Other Proficiences: </b>{{ form.otherProficiencies }}</p>
+            <p><b>Languages: </b>{{ form.languages }}</p>
+        </div>
+    </div>
+
         </form>
     </div>
 {% endblock %}
