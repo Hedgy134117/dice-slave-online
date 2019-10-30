@@ -6,8 +6,15 @@
     <div class="edit-sheet">
         <form class="site-form" action="{% url 'sheets:edit' slug %}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
-            <input type="submit" value="Finish">
-            <h1 class="stat-main"><span class="inverted-popout">{{ form.name }}</span></h1>
+            <p>{{ form.errors }}</p>
+            <h1 class="stat-main">
+            <span class="inverted-popout">
+                <p>Important</p>
+                <p>Name: {{ form.name }}</p>
+                <p>Group: {{ form.sheetGroup }}</p>
+                <p>Slug: {{ form.slug }}</p>
+            </span>
+            </h1>
     <div class="stat">
         <div class="stat-section popout">
             <h1>Info</h1>
@@ -84,6 +91,9 @@
         </div>
     </div>
 
+        <input type="submit" value="Edit">
         </form>
     </div>
+    {% load static %}
+    <script src="{% static 'slugify.js' %}"></script>
 {% endblock %}

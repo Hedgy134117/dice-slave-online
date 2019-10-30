@@ -59,7 +59,9 @@ def editSheet(request, slug):
             form = forms.CreateSheet(request.POST, instance=sheet)
 
             if form.is_valid():
-                form.save()
+                instance = form.save(commit=False)
+                instance.author = request.user
+                instance.save()
                 return redirect('sheets:detail', slug=slug)
         else:
             form = forms.CreateSheet(instance=sheet)
