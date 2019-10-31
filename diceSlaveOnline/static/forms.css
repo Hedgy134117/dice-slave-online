@@ -28,12 +28,12 @@ input[type='submit'] {
     width: 100%;
 }
 
-input[type='submit']:hover {
-    content: ">>";
-}
-
 .double-form p input {
     width: 25%;
+}
+
+.long-form p input {
+    width: 90%;
 }
 
 input[type='checkbox'] {

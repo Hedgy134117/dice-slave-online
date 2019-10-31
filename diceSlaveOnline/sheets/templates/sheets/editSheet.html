@@ -36,26 +36,6 @@
             </div>
         </div>
         <div class="stat-section popout">
-            <h1>Skills</h1>
-            {% for skill in skills %}
-                {% if skill.sht == sheet %}
-                    <div class="skill">
-                        <p class="skill-name"><b>{{ skill.get_name_display }}</b> + {{ skill.mod }}</p>
-                        {% if user.is_authenticated %}
-                            {% if sheet.author == request.user %}
-                                <p class="skill-remove"><a href="{% url 'sheets:removeSkill' skill.name slug %}">Remove</a></p>
-                            {% endif %}
-                        {% endif %}
-                    </div>
-                {% endif %}
-            {% endfor %}
-                    {% if user.is_authenticated %}
-                        {% if sheet.author == request.user %}
-                            <p style="text-align: center;"><a href="{% url 'sheets:addSkill' slug %}">Add</a></p>
-                        {% endif %}
-                    {% endif %}
-        </div>
-        <div class="stat-section popout">
             <h1>Money</h1>
             <p>{{ form.copper }} <b>copper</b></p>
             <p>{{ form.silver }} <b>silver</b></p>
@@ -80,14 +60,16 @@
             <p><b>{{ form.sCharisma }} Charisma</b></p>
         </div>
         <div class="stat-section popout">
-            <h1>Other Stats</h1>
-            <p><b>Personality Traits: </b>{{ form.personalityTraits }}</p>
-            <p><b>Ideals: </b>{{ form.ideals }}</p>
-            <p><b>Bonds: </b>{{ form.bonds }}</p>
-            <p><b>Flaws: </b>{{ form.flaws }}</p>
-            <p><b>Features & Traits: </b>{{ form.featuresTraits }}</p>
-            <p><b>Other Proficiences: </b>{{ form.otherProficiencies }}</p>
-            <p><b>Languages: </b>{{ form.languages }}</p>
+            <div class="long-form">
+                <h1>Other Stats</h1>
+                <p><b>Personality Traits: </b>{{ form.personalityTraits }}</p>
+                <p><b>Ideals: </b>{{ form.ideals }}</p>
+                <p><b>Bonds: </b>{{ form.bonds }}</p>
+                <p><b>Flaws: </b>{{ form.flaws }}</p>
+                <p><b>Features & Traits: </b>{{ form.featuresTraits }}</p>
+                <p><b>Other Proficiences: </b>{{ form.otherProficiencies }}</p>
+                <p><b>Languages: </b>{{ form.languages }}</p>
+            </div>
         </div>
     </div>
 
