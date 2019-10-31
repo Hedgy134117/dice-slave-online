@@ -70,6 +70,21 @@ def editSheet(request, slug):
     else:
         return redirect('sheets:list')
 
+def createGroup(request):
+    form = forms.CreateGroup()
+
+    if request.method == 'POST':
+        form = forms.CreateGroup(request.POST)
+
+        if form.is_valid():
+            instance = form.save(commit=False)
+            instance.owner = request.user
+            instance.save()
+            return redirect('sheets:list')
+    else:
+        form = forms.CreateGroup()
+    return render(request, 'sheets/createGroup.html', { 'form': form })
+
 def addItem(request, slug):
     sheet = Sheet.objects.get(slug=slug)
     form = forms.AddItem()

@@ -5,7 +5,10 @@
 {% block content %}
     <h1 style="font-size: 50px;"><span class="inverted-popout">Sheet List</span></h1>
     {% for group in groups %}
-        <h1 class="inverted-popout">{{ group.name }}</h2>
+        <h1 class="inverted-popout">
+            <span>{{ group.name }}</span> <br />
+            <span style='font-size: 50%'>Owned by: {{ group.owner }}</span>
+        </h1>
         <div class="sheets">
             {% for sheet in sheets %}
                 {% if sheet.sheetGroupValue == group.SheetGroupName %}

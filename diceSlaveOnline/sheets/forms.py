@@ -16,6 +16,11 @@ class CreateSheet(forms.ModelForm):
         model = models.Sheet
         fields = '__all__'
 
+class CreateGroup(forms.ModelForm):
+    class Meta:
+        model = models.SheetGroup
+        fields = '__all__'
+
 class AddSkill(forms.ModelForm):
     class Meta:
         model = models.Skill
