@@ -57,7 +57,7 @@ progress[value]::-webkit-progress-bar {
 }
 
 progress[value]::-webkit-progress-value {
-    background-color: #4FB95C;
+    background-color: #8860d0;
 }
 
 .item {

@@ -5,7 +5,9 @@
 
 body {
 font-family: Arial;
-background: #EE6D66;
+/*background: #EE6D66;*/
+background: linear-gradient(150deg, rgba(86,128,233,1) 0%, rgba(90,185,234,1) 100%) no-repeat center center fixed;
+background-size: cover;
 color: #12130F;
 margin: 0;
 }

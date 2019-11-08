@@ -1,11 +1,9 @@
-from django.http import HttpResponse
 from django.shortcuts import render, redirect
-
-from sheets.models import Sheet, SheetGroup
+from sheets.models import Sheet
 
 def homepage(request):
     if request.user.is_authenticated != True:
-        return redirect('sheets:list')
+        return render(request, 'homepage.html', {})
     else:
         return redirect('profile', request.user)
 
