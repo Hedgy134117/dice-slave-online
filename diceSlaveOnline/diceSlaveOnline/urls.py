@@ -7,5 +7,6 @@ urlpatterns = [
     path('profile/<username>/', views.profile, name='profile'),
     path('admin/', admin.site.urls),
     path('sheets/', include('sheets.urls')),
+    path('dice/', include('onlineDice.urls')),
     path('accounts/', include('accounts.urls')),
 ]

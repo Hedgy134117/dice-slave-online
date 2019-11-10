@@ -2,7 +2,7 @@
     --nav-width: 10%;
 }
 
-ul {
+.nav {
   list-style-type: none;
   margin: 0;
   padding: 0;
@@ -26,12 +26,12 @@ ul {
 }
 
 @media (pointer:coarse) {
-    .nav li a { font-size: 4em; border: 1px solid black; }
+    .nav li a { font-size: 4em; }
     :root { --nav-width: 25%; }
 }
 
 .nav li a:hover {
-  background-color: #4FB95C;
+  background-color: #8860d0;
   color: white;
 }
 

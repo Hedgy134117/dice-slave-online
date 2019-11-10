@@ -33,6 +33,7 @@
         {% if user.is_authenticated %}
         <li><a href="{% url 'profile' user.username %}">My Profile</a></li>
         <li><a href="{% url 'sheets:create' %}" class="">Create Sheet</a></li>
+        <li><a href="{% url 'sheets:createGroup' %}">Create Group</a></li>
         {% else %}
         <li><a href="{% url 'accounts:login' %}" class="">Login</a></li>
         <li><a href="{% url 'accounts:signup' %}" class="">Sign Up</a></li>

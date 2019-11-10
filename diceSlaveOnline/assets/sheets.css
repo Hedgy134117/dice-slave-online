@@ -44,7 +44,7 @@
 .stat-section {
       padding: 10px;
       margin: 10px;
-      min-width: 500px;
+      min-width: 300px;
 }
 
 progress[value] {
@@ -57,7 +57,7 @@ progress[value]::-webkit-progress-bar {
 }
 
 progress[value]::-webkit-progress-value {
-    background-color: #4FB95C;
+    background-color: #8860d0;
 }
 
 .item {

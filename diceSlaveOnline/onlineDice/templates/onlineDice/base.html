@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}Dice Online{% endblock %}
+
+{% block content %}
+
+<ul id="messages"></ul>
+<form id="message-form">
+    <input type="text" id="name" value="DaLlAs DiCeRoLlEr">
+</form>
+
+<button id="d4" form="message-form">d4</button>
+<button id="d6" form="message-form">d6</button>
+<button id="d10" form="message-form">d10</button>
+<button id="d12" form="message-form">d12</button>
+<button id="d20" form="message-form">d20</button>
+<button id="d100" form="message-form">d100</button>
+
+<script src="https://unpkg.com/@pusher/chatkit-client@1/dist/web/chatkit.js"></script>
+{% load static %}
+<script src="{% static 'dice.js' %}"></script>
+
+{% endblock %}

@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'sheets',
     'accounts',
+    'onlineDice',
 ]
 
 MIDDLEWARE = [

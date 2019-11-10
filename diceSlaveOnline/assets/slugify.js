@@ -7,6 +7,10 @@ const slugify = (val) => {
         .replace(/[\s\W-]+/g, '-')      // replace spaces, nonwords, and dashes with a single dash
 };
 
+window.onload = function() {
+    slugify(titleInput.value);
+}
+
 titleInput.addEventListener('keyup', (e) => {
     slugInput.setAttribute('value', slugify(titleInput.value));
 });

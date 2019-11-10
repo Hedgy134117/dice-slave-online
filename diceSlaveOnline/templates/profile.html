@@ -11,6 +11,7 @@
             <h2><a href="{% url 'sheets:detail' slug='sheet.slug' slug=sheet.slug %}">
                 {{ sheet.name }} {{ sheet.hitPoints }} / {{ sheet.maxHitPoints }}
             </a></h2>
+            <p><b>{{ sheet.sheetGroup }}</b></p>
             <p><i>Lvl {{ sheet.level }}
                 {% if sheet.level == 1 %}
                 <progress value="{{ sheet.xp }}" max=300></progress>
