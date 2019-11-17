@@ -24,16 +24,30 @@
     <link rel="stylesheet" href="{% static 'nav.css' %}">
     <link rel="stylesheet" href="{% static 'sheets.css' %}">
     <link rel="stylesheet" href="{% static 'forms.css' %}">
-    <!--<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.css">-->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.css">
     <title>{% block title %}{% endblock %}</title>
 </head>
 <body>
+    <script>
+        function nav() {
+            if (document.getElementsByClassName("nav")[0].style.width != "250px") {
+                document.getElementsByClassName("nav")[0].style.width = "250px";
+                document.getElementsByClassName("main")[0].style.marginLeft = "250px";
+            }
+            else {
+                document.getElementsByClassName("nav")[0].style.width = "0";
+                document.getElementsByClassName("main")[0].style.marginLeft = "0";
+            }
+        }
+    </script>
+
     <ul class="nav">
         <li><a href="{% url 'sheets:list' %}" class="">Sheet List</a></li>
         {% if user.is_authenticated %}
         <li><a href="{% url 'profile' user.username %}">My Profile</a></li>
         <li><a href="{% url 'sheets:create' %}" class="">Create Sheet</a></li>
         <li><a href="{% url 'sheets:createGroup' %}">Create Group</a></li>
+        <li><a href="{% url 'dice:base' %}">Dice Online</a></li>
         {% else %}
         <li><a href="{% url 'accounts:login' %}" class="">Login</a></li>
         <li><a href="{% url 'accounts:signup' %}" class="">Sign Up</a></li>
@@ -46,7 +60,12 @@
     </ul>
 
     <div class="main">
-        <div class="fadeInRight">
+        <div onclick="nav()" id="navButton">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        <div>
             {% block content %}
             {% endblock %}
         </div>

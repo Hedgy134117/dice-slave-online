@@ -44,6 +44,43 @@ background-color: #FFFFFF;
 box-shadow: 5px 5px 0px rgba(0, 0, 0, 0.4);
 }
 
+#dice {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+#dice-portal iframe {
+    margin: 0;
+    width: 95%;
+    height: 100vh;
+
+    margin-left: 5%;
+    pointer: coarse;
+}
+
+#messages {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+#messages li {
+    margin: 30px auto 20px auto;
+    padding: 10px 20px 10px 20px;
+    display: flex;
+}
+
+#messages li #name {
+    font-size: 0.8em;
+    align-self: center;
+    color: #7F7F7F;
+    padding-right: 20px;
+}
+
+#messages li #roll {
+    font-size: 1.2em;
+}
+
 .inverted-popout {
 /*border-radius: var(--less-rounded);*/
 /*background-color: #000506;*/

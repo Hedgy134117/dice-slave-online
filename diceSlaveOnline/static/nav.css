@@ -1,16 +1,13 @@
-:root {
-    --nav-width: 10%;
-}
-
 .nav {
   list-style-type: none;
   margin: 0;
   padding: 0;
-  width: var(--nav-width);
+  width: 0;
   background-color: #f1f1f1;
   height: 100%; /* Full height */
   position: fixed; /* Make it stick, even on scroll */
   overflow: auto; /* Enable scrolling if the sidenav has too much content */
+  transition: 0.5s;
 }
 
 .nav li a {
@@ -21,8 +18,23 @@
 }
 
 .main {
-    margin-left: var(--nav-width);
     padding: 1px 16px;
+    transition: 0.5s;
+}
+
+#navButton {
+    display: inline;
+}
+
+#navButton:hover {
+    cursor: pointer;
+}
+
+#navButton div {
+    width: 35px;
+    height: 5px;
+    background-color: black;
+    margin: 6px 0;
 }
 
 @media (pointer:coarse) {
@@ -33,9 +45,4 @@
 .nav li a:hover {
   background-color: #8860d0;
   color: white;
-}
-
-.nav-logout:hover {
-    background-color: #e62d20;
-    color: white;
 }

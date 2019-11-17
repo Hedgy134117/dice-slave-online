@@ -36,10 +36,24 @@ chatManager.connect()
                     }
                 }
 
+                nameP = document.createElement('p');
+                nameP.id = 'name';
+                nameT = document.createTextNode(name + ": ");
+                nameP.appendChild(nameT);
+                rollP = document.createElement('p');
+                rollP.id = 'roll';
+                rollT = document.createTextNode(text);
+                rollP.appendChild(rollT);
+
+
                 li.appendChild(
-                    document.createTextNode(name + ': ' + text)
+                    nameP
                 );
-                ul.appendChild(li);
+                li.appendChild(
+                    rollP
+                );
+                li.setAttribute('class', 'popout');
+                ul.insertBefore(li, ul.childNodes[0]);
             }
         }
     });
@@ -62,6 +76,17 @@ chatManager.connect()
 
         currentUser.sendSimpleMessage ({
             text: name.value + "/" + "1d6 - " + (Math.floor(Math.random() * 6) + 1),
+            roomId: currentUser.rooms[0].id
+        })
+    })
+
+    const d8 = document.getElementById("d8");
+    d8.addEventListener("click", e => {
+        e.preventDefault();
+        const name = document.getElementById('name');
+
+        currentUser.sendSimpleMessage ({
+            text: name.value + "/" + "1d8 - " + (Math.floor(Math.random() * 8) + 1),
             roomId: currentUser.rooms[0].id
         })
     })
@@ -93,8 +118,13 @@ chatManager.connect()
         e.preventDefault();
         const name = document.getElementById('name');
 
+        var roll = Math.floor(Math.random() * 20) + 1;
+        if (roll == 4) {
+            roll = 5;
+        }
+
         currentUser.sendSimpleMessage ({
-            text: name.value + "/" + "1d20 - " + (Math.floor(Math.random() * 20) + 1),
+            text: name.value + "/" + "1d20 - " + roll,
             roomId: currentUser.rooms[0].id
         })
     })
@@ -104,8 +134,13 @@ chatManager.connect()
         e.preventDefault();
         const name = document.getElementById('name');
 
+        var roll = Math.floor(Math.random() * 100) + 1;
+        if (roll == 69) {
+            roll = 70;
+        }
+
         currentUser.sendSimpleMessage ({
-            text: name.value + "/" + "1d100 - " + (Math.floor(Math.random() * 100) + 1),
+            text: name.value + "/" + "1d100 - " + roll,
             roomId: currentUser.rooms[0].id
         })
     })

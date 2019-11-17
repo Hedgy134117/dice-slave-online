@@ -2,22 +2,37 @@
 
 {% block title %}Dice Online{% endblock %}
 
+{% load static %}
 {% block content %}
 
-<ul id="messages"></ul>
-<form id="message-form">
-    <input type="text" id="name" value="DaLlAs DiCeRoLlEr">
-</form>
+<div id="dice">
+    <div id="dice-history">
+        <form id="message-form">
+            <input type="text" id="name" value="Name">
+        </form>
 
-<button id="d4" form="message-form">d4</button>
-<button id="d6" form="message-form">d6</button>
-<button id="d10" form="message-form">d10</button>
-<button id="d12" form="message-form">d12</button>
-<button id="d20" form="message-form">d20</button>
-<button id="d100" form="message-form">d100</button>
+
+
+        <button id="d4" form="message-form">d4</button>
+        <button id="d6" form="message-form">d6</button>
+        <button id="d8" form="message-form">d8</button>
+        <button id="d10" form="message-form">d10</button>
+        <button id="d12" form="message-form">d12</button>
+        <button id="d20" form="message-form">d20</button>
+        <button id="d100" form="message-form">d100</button>
+
+        <ul id="messages"></ul>
+    </div>
+    <div id="dice-portal">
+        {% if sheet is not False %}
+        <iframe src="http://hedgy.pythonanywhere.com/sheets/{{ sheet.slug }}/"></iframe>
+        {% else %}
+        <iframe src="http://hedgy.pythonanywhere.com/profile/{{ request.user.username }}"></iframe>
+        {% endif %}
+    </div>
+</div>
 
 <script src="https://unpkg.com/@pusher/chatkit-client@1/dist/web/chatkit.js"></script>
-{% load static %}
 <script src="{% static 'dice.js' %}"></script>
 
 {% endblock %}
