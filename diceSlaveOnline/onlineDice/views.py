@@ -1,9 +1,11 @@
 from django.shortcuts import render
 from django.apps import apps
+from django.contrib.auth.decorators import login_required
 
 Sheet = apps.get_model('sheets', 'Sheet')
 
 # Create your views here.
+@login_required
 def base(request):
     sheet = Sheet.objects.filter(author=request.user)
 
