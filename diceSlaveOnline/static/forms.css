@@ -22,10 +22,10 @@ form input[type='text']:focus, form input[type='number']:focus, form input[type=
 }
 
 input[type='submit'] {
-    margin: 10px;
-    margin-bottom: 0px;
-    padding: 10px;
-    width: 100%;
+    position: fixed;
+    bottom: 0;
+    margin-bottom: 1%;
+    padding: 20px 100vw 20px 50%;
 }
 
 .double-form p input {

@@ -39,10 +39,10 @@ def createSheet(request):
 
     if request.method == 'POST':
         form = forms.CreateSheet(request.POST)
-        form.author = request.user
-
         if form.is_valid():
-            form.save()
+            instance = form.save(commit=False)
+            instance.author = request.user
+            instance.save()
             return redirect('sheets:list')
     else:
         form = forms.CreateSheet()

@@ -13,7 +13,7 @@ class SheetGroup(models.Model):
         return str(self.name)
 
 class Sheet(models.Model):
-    author = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
+    author = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True, editable=False)
 
     name = models.CharField(max_length=100)
 

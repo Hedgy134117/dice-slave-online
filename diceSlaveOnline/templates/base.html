@@ -25,6 +25,7 @@
     <link rel="stylesheet" href="{% static 'sheets.css' %}">
     <link rel="stylesheet" href="{% static 'forms.css' %}">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.css">
+    <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}">
     <title>{% block title %}{% endblock %}</title>
 </head>
 <body>
@@ -45,8 +46,10 @@
         <li><a href="{% url 'sheets:list' %}" class="">Sheet List</a></li>
         {% if user.is_authenticated %}
         <li><a href="{% url 'profile' user.username %}">My Profile</a></li>
+        <hr>
         <li><a href="{% url 'sheets:create' %}" class="">Create Sheet</a></li>
         <li><a href="{% url 'sheets:createGroup' %}">Create Group</a></li>
+        <hr>
         <li><a href="{% url 'dice:base' %}">Dice Online</a></li>
         {% else %}
         <li><a href="{% url 'accounts:login' %}" class="">Login</a></li>

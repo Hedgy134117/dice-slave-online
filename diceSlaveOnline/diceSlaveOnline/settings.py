@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # 'pwa',
     'sheets',
     'accounts',
     'onlineDice',
@@ -121,6 +122,20 @@ USE_L10N = True
 
 USE_TZ = True
 
+# # PWA
+# PWA_APP_NAME = 'DNDSM'
+# PWA_APP_DESCRIPTION = 'Dungeons and Dragons Sheet Manager'
+# PWA_APP_THEME_COLOR = '#5680E9'
+# PWA_APP_BACKGROUND_COLOR = '#5AB9EA'
+# PWA_APP_DISPLAY = 'standalone'
+# PWA_APP_START_URL = '/'
+# PWA_APP_ICONS = [
+#     {
+#         'src': 'static/favicon.ico',
+#         'sizes': '16x16'
+#     }
+
+# ]
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/

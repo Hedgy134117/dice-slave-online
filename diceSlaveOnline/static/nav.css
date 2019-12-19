@@ -46,3 +46,8 @@
   background-color: #8860d0;
   color: white;
 }
+
+hr {
+    margin-left: 15px;
+    margin-right: 15px;
+}

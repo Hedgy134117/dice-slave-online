@@ -12,6 +12,9 @@ def base(request):
     if sheet.count() > 1:
         return render(request, 'onlineDice/base.html', { 'sheet': False })
     else:
-        sheet = sheet[0]
+        try:
+            sheet = sheet[0]
+        except:
+            return render(request, 'onlineDice/base.html', { 'sheet': False })
 
     return render(request, 'onlineDice/base.html', { 'sheet': sheet } )

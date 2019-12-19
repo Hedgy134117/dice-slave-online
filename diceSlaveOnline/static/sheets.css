@@ -18,6 +18,12 @@
     text-decoration: none;
     padding: 5px;
     text-decoration: none;
+
+    transition: 0.2s;
+}
+
+.sheet a:hover {
+    filter: drop-shadow(0 0 0.75rem #8860d0);
 }
 
 .sheet p {
