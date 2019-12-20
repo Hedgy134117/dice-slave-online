@@ -4,6 +4,9 @@
 
 {% block content %}
     <h1><span class="inverted-popout">Welcome back, {{request.user}}</span></h1>
+    {% if user.is_superuser %}
+    <h1><span class="inverted-popout">Oh, you're an <a href="{% url 'admin:index' %}">admin</a></span></h1>
+    {% endif %}
 
     <div class="sheets">
     {% for sheet in sheets %}
