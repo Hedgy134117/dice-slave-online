@@ -66,7 +66,7 @@ def editSheet(request, slug):
         else:
             form = forms.CreateSheet(instance=sheet)
 
-        return render(request, 'sheets/editSheet.html', { 'form': form, 'slug': slug })
+        return render(request, 'sheets/editSheet.html', { 'form': form, 'slug': slug, 'sheet': sheet })
     else:
         return redirect('sheets:list')
 

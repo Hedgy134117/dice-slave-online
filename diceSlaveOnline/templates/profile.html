@@ -2,63 +2,19 @@
 
 {% block title %}{{request.user}}{% endblock %}
 
+{% load static %}
+{% block css %}<link rel="stylesheet" type="text/css" href="{% static 'sheets/sheetList.css' %}">{% endblock %}
+
 {% block content %}
-    <h1><span class="inverted-popout">Welcome back, {{request.user}}</span></h1>
+    <h1>Welcome back, {{request.user}}</h1>
     {% if user.is_superuser %}
-    <h1><span class="inverted-popout">Oh, you're an <a href="{% url 'admin:index' %}">admin</a></span></h1>
+    <h1>Oh, you're an <a href="{% url 'admin:index' %}">admin</a></h1>
     {% endif %}
 
-    <div class="sheets">
+    <div>
     {% for sheet in sheets %}
-        <div class="sheet popout">
-            <h2><a href="{% url 'sheets:detail' slug='sheet.slug' slug=sheet.slug %}">
-                {{ sheet.name }} {{ sheet.hitPoints }} / {{ sheet.maxHitPoints }}
-            </a></h2>
-            <p><b>{{ sheet.sheetGroup }}</b></p>
-            <p><i>Lvl {{ sheet.level }}
-                {% if sheet.level == 1 %}
-                <progress value="{{ sheet.xp }}" max=300></progress>
-                {% endif %}
-                {% if sheet.level == 2 %}
-                <progress value="{{ sheet.xp }}" max=900></progress>
-                {% endif %}
-                {% if sheet.level == 3 %}
-                <progress value="{{ sheet.xp }}" max=2700></progress>
-                {% endif %}
-                {% if sheet.level == 4 %}
-                <progress value="{{ sheet.xp }}" max=6500></progress>
-                {% endif %}
-                {% if sheet.level == 5 %}
-                <progress value="{{ sheet.xp }}" max=14000></progress>
-                {% endif %}
-                {% if sheet.level > 5 %}
-                <progress value="{{ sheet.xp }}" max=0></progress>
-                {% endif %}
-
-            ( {{ sheet.xp }} /
-                {% if sheet.level == 1 %}
-                300
-                {% endif %}
-                {% if sheet.level == 2 %}
-                900
-                {% endif %}
-                {% if sheet.level == 3 %}
-                2700
-                {% endif %}
-                {% if sheet.level == 4 %}
-                6500
-                {% endif %}
-                {% if sheet.level == 5 %}
-                14000
-                {% endif %}
-                {% if sheet.level > 5 %}
-                undefined
-                {% endif %}
-
-            )</i></p>
-            <p>{{ sheet.Class }}</p>
-            <p>{{ sheet.background }}</p>
-            <p>{{ sheet.race }}</p>
+        <div class="button">
+            <h2><a href="{% url 'sheets:detail' slug='sheet.slug' slug=sheet.slug %}">{{ sheet.name }}</a></h2>
         </div>
     {% endfor %}
     </div>

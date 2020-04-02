@@ -1,0 +1,65 @@
+#sheetNav {
+    text-decoration: none;
+    list-style-type: none;
+    display: flex;
+    justify-content: center;
+}
+
+.column {
+    float: left;
+    width: 50%;
+}
+
+.info {
+    float: left;
+    width: 33%;
+}
+.stats {
+    float: left;
+    width: 33%;
+}
+.money {
+    float:left;
+    width: 33%;
+}
+
+.main {
+    text-align: center;
+}
+
+.skill-column {
+    float: left;
+    width: 50%;
+}
+
+.skill {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.skill p {
+    padding-right: 12px;
+}
+
+input[type=checkbox] {
+    padding-right: 12px;
+}
+
+.item {
+    display: flex;
+    justify-content: center;
+}
+
+.item p {
+    padding-right: 12px;
+}
+
+.spell {
+    display: flex;
+    justify-content: center;
+}
+
+.spell p {
+    padding-right: 12px;
+}
