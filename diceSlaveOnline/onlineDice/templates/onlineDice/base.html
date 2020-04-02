@@ -25,9 +25,9 @@
     </div>
     <div id="dice-portal">
         {% if sheet is not False %}
-        <iframe src="http://hedgy.pythonanywhere.com/sheets/{{ sheet.slug }}/"></iframe>
+        <iframe src="https://hedgy.pythonanywhere.com/sheets/{{ sheet.slug }}/"></iframe>
         {% else %}
-        <iframe src="http://hedgy.pythonanywhere.com/profile/{{ request.user.username }}"></iframe>
+        <iframe src="https://hedgy.pythonanywhere.com/profile/{{ request.user.username }}"></iframe>
         {% endif %}
     </div>
 </div>

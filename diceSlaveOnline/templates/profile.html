@@ -31,6 +31,9 @@
                 {% if sheet.level == 5 %}
                 <progress value="{{ sheet.xp }}" max=14000></progress>
                 {% endif %}
+                {% if sheet.level > 5 %}
+                <progress value="{{ sheet.xp }}" max=0></progress>
+                {% endif %}
 
             ( {{ sheet.xp }} /
                 {% if sheet.level == 1 %}
@@ -47,6 +50,9 @@
                 {% endif %}
                 {% if sheet.level == 5 %}
                 14000
+                {% endif %}
+                {% if sheet.level > 5 %}
+                undefined
                 {% endif %}
 
             )</i></p>

@@ -1,7 +1,16 @@
+form {
+    text-align: center;
+}
+
 label {
-    display: block;
-    padding: 5px 0px 5px 0px;
-    font-size: 24px;
+display: table;
+margin: 30px auto 20px auto;
+
+text-align: center;
+background-color: #000506;
+color: #FFFAF9;
+border-radius: 15px;
+padding: 10px 20px 10px 20px;
 }
 
 form input[type='text'], form input[type='number'], form input[type='password'] {
@@ -22,10 +31,18 @@ form input[type='text']:focus, form input[type='number']:focus, form input[type=
 }
 
 input[type='submit'] {
-    position: fixed;
-    bottom: 0;
-    margin-bottom: 1%;
-    padding: 20px 100vw 20px 50%;
+    padding: 10px 16px 10px 16px;
+    display: inline-block;
+
+    border: none;
+    background-color: #F1F1F1;
+    cursor: pointer;
+    transition-duration: 0.2s;
+}
+
+input[type='submit']:hover {
+    background-color: #8860d0;
+    color: #F1F1F1;
 }
 
 .double-form p input {
