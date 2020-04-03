@@ -45,48 +45,48 @@
                 <div class="skills">
                     <div class="skill-column">
                         <div class="skill">
-                            <p><input type="checkbox" {% if sheet.acrobatics %} checked {% endif %}></p>
+                            <p><input type="checkbox" {% if sheet.acrobatics %} checked {% endif %} readonly></p>
                             <p>+{% if sheet.acrobatics %}{{sheet.dexterityMod|add:sheet.proficiency}}{% else %}{{ sheet.dexterityMod }}{%endif%}</p>
                             <p>Acrobatics</p>
                         </div>
                         <div class="skill">
-                            <p><input type="checkbox" {% if sheet.animalHandling %} checked {% endif %}></p>
+                            <p><input type="checkbox" {% if sheet.animalHandling %} checked {% endif %} readonly></p>
                             <p>+{% if sheet.animalHandling %}{{sheet.wisdomMod|add:sheet.proficiency}}{% else %}{{ sheet.wisdomMod }}{%endif%}</p>
                             <p>Aimal Handling</p>
                         </div>
                         <div class="skill">
-                            <p><input type="checkbox" {% if sheet.arcana %} checked {% endif %}></p>
+                            <p><input type="checkbox" {% if sheet.arcana %} checked {% endif %} readonly></p>
                             <p>+{% if sheet.arcana %}{{sheet.intelligenceMod|add:sheet.proficiency}}{% else %}{{ sheet.intelligenceMod }}{%endif%}</p>
                             <p>Arcana</p>
                         </div>
                         <div class="skill">
-                            <p><input type="checkbox" {% if sheet.athletics %} checked {% endif %}></p>
+                            <p><input type="checkbox" {% if sheet.athletics %} checked {% endif %} readonly></p>
                             <p>+{% if sheet.athletics %}{{sheet.strengthMod|add:sheet.proficiency}}{% else %}{{ sheet.strengthMod }}{%endif%}</p>
                             <p>Athletics</p>
                         </div>
                         <div class="skill">
-                            <p><input type="checkbox" {% if sheet.deception %} checked {% endif %}></p>
+                            <p><input type="checkbox" {% if sheet.deception %} checked {% endif %} readonly></p>
                             <p>+{% if sheet.deception %}{{sheet.charismaMod|add:sheet.proficiency}}{% else %}{{ sheet.charismaMod }}{%endif%}</p>
                             <p>Deception</p>
                         </div>
                         <div class="skill">
-                            <p><input type="checkbox" {% if sheet.history %} checked {% endif %}></p>
+                            <p><input type="checkbox" {% if sheet.history %} checked {% endif %} readonly></p>
                             <p>+{% if sheet.history %}{{sheet.intelligenceMod|add:sheet.proficiency}}{% else %}{{ sheet.intelligenceMod }}{%endif%}</p>
                             <p>History</p>
                         </div>
                         <div class="skill">
-                            <p><input type="checkbox" {% if sheet.insight %} checked {% endif %}></p>
+                            <p><input type="checkbox" {% if sheet.insight %} checked {% endif %} readonly></p>
                             <p>+{% if sheet.insight %}{{sheet.wisdomMod|add:sheet.proficiency}}{% else %}{{ sheet.wisdomMod }}{%endif%}
                             </p>
                             <p>Insight</p>
                         </div>
                         <div class="skill">
-                            <p><input type="checkbox" {% if sheet.intimidation %} checked {% endif %}></p>
+                            <p><input type="checkbox" {% if sheet.intimidation %} checked {% endif %} readonly></p>
                             <p>+{% if sheet.intimidation %}{{sheet.charismaMod|add:sheet.proficiency}}{% else %}{{ sheet.charismaMod }}{%endif%}</p>
                             <p>Intimidation</p>
                         </div>
                         <div class="skill">
-                            <p><input type="checkbox" {% if sheet.investigation %} checked {% endif %}></p>
+                            <p><input type="checkbox" {% if sheet.investigation %} checked {% endif %} readonly></p>
                             <p>+{% if sheet.investigation %}{{sheet.intelligenceMod|add:sheet.proficiency}}{% else %}{{ sheet.intelligenceMod }}{%endif%}
                             </p>
                             <p>Investigation</p>
@@ -94,53 +94,53 @@
                     </div>
                     <div class="skill-column">
                         <div class="skill">
-                            <p><input type="checkbox" {% if sheet.medicine %} checked {% endif %}></p>
+                            <p><input type="checkbox" {% if sheet.medicine %} checked {% endif %} readonly></p>
                             <p>+{% if sheet.medicine %}{{sheet.wisdomMod|add:sheet.proficiency}}{% else %}{{ sheet.wisdomMod }}{%endif%}
                             </p>
                             <p>Medicine</p>
                         </div>
                         <div class="skill">
-                            <p><input type="checkbox" {% if sheet.nature %} checked {% endif %}></p>
+                            <p><input type="checkbox" {% if sheet.nature %} checked {% endif %} readonly></p>
                             <p>+{% if sheet.nature %}{{sheet.intelligenceMod|add:sheet.proficiency}}{% else %}{{ sheet.intelligenceMod }}{%endif%}
                             </p>
                             <p>Nature</p>
                         </div>
                         <div class="skill">
-                            <p><input type="checkbox" {% if sheet.perception %} checked {% endif %}></p>
+                            <p><input type="checkbox" {% if sheet.perception %} checked {% endif %} readonly></p>
                             <p>+{% if sheet.perception %}{{sheet.wisdomMod|add:sheet.proficiency}}{% else %}{{ sheet.wisdomMod }}{%endif%}
                             </p>
                             <p>Perception</p>
                         </div>
                         <div class="skill">
-                            <p><input type="checkbox" {% if sheet.performance %} checked {% endif %}></p>
+                            <p><input type="checkbox" {% if sheet.performance %} checked {% endif %} readonly></p>
                             <p>+{% if sheet.performance %}{{sheet.charismaMod|add:sheet.proficiency}}{% else %}{{ sheet.charismaMod }}{%endif%}</p>
                             <p>Performance</p>
                         </div>
                         <div class="skill">
-                            <p><input type="checkbox" {% if sheet.persuasion %} checked {% endif %}></p>
+                            <p><input type="checkbox" {% if sheet.persuasion %} checked {% endif %} readonly></p>
                             <p>+{% if sheet.persuasion %}{{sheet.charismaMod|add:sheet.proficiency}}{% else %}{{ sheet.charismaMod }}{%endif%}</p>
                             <p>Persuasion</p>
                         </div>
                         <div class="skill">
-                            <p><input type="checkbox" {% if sheet.religion %} checked {% endif %}></p>
+                            <p><input type="checkbox" {% if sheet.religion %} checked {% endif %} readonly></p>
                             <p>+{% if sheet.religion %}{{sheet.intelligenceMod|add:sheet.proficiency}}{% else %}{{ sheet.intelligenceMod }}{%endif%}
                             </p>
                             <p>Religion</p>
                         </div>
                         <div class="skill">
-                            <p><input type="checkbox" {% if sheet.sleightOfHand %} checked {% endif %}></p>
+                            <p><input type="checkbox" {% if sheet.sleightOfHand %} checked {% endif %} readonly></p>
                             <p>+{% if sheet.sleightOfHand %}{{sheet.dexterityMod|add:sheet.proficiency}}{% else %}{{ sheet.dexterityMod }}{%endif%}
                             </p>
                             <p>Sleight of Hand</p>
                         </div>
                         <div class="skill">
-                            <p><input type="checkbox" {% if sheet.stealth %} checked {% endif %}></p>
+                            <p><input type="checkbox" {% if sheet.stealth %} checked {% endif %} readonly></p>
                             <p>+{% if sheet.stealth %}{{sheet.dexterityMod|add:sheet.proficiency}}{% else %}{{ sheet.dexterityMod }}{%endif%}
                             </p>
                             <p>Stealth</p>
                         </div>
                         <div class="skill">
-                            <p><input type="checkbox" {% if sheet.survival %} checked {% endif %}></p>
+                            <p><input type="checkbox" {% if sheet.survival %} checked {% endif %} readonly></p>
                             <p>+{% if sheet.survival %}{{sheet.wisdomMod|add:sheet.proficiency}}{% else %}{{ sheet.wisdomMod }}{%endif%}
                             </p>
                             <p>Survival</p>

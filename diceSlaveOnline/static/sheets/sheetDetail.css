@@ -46,6 +46,10 @@ input[type=checkbox] {
     padding-right: 12px;
 }
 
+input[type=checkbox][readonly] {
+    pointer-events: none;
+}
+
 .item {
     display: flex;
     justify-content: center;
