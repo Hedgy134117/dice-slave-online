@@ -120,7 +120,30 @@ class Spell(models.Model):
         ('9', '9th')
     )
     level = models.CharField(max_length=100, choices=level_choices, default='cantrip')
+    
+    type_choices = (
+        ('offensive', 'Offensive'),
+        ('normal', 'Normal'),
+    )
+    Type = models.CharField(max_length=100, choices=type_choices, default='normal')
 
+
+class Item(models.Model):
+    sht = models.ForeignKey(Sheet, on_delete=models.CASCADE, blank=True, null=True, editable=False)
+    name = models.CharField(max_length=100)
+    amount = models.IntegerField(default=1)
+    reference = models.URLField(max_length=200, verbose_name="Link for Reference", blank=True, null=True, default="https://roll20.net/compendium/dnd5e/Items%20List#content")
+
+    type_choices = (
+        ('weapon', 'Weapon'),
+        ('item', 'Item'),
+    )
+    Type = models.CharField(max_length=100, choices=type_choices, default='item')
+    equipped = models.BooleanField(default=False)
+
+
+    def __str__(self):
+        return self.name
 
 class Skill(models.Model):
     sht = models.ForeignKey(Sheet, on_delete=models.CASCADE, blank=True, null=True, editable=False)
@@ -148,14 +171,6 @@ class Skill(models.Model):
 
     name = models.CharField(max_length=100, choices=nameChoices, default="")
     mod = models.IntegerField()
-
-    def __str__(self):
-        return self.name
-
-class Item(models.Model):
-    sht = models.ForeignKey(Sheet, on_delete=models.CASCADE, blank=True, null=True, editable=False)
-    name = models.CharField(max_length=100)
-    amount = models.IntegerField(default=1)
 
     def __str__(self):
         return self.name

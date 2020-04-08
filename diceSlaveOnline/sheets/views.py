@@ -19,15 +19,18 @@ def sheetDetail(request, slug):
     for item in itemList:
         if item.sht == sheet:
             equipment.append(item)
-    skills = Skill.objects.all()
-    spells = Spell.objects.all().order_by('level')
+    spellList = Spell.objects.all().order_by('level')
+    spells = []
+    for spell in spellList:
+        if spell.sht == sheet:
+            spells.append(spell)
+
     return render(
         request, 'sheets/sheetDetail.html', {
             'sheet': sheet,
             'equipment': equipment,
             'slug': slug,
             'request': request,
-            'skills': skills,
             'spells': spells,
         })
 
@@ -177,6 +180,26 @@ def addSpell(request, slug):
         else:
             form = forms.AddSpell()
             return render(request, 'sheets/addSpell.html', { 'form': form, 'slug': slug })
+    else:
+        return redirect('sheets:list')
+
+def editSpell(request, name, slug):
+    sheet = Sheet.objects.get(slug=slug)
+    spell = Spell.objects.get(name=name, sht=sheet)
+
+    if request.user == sheet.author:
+        if request.method == 'POST':
+            form = forms.AddSpell(request.POST)
+
+            if form.is_valid():
+                instance = form.save(commit=False)
+                instance.sht = sheet
+                spell.delete()
+                instance.save()
+                return redirect('sheets:detail', slug=slug)
+        else:
+            form = forms.AddSpell(instance=spell)
+            return render(request, 'sheets/editSpell.html', { 'form': form, 'spell': spell, 'slug': slug })
     else:
         return redirect('sheets:list')
 

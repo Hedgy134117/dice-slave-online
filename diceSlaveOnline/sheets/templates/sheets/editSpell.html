@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}Edit Spell{% endblock %}
+
+{% block content %}
+    <div>
+        <h2>Edit an Item</h2>
+        <form action="{% url 'sheets:editSpell' spell.name slug %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form }}
+            <input type="submit" value="Edit">
+        </form>
+    </div>
+{% endblock %}

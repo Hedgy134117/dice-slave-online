@@ -11,7 +11,12 @@ function page(openPage) {
     currentPage.style.display = 'block';
     for (var i = 0; i < pages.length; i++) {
         if (pages[i] != currentPage) {
-            pages[i].style.display = 'none';
+            try {
+                pages[i].style.display = 'none';
+            }
+            catch(err) {
+                continue;
+            }
         }
     }
 }

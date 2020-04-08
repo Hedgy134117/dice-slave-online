@@ -43,7 +43,7 @@
             </div>
             <div class="column">
                 <div class="skills">
-                    <div class="skill-column">
+                    <div class="column">
                         <div class="skill">
                             <p><input type="checkbox" {% if sheet.acrobatics %} checked {% endif %} readonly></p>
                             <p>+{% if sheet.acrobatics %}{{sheet.dexterityMod|add:sheet.proficiency}}{% else %}{{ sheet.dexterityMod }}{%endif%}</p>
@@ -92,7 +92,7 @@
                             <p>Investigation</p>
                         </div>
                     </div>
-                    <div class="skill-column">
+                    <div class="column">
                         <div class="skill">
                             <p><input type="checkbox" {% if sheet.medicine %} checked {% endif %} readonly></p>
                             <p>+{% if sheet.medicine %}{{sheet.wisdomMod|add:sheet.proficiency}}{% else %}{{ sheet.wisdomMod }}{%endif%}
@@ -150,40 +150,73 @@
             </div>
         </div>
         <div id="fighting" style="display: none">
-            <h2><b>AC:</b> {{ sheet.armorClass }}</h2>
-            <h2><b>Initiative:</b> {{ sheet.initiative }}</h2>
-            <h2><b>Speed:</b> {{ sheet.speed }}</h2>
-            <h2><b>HP:</b> {{ sheet.hitPoints }} / {{ sheet.maxHitPoints }}</h2>
-            {% if sheet.sStrength %}
-            <h2><b>Strength Saving Throw</b></h2>
-            {% endif %}
-            {% if sheet.sDexterity %}
-            <h2><b>Dexterity Saving Throw</b></h2>
-            {% endif %}
-            {% if sheet.sConstitution %}
-            <h2><b>Constitution Saving Throw</b></h2>
-            {% endif %}
-            {% if sheet.sIntelligence %}
-            <h2><b>Intelligence Saving Throw</b></h2>
-            {% endif %}
-            {% if sheet.sWisdom %}
-            <h2><b>Wisdom Saving Throw</b></h2>
-            {% endif %}
-            {% if sheet.sCharisma %}
-            <h2><b>Charisma Saving Throw</b></h2>
-            {% endif %}
+            <div class="column">
+                <h2><b>AC:</b> {{ sheet.armorClass }}</h2>
+                <h2><b>Initiative:</b> {{ sheet.initiative }}</h2>
+                <h2><b>Speed:</b> {{ sheet.speed }}</h2>
+                <h2><b>HP:</b> {{ sheet.hitPoints }} / {{ sheet.maxHitPoints }}</h2>
+                {% if sheet.sStrength %}
+                <h2><b>Strength Saving Throw</b></h2>
+                {% endif %}
+                {% if sheet.sDexterity %}
+                <h2><b>Dexterity Saving Throw</b></h2>
+                {% endif %}
+                {% if sheet.sConstitution %}
+                <h2><b>Constitution Saving Throw</b></h2>
+                {% endif %}
+                {% if sheet.sIntelligence %}
+                <h2><b>Intelligence Saving Throw</b></h2>
+                {% endif %}
+                {% if sheet.sWisdom %}
+                <h2><b>Wisdom Saving Throw</b></h2>
+                {% endif %}
+                {% if sheet.sCharisma %}
+                <h2><b>Charisma Saving Throw</b></h2>
+                {% endif %}
+            </div>
+            <div class="column">
+                <div class="column">
+                    {% for item in equipment %}
+                        {% if item.Type == 'weapon' and item.equipped %}
+                            <div class="item">
+                                <p><a href="{{ item.reference }}">{{ item.name }}</a> {{ item.amount }}</p>
+                            {% if user.is_authenticated %}
+                                <p><a href="{% url 'sheets:editItem' item.name slug %}">Edit</a></p>
+                                <p><a href="{% url 'sheets:removeItem' item.name slug %}">Remove</a></p>
+                            {% endif %}
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                <div class="column">
+                {% for spell in spells %}
+                    {% if spell.Type == 'offensive' %}
+                        <div class="spell">
+                            <p><a href="{{ spell.reference }}">{{ spell.name }}</a></p>
+                            <p>{{ spell.get_level_display }}</p>
+                            {% if user.is_authenticated %}
+                                {% if sheet.author == request.user %}
+                                    <p><a href="{% url 'sheets:removeSpell' spell.name slug %}">Remove</a></p>
+                                {% endif %}
+                            {% endif %}
+                        </div>
+                    {% endif %}
+                {% endfor %}
+                </div>
+            </div>
         </div>
         <div id="equipment" style="display: none">
             {% for item in equipment %}
-                <div class="item">
-                    <p>{{ item.amount }} {{ item.name }}</p>
+                {% if item.Type == 'weapon' and not item.equipped or item.Type == 'item' %}
+                    <div class="item">
+                        <p><a href="{{ item.reference }}">{{ item.name }}</a></p>
+                        <p>{{ item.amount }}</p>
                     {% if user.is_authenticated %}
-                        {% if sheet.author == request.user %}
-                            <p><a href="{% url 'sheets:editItem' item.name slug %}">Edit</a></p>
-                            <p><a href="{% url 'sheets:removeItem' item.name slug %}">Remove</a></p>
-                        {% endif %}
+                        <p><a href="{% url 'sheets:editItem' item.name slug %}">Edit</a></p>
+                        <p><a href="{% url 'sheets:removeItem' item.name slug %}">Remove</a></p>
                     {% endif %}
-                </div>
+                    </div>
+                {% endif %}
             {% endfor %}
             {% if user.is_authenticated %}
                 {% if sheet.author == request.user %}
@@ -193,16 +226,17 @@
         </div>
         <div id="spellcasting" style="display: none">
             {% for spell in spells %}
-                {% if spell.sht == sheet %}
-                <div class="spell">
-                    <p><a href="{{ spell.reference }}">{{ spell.name }}</a></p>
-                    <p>{{ spell.get_level_display }}</p>
-                    {% if user.is_authenticated %}
-                        {% if sheet.author == request.user %}
-                            <p><a href="{% url 'sheets:removeSpell' spell.name slug %}">Remove</a></p>
+                {% if spell.Type == 'normal' %}
+                    <div class="spell">
+                        <p><a href="{{ spell.reference }}">{{ spell.name }}</a></p>
+                        <p>{{ spell.get_level_display }}</p>
+                        {% if user.is_authenticated %}
+                            {% if sheet.author == request.user %}
+                                <p><a href="{% url 'sheets:editSpell' spell.name slug %}">Edit</a></p>
+                                <p><a href="{% url 'sheets:removeSpell' spell.name slug %}">Remove</a></p>
+                            {% endif %}
                         {% endif %}
-                    {% endif %}
-                </div>
+                    </div>
                 {% endif %}
             {% endfor %}
             {% if user.is_authenticated %}
