@@ -108,6 +108,7 @@ class Spell(models.Model):
 
     level_choices = (
         ('cantrip', 'Cantrip'),
+        ('infusion', 'Infusion'),
         ('1', '1st'),
         ('2', '2nd'),
         ('3', '3rd'),
