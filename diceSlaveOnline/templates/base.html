@@ -16,7 +16,7 @@
 
         {% if user.is_authenticated %}
         <li><a href="{% url 'accounts:logout' %}" class="nav-logout">Logout</a></li>
-        <li><a href="{% url 'dice:base' %}">Dice Online</a></li>
+        <!-- <li><a href="{% url 'dice:base' %}">Dice Online</a></li> -->
         <li><a href="{% url 'sheets:createGroup' %}">Create Group</a></li>
         <li><a href="{% url 'sheets:create' %}" class="">Create Sheet</a></li>
         <li><a href="{% url 'profile' user.username %}">My Profile</a></li>
