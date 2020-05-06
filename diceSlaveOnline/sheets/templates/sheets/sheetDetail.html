@@ -16,15 +16,16 @@
                 <li><button onclick="page('spellcasting')">Spellcasting</button></li>
                 <li><button onclick="page('personality')">Personality</button></li>
             </ul>
+
             <div id="character" style="display: block">
                 <div class="column">
                     <div class="info">
-                        <h2 onclick="sideEditor('Class')"><b>Class: </b>{{ sheet.Class }}</h2>
-                        <h2 onclick="sideEditor()"><b>Background: </b>{{ sheet.background }}</h2>
-                        <h2 onclick="sideEditor()"><b>Race: </b>{{ sheet.race }}</h2>
-                        <h2 onclick="sideEditor()"><b>XP: </b>{{ sheet.xp }}</h2>
-                        <h2 onclick="sideEditor()"><b>Level: </b>{{ sheet.level }}</h2>
-                        <h2 onclick="sideEditor()"><b>Hit Dice:</b> {{ sheet.hitDice }}</h2>
+                        <h2 class="getInfo" onclick="get(sideEditor, 'Class')"><b>Class: </b><span>{{ sheet.Class }}</span></h2>
+                        <h2 class="getInfo" onclick="get(sideEditor, 'background')"><b>Background: </b><span>{{ sheet.background }}</span></h2>
+                        <h2 class="getInfo" onclick="get(sideEditor, 'race')"><b>Race: </b><span>{{ sheet.race }}</span></h2>
+                        <h2 class="getInfo" onclick="get(sideEditor, 'xp')"><b>XP: </b><span>{{ sheet.xp }}</span></h2>
+                        <h2 class="getInfo" onclick="get(sideEditor, 'level')"><b>Level: </b><span>{{ sheet.level }}</span></h2>
+                        <h2 class="getInfo" onclick="get(sideEditor, 'hitDice')"><b>Hit Dice: </b><span>{{ sheet.hitDice }}</span></h2>
                     </div>
                     <div class="money">
                         <h2>{{ sheet.copper }} <b>copper</b></h2>
@@ -257,22 +258,71 @@
             </div>
         </div>
 
-        
+        {% if sheet.author == request.user %}
+        <div id="side-editor">
+            <label id="value"></label>
+            <input id="newValue" />
+            <input type="submit" onclick="edit()" />
+        </div>
+        {% endif %}
     </div>
 
     {% if sheet.author == request.user %}
         <div class="button">
             <h2><a href="{% url 'sheets:edit' slug %}">Edit</a></h2>
         </div>
-        <!--
-        <div id="side-editor">
-            <form method="post" enctype="multipart/form-data">
-            
-            </form>
-        </div>
-        -->
     {% endif %}
 
+    <script>
+        var data = null;
+        get(function a() { });
+
+        function sideEditor(content) {
+            document.getElementById('value').innerHTML = content;
+            document.getElementById("newValue").value = data['sheet'][0]['fields'][content];
+        }
+
+        function view() {
+            console.log(data);
+            for(let i = 0; i < document.getElementsByClassName('getInfo').length; i++) {
+                var field = document.getElementsByClassName('getInfo')[i].getAttribute('onclick')
+                field = field.split("'")[1];
+                console.log(document.getElementsByClassName('getInfo')[i].children);
+                document.getElementsByClassName('getInfo')[i].children[1].innerHTML = data['sheet'][0]['fields'][field];
+            }
+        }
+
+        function edit() {
+            var value = document.getElementById('value').innerHTML;
+            var newValue = document.getElementById('newValue').value;
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    get(view);
+                }
+            }
+            xhr.open("POST", "/sheets/" + '{{ slug }}' + "/post/", true);
+            xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+            xhr.send("value=" + value + "&newValue=" + newValue);
+        }
+
+        function get(callback, params) {
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    data = JSON.parse(this.responseText);
+                    if (params == undefined) {
+                        callback();
+                    }
+                    else {
+                        callback(params);
+                    }
+                }
+            };
+            xhr.open("GET", "/sheets/" + '{{ slug }}' + "/get/", true);
+            xhr.send();
+        }
+        </script>
     <script src="{% static 'sheets/sheetNav.js' %}"></script>
 
 {% endblock %}

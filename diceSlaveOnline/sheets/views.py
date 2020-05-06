@@ -1,10 +1,15 @@
 from django.contrib import messages
 from django.shortcuts import render, redirect
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+from django.core import serializers
 
 from .models import Sheet, SheetGroup, Item, Skill, Spell
 from . import forms
 
 from django.core.management import call_command
+
+import json
 
 # Create your views here.
 def sheetList(request):
@@ -33,7 +38,6 @@ def sheetDetail(request, slug):
             'request': request,
             'spells': spells,
         })
-
 
 def createSheet(request):
     form = forms.CreateSheet()
@@ -209,3 +213,41 @@ def removeSpell(request, name, slug):
 
     spell.delete()
     return redirect('sheets:detail', slug=slug)
+
+@csrf_exempt
+def ajaxEdit(request, slug):
+    value = request.POST.get('value')
+    newValue = request.POST.get('newValue')
+    
+    print(value, newValue)
+    sheet = Sheet.objects.get(slug=slug)
+
+    if not newValue.lower().replace(' ', '').isalpha():
+        exec('sheet.' + value + " = " + newValue)
+    else:
+        exec('sheet.' + value + " = '" + newValue + "'")
+    sheet.save()
+
+
+    response = {}
+    response['hello'] = 'hello'
+    return JsonResponse(response)
+
+def ajaxSheetDetail(request, slug):
+    sheet = Sheet.objects.filter(slug=slug)
+    itemList = Item.objects.all()
+    equipment = []
+    for item in itemList:
+        if item.sht == sheet:
+            equipment.append(item)
+    spellList = Spell.objects.all().order_by('level')
+    spells = []
+    for spell in spellList:
+        if spell.sht == sheet:
+            spells.append(spell)
+
+    response = {}
+    response['sheet'] = json.loads(serializers.serialize('json', sheet))
+    response['equipment'] = equipment
+    response['spells'] = spells
+    return JsonResponse(response)

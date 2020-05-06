@@ -155,24 +155,12 @@
                     <h2><b>Initiative:</b> {{ form.initiative }}</h2>
                     <h2><b>Speed:</b> {{ form.speed }}</h2>
                     <h2><b>HP:</b> {{ form.hitPoints }} / {{ form.maxHitPoints }}</h2>
-                    {% if form.sStrength %}
-                    <h2><b>Strength Saving Throw</b></h2>
-                    {% endif %}
-                    {% if form.sDexterity %}
-                    <h2><b>Dexterity Saving Throw</b></h2>
-                    {% endif %}
-                    {% if form.sConstitution %}
-                    <h2><b>Constitution Saving Throw</b></h2>
-                    {% endif %}
-                    {% if form.sIntelligence %}
-                    <h2><b>Intelligence Saving Throw</b></h2>
-                    {% endif %}
-                    {% if form.sWisdom %}
-                    <h2><b>Wisdom Saving Throw</b></h2>
-                    {% endif %}
-                    {% if form.sCharisma %}
-                    <h2><b>Charisma Saving Throw</b></h2>
-                    {% endif %}
+                    <h2><b>{{ form.sStrength }} Strength Saving Throw</b></h2>
+                    <h2><b>{{ form.sDexterity}} Dexterity Saving Throw</b></h2>
+                    <h2><b>{{ form.sConstitution }} Constitution Saving Throw</b></h2>
+                    <h2><b>{{ form.sIntelligence}} Intelligence Saving Throw</b></h2>
+                    <h2><b>{{ form.sWisdom }} Wisdom Saving Throw</b></h2>
+                    <h2><b>{{ form.sCharisma }} Charisma Saving Throw</b></h2>
                 </div>
                 <div id="equipment" style="display: none">
                     {% for item in equipment %}

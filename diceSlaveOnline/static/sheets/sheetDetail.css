@@ -34,7 +34,7 @@ input[type=checkbox][readonly] {
 }
 
 
-/* #main-content {
+#main-content {
     display: grid;
     grid-template-columns: 75% 25%;
-} */
+}
