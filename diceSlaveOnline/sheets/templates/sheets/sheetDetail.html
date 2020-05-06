@@ -6,260 +6,271 @@
 {% block title %}{{ sheet.name }}{% endblock %}
 
 {% block content %}
-    <h1>{{ sheet.name }}</h1>
-    <div>
-        <ul id="sheetNav">
-            <li><button onclick="page('character')">Character</button></li>
-            <li><button onclick="page('fighting')">Fighting</button></li>
-            <li><button onclick="page('equipment')">Equipment</button></li>
-            <li><button onclick="page('spellcasting')">Spellcasting</button></li>
-            <li><button onclick="page('personality')">Personality</button></li>
-        </ul>
-        <div id="character" style="display: block">
-            <div class="column">
-                <div class="info">
-                    <h2><b>Class: </b>{{ sheet.Class }}</h2>
-                    <h2><b>Background: </b>{{ sheet.background }}</h2>
-                    <h2><b>Race: </b>{{ sheet.race }}</h2>
-                    <h2><b>XP: </b>{{ sheet.xp }}</h2>
-                    <h2><b>Level: </b>{{ sheet.level }}</h2>
-                    <h2><b>Hit Dice:</b> {{ sheet.hitDice }}</h2>
-                </div>
-                <div class="money">
-                    <h2>{{ sheet.copper }} <b>copper</b></h2>
-                    <h2>{{ sheet.silver }} <b>silver</b></h2>
-                    <h2>{{ sheet.gold }} <b>gold</b></h2>
-                    <h2>{{ sheet.platinum }} <b>platinum</b></h2>
-                </div>
-                <div class="stats">
-                    <h2><b>Strength:</b> {{ sheet.strength }} + {{ sheet.strengthMod }}</h2>
-                    <h2><b>Dexterity:</b> {{ sheet.dexterity }} + {{ sheet.dexterityMod }}</h2>
-                    <h2><b>Constitution:</b> {{ sheet.constitution }} + {{ sheet.constitutionMod }}</h2>
-                    <h2><b>Intelligence:</b> {{ sheet.intelligence }} + {{ sheet.intelligenceMod }}</h2>
-                    <h2><b>Wisdom:</b> {{ sheet.wisdom }} + {{ sheet.wisdomMod }}</h2>
-                    <h2><b>Charisma:</b> {{ sheet.charisma }} + {{ sheet.charismaMod }}</h2>
-                    <h2><b>Proficiency:</b> {{ sheet.proficiency }}</h2>
-                </div>
-            </div>
-            <div class="column">
-                <div class="skills">
-                    <div class="column">
-                        <div class="skill">
-                            <p><input type="checkbox" {% if sheet.acrobatics %} checked {% endif %} readonly></p>
-                            <p>+{% if sheet.acrobatics %}{{sheet.dexterityMod|add:sheet.proficiency}}{% else %}{{ sheet.dexterityMod }}{%endif%}</p>
-                            <p>Acrobatics</p>
-                        </div>
-                        <div class="skill">
-                            <p><input type="checkbox" {% if sheet.animalHandling %} checked {% endif %} readonly></p>
-                            <p>+{% if sheet.animalHandling %}{{sheet.wisdomMod|add:sheet.proficiency}}{% else %}{{ sheet.wisdomMod }}{%endif%}</p>
-                            <p>Aimal Handling</p>
-                        </div>
-                        <div class="skill">
-                            <p><input type="checkbox" {% if sheet.arcana %} checked {% endif %} readonly></p>
-                            <p>+{% if sheet.arcana %}{{sheet.intelligenceMod|add:sheet.proficiency}}{% else %}{{ sheet.intelligenceMod }}{%endif%}</p>
-                            <p>Arcana</p>
-                        </div>
-                        <div class="skill">
-                            <p><input type="checkbox" {% if sheet.athletics %} checked {% endif %} readonly></p>
-                            <p>+{% if sheet.athletics %}{{sheet.strengthMod|add:sheet.proficiency}}{% else %}{{ sheet.strengthMod }}{%endif%}</p>
-                            <p>Athletics</p>
-                        </div>
-                        <div class="skill">
-                            <p><input type="checkbox" {% if sheet.deception %} checked {% endif %} readonly></p>
-                            <p>+{% if sheet.deception %}{{sheet.charismaMod|add:sheet.proficiency}}{% else %}{{ sheet.charismaMod }}{%endif%}</p>
-                            <p>Deception</p>
-                        </div>
-                        <div class="skill">
-                            <p><input type="checkbox" {% if sheet.history %} checked {% endif %} readonly></p>
-                            <p>+{% if sheet.history %}{{sheet.intelligenceMod|add:sheet.proficiency}}{% else %}{{ sheet.intelligenceMod }}{%endif%}</p>
-                            <p>History</p>
-                        </div>
-                        <div class="skill">
-                            <p><input type="checkbox" {% if sheet.insight %} checked {% endif %} readonly></p>
-                            <p>+{% if sheet.insight %}{{sheet.wisdomMod|add:sheet.proficiency}}{% else %}{{ sheet.wisdomMod }}{%endif%}
-                            </p>
-                            <p>Insight</p>
-                        </div>
-                        <div class="skill">
-                            <p><input type="checkbox" {% if sheet.intimidation %} checked {% endif %} readonly></p>
-                            <p>+{% if sheet.intimidation %}{{sheet.charismaMod|add:sheet.proficiency}}{% else %}{{ sheet.charismaMod }}{%endif%}</p>
-                            <p>Intimidation</p>
-                        </div>
-                        <div class="skill">
-                            <p><input type="checkbox" {% if sheet.investigation %} checked {% endif %} readonly></p>
-                            <p>+{% if sheet.investigation %}{{sheet.intelligenceMod|add:sheet.proficiency}}{% else %}{{ sheet.intelligenceMod }}{%endif%}
-                            </p>
-                            <p>Investigation</p>
-                        </div>
-                    </div>
-                    <div class="column">
-                        <div class="skill">
-                            <p><input type="checkbox" {% if sheet.medicine %} checked {% endif %} readonly></p>
-                            <p>+{% if sheet.medicine %}{{sheet.wisdomMod|add:sheet.proficiency}}{% else %}{{ sheet.wisdomMod }}{%endif%}
-                            </p>
-                            <p>Medicine</p>
-                        </div>
-                        <div class="skill">
-                            <p><input type="checkbox" {% if sheet.nature %} checked {% endif %} readonly></p>
-                            <p>+{% if sheet.nature %}{{sheet.intelligenceMod|add:sheet.proficiency}}{% else %}{{ sheet.intelligenceMod }}{%endif%}
-                            </p>
-                            <p>Nature</p>
-                        </div>
-                        <div class="skill">
-                            <p><input type="checkbox" {% if sheet.perception %} checked {% endif %} readonly></p>
-                            <p>+{% if sheet.perception %}{{sheet.wisdomMod|add:sheet.proficiency}}{% else %}{{ sheet.wisdomMod }}{%endif%}
-                            </p>
-                            <p>Perception</p>
-                        </div>
-                        <div class="skill">
-                            <p><input type="checkbox" {% if sheet.performance %} checked {% endif %} readonly></p>
-                            <p>+{% if sheet.performance %}{{sheet.charismaMod|add:sheet.proficiency}}{% else %}{{ sheet.charismaMod }}{%endif%}</p>
-                            <p>Performance</p>
-                        </div>
-                        <div class="skill">
-                            <p><input type="checkbox" {% if sheet.persuasion %} checked {% endif %} readonly></p>
-                            <p>+{% if sheet.persuasion %}{{sheet.charismaMod|add:sheet.proficiency}}{% else %}{{ sheet.charismaMod }}{%endif%}</p>
-                            <p>Persuasion</p>
-                        </div>
-                        <div class="skill">
-                            <p><input type="checkbox" {% if sheet.religion %} checked {% endif %} readonly></p>
-                            <p>+{% if sheet.religion %}{{sheet.intelligenceMod|add:sheet.proficiency}}{% else %}{{ sheet.intelligenceMod }}{%endif%}
-                            </p>
-                            <p>Religion</p>
-                        </div>
-                        <div class="skill">
-                            <p><input type="checkbox" {% if sheet.sleightOfHand %} checked {% endif %} readonly></p>
-                            <p>+{% if sheet.sleightOfHand %}{{sheet.dexterityMod|add:sheet.proficiency}}{% else %}{{ sheet.dexterityMod }}{%endif%}
-                            </p>
-                            <p>Sleight of Hand</p>
-                        </div>
-                        <div class="skill">
-                            <p><input type="checkbox" {% if sheet.stealth %} checked {% endif %} readonly></p>
-                            <p>+{% if sheet.stealth %}{{sheet.dexterityMod|add:sheet.proficiency}}{% else %}{{ sheet.dexterityMod }}{%endif%}
-                            </p>
-                            <p>Stealth</p>
-                        </div>
-                        <div class="skill">
-                            <p><input type="checkbox" {% if sheet.survival %} checked {% endif %} readonly></p>
-                            <p>+{% if sheet.survival %}{{sheet.wisdomMod|add:sheet.proficiency}}{% else %}{{ sheet.wisdomMod }}{%endif%}
-                            </p>
-                            <p>Survival</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div id="fighting" style="display: none">
-            <div class="column">
-                <h2><b>AC:</b> {{ sheet.armorClass }}</h2>
-                <h2><b>Initiative:</b> {{ sheet.initiative }}</h2>
-                <h2><b>Speed:</b> {{ sheet.speed }}</h2>
-                <h2><b>HP:</b> {{ sheet.hitPoints }} / {{ sheet.maxHitPoints }}</h2>
-                {% if sheet.sStrength %}
-                <h2><b>Strength Saving Throw</b></h2>
-                {% endif %}
-                {% if sheet.sDexterity %}
-                <h2><b>Dexterity Saving Throw</b></h2>
-                {% endif %}
-                {% if sheet.sConstitution %}
-                <h2><b>Constitution Saving Throw</b></h2>
-                {% endif %}
-                {% if sheet.sIntelligence %}
-                <h2><b>Intelligence Saving Throw</b></h2>
-                {% endif %}
-                {% if sheet.sWisdom %}
-                <h2><b>Wisdom Saving Throw</b></h2>
-                {% endif %}
-                {% if sheet.sCharisma %}
-                <h2><b>Charisma Saving Throw</b></h2>
-                {% endif %}
-            </div>
-            <div class="column">
+    <h1>{{ sheet.name }} {% if sheet.hidden == True %}(HIDDEN){% endif %}</h1>
+    <div id="main-content">
+        <div>
+            <ul id="sheetNav">
+                <li><button onclick="page('character')">Character</button></li>
+                <li><button onclick="page('fighting')">Fighting</button></li>
+                <li><button onclick="page('equipment')">Equipment</button></li>
+                <li><button onclick="page('spellcasting')">Spellcasting</button></li>
+                <li><button onclick="page('personality')">Personality</button></li>
+            </ul>
+            <div id="character" style="display: block">
                 <div class="column">
-                    {% for item in equipment %}
-                        {% if item.Type == 'weapon' and item.equipped %}
-                            <div class="item">
-                                <p><a href="{{ item.reference }}">{{ item.name }}</a> {{ item.amount }}</p>
-                            {% if user.is_authenticated %}
-                                <p><a href="{% url 'sheets:editItem' item.name slug %}">Edit</a></p>
-                                <p><a href="{% url 'sheets:removeItem' item.name slug %}">Remove</a></p>
+                    <div class="info">
+                        <h2 onclick="sideEditor('Class')"><b>Class: </b>{{ sheet.Class }}</h2>
+                        <h2 onclick="sideEditor()"><b>Background: </b>{{ sheet.background }}</h2>
+                        <h2 onclick="sideEditor()"><b>Race: </b>{{ sheet.race }}</h2>
+                        <h2 onclick="sideEditor()"><b>XP: </b>{{ sheet.xp }}</h2>
+                        <h2 onclick="sideEditor()"><b>Level: </b>{{ sheet.level }}</h2>
+                        <h2 onclick="sideEditor()"><b>Hit Dice:</b> {{ sheet.hitDice }}</h2>
+                    </div>
+                    <div class="money">
+                        <h2>{{ sheet.copper }} <b>copper</b></h2>
+                        <h2>{{ sheet.silver }} <b>silver</b></h2>
+                        <h2>{{ sheet.gold }} <b>gold</b></h2>
+                        <h2>{{ sheet.platinum }} <b>platinum</b></h2>
+                    </div>
+                    <div class="stats">
+                        <h2><b>Strength:</b> {{ sheet.strength }} + {{ sheet.strengthMod }}</h2>
+                        <h2><b>Dexterity:</b> {{ sheet.dexterity }} + {{ sheet.dexterityMod }}</h2>
+                        <h2><b>Constitution:</b> {{ sheet.constitution }} + {{ sheet.constitutionMod }}</h2>
+                        <h2><b>Intelligence:</b> {{ sheet.intelligence }} + {{ sheet.intelligenceMod }}</h2>
+                        <h2><b>Wisdom:</b> {{ sheet.wisdom }} + {{ sheet.wisdomMod }}</h2>
+                        <h2><b>Charisma:</b> {{ sheet.charisma }} + {{ sheet.charismaMod }}</h2>
+                        <h2><b>Proficiency:</b> {{ sheet.proficiency }}</h2>
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="skills">
+                        <div class="column">
+                            <div class="skill">
+                                <p><input type="checkbox" {% if sheet.acrobatics %} checked {% endif %} readonly></p>
+                                <p>+{% if sheet.acrobatics %}{{sheet.dexterityMod|add:sheet.proficiency}}{% else %}{{ sheet.dexterityMod }}{%endif%}</p>
+                                <p>Acrobatics</p>
+                            </div>
+                            <div class="skill">
+                                <p><input type="checkbox" {% if sheet.animalHandling %} checked {% endif %} readonly></p>
+                                <p>+{% if sheet.animalHandling %}{{sheet.wisdomMod|add:sheet.proficiency}}{% else %}{{ sheet.wisdomMod }}{%endif%}</p>
+                                <p>Aimal Handling</p>
+                            </div>
+                            <div class="skill">
+                                <p><input type="checkbox" {% if sheet.arcana %} checked {% endif %} readonly></p>
+                                <p>+{% if sheet.arcana %}{{sheet.intelligenceMod|add:sheet.proficiency}}{% else %}{{ sheet.intelligenceMod }}{%endif%}</p>
+                                <p>Arcana</p>
+                            </div>
+                            <div class="skill">
+                                <p><input type="checkbox" {% if sheet.athletics %} checked {% endif %} readonly></p>
+                                <p>+{% if sheet.athletics %}{{sheet.strengthMod|add:sheet.proficiency}}{% else %}{{ sheet.strengthMod }}{%endif%}</p>
+                                <p>Athletics</p>
+                            </div>
+                            <div class="skill">
+                                <p><input type="checkbox" {% if sheet.deception %} checked {% endif %} readonly></p>
+                                <p>+{% if sheet.deception %}{{sheet.charismaMod|add:sheet.proficiency}}{% else %}{{ sheet.charismaMod }}{%endif%}</p>
+                                <p>Deception</p>
+                            </div>
+                            <div class="skill">
+                                <p><input type="checkbox" {% if sheet.history %} checked {% endif %} readonly></p>
+                                <p>+{% if sheet.history %}{{sheet.intelligenceMod|add:sheet.proficiency}}{% else %}{{ sheet.intelligenceMod }}{%endif%}</p>
+                                <p>History</p>
+                            </div>
+                            <div class="skill">
+                                <p><input type="checkbox" {% if sheet.insight %} checked {% endif %} readonly></p>
+                                <p>+{% if sheet.insight %}{{sheet.wisdomMod|add:sheet.proficiency}}{% else %}{{ sheet.wisdomMod }}{%endif%}
+                                </p>
+                                <p>Insight</p>
+                            </div>
+                            <div class="skill">
+                                <p><input type="checkbox" {% if sheet.intimidation %} checked {% endif %} readonly></p>
+                                <p>+{% if sheet.intimidation %}{{sheet.charismaMod|add:sheet.proficiency}}{% else %}{{ sheet.charismaMod }}{%endif%}</p>
+                                <p>Intimidation</p>
+                            </div>
+                            <div class="skill">
+                                <p><input type="checkbox" {% if sheet.investigation %} checked {% endif %} readonly></p>
+                                <p>+{% if sheet.investigation %}{{sheet.intelligenceMod|add:sheet.proficiency}}{% else %}{{ sheet.intelligenceMod }}{%endif%}
+                                </p>
+                                <p>Investigation</p>
+                            </div>
+                        </div>
+                        <div class="column">
+                            <div class="skill">
+                                <p><input type="checkbox" {% if sheet.medicine %} checked {% endif %} readonly></p>
+                                <p>+{% if sheet.medicine %}{{sheet.wisdomMod|add:sheet.proficiency}}{% else %}{{ sheet.wisdomMod }}{%endif%}
+                                </p>
+                                <p>Medicine</p>
+                            </div>
+                            <div class="skill">
+                                <p><input type="checkbox" {% if sheet.nature %} checked {% endif %} readonly></p>
+                                <p>+{% if sheet.nature %}{{sheet.intelligenceMod|add:sheet.proficiency}}{% else %}{{ sheet.intelligenceMod }}{%endif%}
+                                </p>
+                                <p>Nature</p>
+                            </div>
+                            <div class="skill">
+                                <p><input type="checkbox" {% if sheet.perception %} checked {% endif %} readonly></p>
+                                <p>+{% if sheet.perception %}{{sheet.wisdomMod|add:sheet.proficiency}}{% else %}{{ sheet.wisdomMod }}{%endif%}
+                                </p>
+                                <p>Perception</p>
+                            </div>
+                            <div class="skill">
+                                <p><input type="checkbox" {% if sheet.performance %} checked {% endif %} readonly></p>
+                                <p>+{% if sheet.performance %}{{sheet.charismaMod|add:sheet.proficiency}}{% else %}{{ sheet.charismaMod }}{%endif%}</p>
+                                <p>Performance</p>
+                            </div>
+                            <div class="skill">
+                                <p><input type="checkbox" {% if sheet.persuasion %} checked {% endif %} readonly></p>
+                                <p>+{% if sheet.persuasion %}{{sheet.charismaMod|add:sheet.proficiency}}{% else %}{{ sheet.charismaMod }}{%endif%}</p>
+                                <p>Persuasion</p>
+                            </div>
+                            <div class="skill">
+                                <p><input type="checkbox" {% if sheet.religion %} checked {% endif %} readonly></p>
+                                <p>+{% if sheet.religion %}{{sheet.intelligenceMod|add:sheet.proficiency}}{% else %}{{ sheet.intelligenceMod }}{%endif%}
+                                </p>
+                                <p>Religion</p>
+                            </div>
+                            <div class="skill">
+                                <p><input type="checkbox" {% if sheet.sleightOfHand %} checked {% endif %} readonly></p>
+                                <p>+{% if sheet.sleightOfHand %}{{sheet.dexterityMod|add:sheet.proficiency}}{% else %}{{ sheet.dexterityMod }}{%endif%}
+                                </p>
+                                <p>Sleight of Hand</p>
+                            </div>
+                            <div class="skill">
+                                <p><input type="checkbox" {% if sheet.stealth %} checked {% endif %} readonly></p>
+                                <p>+{% if sheet.stealth %}{{sheet.dexterityMod|add:sheet.proficiency}}{% else %}{{ sheet.dexterityMod }}{%endif%}
+                                </p>
+                                <p>Stealth</p>
+                            </div>
+                            <div class="skill">
+                                <p><input type="checkbox" {% if sheet.survival %} checked {% endif %} readonly></p>
+                                <p>+{% if sheet.survival %}{{sheet.wisdomMod|add:sheet.proficiency}}{% else %}{{ sheet.wisdomMod }}{%endif%}
+                                </p>
+                                <p>Survival</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="fighting" style="display: none">
+                <div class="column">
+                    <h2><b>AC:</b> {{ sheet.armorClass }}</h2>
+                    <h2><b>Initiative:</b> {{ sheet.initiative }}</h2>
+                    <h2><b>Speed:</b> {{ sheet.speed }}</h2>
+                    <h2><b>HP:</b> {{ sheet.hitPoints }} / {{ sheet.maxHitPoints }}</h2>
+                    {% if sheet.sStrength %}
+                    <h2><b>Strength Saving Throw</b></h2>
+                    {% endif %}
+                    {% if sheet.sDexterity %}
+                    <h2><b>Dexterity Saving Throw</b></h2>
+                    {% endif %}
+                    {% if sheet.sConstitution %}
+                    <h2><b>Constitution Saving Throw</b></h2>
+                    {% endif %}
+                    {% if sheet.sIntelligence %}
+                    <h2><b>Intelligence Saving Throw</b></h2>
+                    {% endif %}
+                    {% if sheet.sWisdom %}
+                    <h2><b>Wisdom Saving Throw</b></h2>
+                    {% endif %}
+                    {% if sheet.sCharisma %}
+                    <h2><b>Charisma Saving Throw</b></h2>
+                    {% endif %}
+                </div>
+                <div class="column">
+                    <div class="column">
+                        {% for item in equipment %}
+                            {% if item.Type == 'weapon' and item.equipped %}
+                                <div class="item">
+                                    <p><a href="{{ item.reference }}">{{ item.name }}</a> {{ item.amount }}</p>
+                                {% if user.is_authenticated %}
+                                    <p><a href="{% url 'sheets:editItem' item.name slug %}">Edit</a></p>
+                                    <p><a href="{% url 'sheets:removeItem' item.name slug %}">Remove</a></p>
+                                {% endif %}
+                                </div>
                             {% endif %}
+                        {% endfor %}
+                    </div>
+                    <div class="column">
+                    {% for spell in spells %}
+                        {% if spell.Type == 'offensive' %}
+                            <div class="spell">
+                                <p><a href="{{ spell.reference }}">{{ spell.name }}</a></p>
+                                <p>{{ spell.get_level_display }}</p>
+                                {% if user.is_authenticated %}
+                                    {% if sheet.author == request.user %}
+                                        <p><a href="{% url 'sheets:removeSpell' spell.name slug %}">Remove</a></p>
+                                    {% endif %}
+                                {% endif %}
                             </div>
                         {% endif %}
                     {% endfor %}
+                    </div>
                 </div>
-                <div class="column">
+            </div>
+            <div id="equipment" style="display: none">
+                {% for item in equipment %}
+                    {% if item.Type == 'weapon' and not item.equipped or item.Type == 'item' %}
+                        <div class="item">
+                            <p><a href="{{ item.reference }}">{{ item.name }}</a></p>
+                            <p>{{ item.amount }}</p>
+                        {% if user.is_authenticated %}
+                            <p><a href="{% url 'sheets:editItem' item.name slug %}">Edit</a></p>
+                            <p><a href="{% url 'sheets:removeItem' item.name slug %}">Remove</a></p>
+                        {% endif %}
+                        </div>
+                    {% endif %}
+                {% endfor %}
+                {% if user.is_authenticated %}
+                    {% if sheet.author == request.user %}
+                        <p><a href="{% url 'sheets:addItem' slug %}">Add</a></p>
+                    {% endif %}
+                {% endif %}
+            </div>
+            <div id="spellcasting" style="display: none">
                 {% for spell in spells %}
-                    {% if spell.Type == 'offensive' %}
+                    {% if spell.Type == 'normal' %}
                         <div class="spell">
                             <p><a href="{{ spell.reference }}">{{ spell.name }}</a></p>
                             <p>{{ spell.get_level_display }}</p>
                             {% if user.is_authenticated %}
                                 {% if sheet.author == request.user %}
+                                    <p><a href="{% url 'sheets:editSpell' spell.name slug %}">Edit</a></p>
                                     <p><a href="{% url 'sheets:removeSpell' spell.name slug %}">Remove</a></p>
                                 {% endif %}
                             {% endif %}
                         </div>
                     {% endif %}
                 {% endfor %}
-                </div>
+                {% if user.is_authenticated %}
+                    {% if sheet.author == request.user %}
+                        <p><a href="{% url 'sheets:addSpell' slug %}">Add</a></p>
+                    {% endif %}
+                {% endif %}
+            </div>
+            <div id="personality" style="display: none">
+                <p><b>Personality Traits: </b>{{ sheet.personalityTraits }}</p>
+                <p><b>Ideals: </b>{{ sheet.ideals }}</p>
+                <p><b>Bonds: </b>{{ sheet.bonds }}</p>
+                <p><b>Flaws: </b>{{ sheet.flaws }}</p>
+                <p><b>Features & Traits: </b>{{ sheet.featuresTraits }}</p>
+                <p><b>Other Proficiences: </b>{{ sheet.otherProficiencies }}</p>
+                <p><b>Languages: </b>{{ sheet.languages }}</p>
             </div>
         </div>
-        <div id="equipment" style="display: none">
-            {% for item in equipment %}
-                {% if item.Type == 'weapon' and not item.equipped or item.Type == 'item' %}
-                    <div class="item">
-                        <p><a href="{{ item.reference }}">{{ item.name }}</a></p>
-                        <p>{{ item.amount }}</p>
-                    {% if user.is_authenticated %}
-                        <p><a href="{% url 'sheets:editItem' item.name slug %}">Edit</a></p>
-                        <p><a href="{% url 'sheets:removeItem' item.name slug %}">Remove</a></p>
-                    {% endif %}
-                    </div>
-                {% endif %}
-            {% endfor %}
-            {% if user.is_authenticated %}
-                {% if sheet.author == request.user %}
-                    <p><a href="{% url 'sheets:addItem' slug %}">Add</a></p>
-                {% endif %}
-            {% endif %}
-        </div>
-        <div id="spellcasting" style="display: none">
-            {% for spell in spells %}
-                {% if spell.Type == 'normal' %}
-                    <div class="spell">
-                        <p><a href="{{ spell.reference }}">{{ spell.name }}</a></p>
-                        <p>{{ spell.get_level_display }}</p>
-                        {% if user.is_authenticated %}
-                            {% if sheet.author == request.user %}
-                                <p><a href="{% url 'sheets:editSpell' spell.name slug %}">Edit</a></p>
-                                <p><a href="{% url 'sheets:removeSpell' spell.name slug %}">Remove</a></p>
-                            {% endif %}
-                        {% endif %}
-                    </div>
-                {% endif %}
-            {% endfor %}
-            {% if user.is_authenticated %}
-                {% if sheet.author == request.user %}
-                    <p><a href="{% url 'sheets:addSpell' slug %}">Add</a></p>
-                {% endif %}
-            {% endif %}
-        </div>
-        <div id="personality" style="display: none">
-            <p><b>Personality Traits: </b>{{ sheet.personalityTraits }}</p>
-            <p><b>Ideals: </b>{{ sheet.ideals }}</p>
-            <p><b>Bonds: </b>{{ sheet.bonds }}</p>
-            <p><b>Flaws: </b>{{ sheet.flaws }}</p>
-            <p><b>Features & Traits: </b>{{ sheet.featuresTraits }}</p>
-            <p><b>Other Proficiences: </b>{{ sheet.otherProficiencies }}</p>
-            <p><b>Languages: </b>{{ sheet.languages }}</p>
-        </div>
+
+        
     </div>
 
     {% if sheet.author == request.user %}
         <div class="button">
             <h2><a href="{% url 'sheets:edit' slug %}">Edit</a></h2>
         </div>
+        <!--
+        <div id="side-editor">
+            <form method="post" enctype="multipart/form-data">
+            
+            </form>
+        </div>
+        -->
     {% endif %}
 
     <script src="{% static 'sheets/sheetNav.js' %}"></script>

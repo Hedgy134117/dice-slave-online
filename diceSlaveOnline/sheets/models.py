@@ -14,6 +14,7 @@ class SheetGroup(models.Model):
 
 class Sheet(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True, editable=False)
+    hidden = models.BooleanField(default=False)
 
     name = models.CharField(max_length=100)
 

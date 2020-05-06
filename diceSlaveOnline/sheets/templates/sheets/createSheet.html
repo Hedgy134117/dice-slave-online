@@ -12,10 +12,10 @@
     <div>
         <form action="{% url 'sheets:create' %}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
-            {% csrf_token %}
             <p>{{ form.errors }}</p>
             <h1>Name: {{ form.name }}</h1>
             <h1>Slug: {{ form.slug }}</h1>
+            <p>Hidden: {{ form.hidden }}</p>
             <h1>Group: {{ form.sheetGroup }}</h1>
             <div>
                 <ul id="sheetNav">
