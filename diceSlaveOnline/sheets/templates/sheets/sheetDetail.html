@@ -282,7 +282,6 @@
 
     <script>
         var data = null;
-        get(function a() { });
 
         var descriptions = null
         var xhr = new XMLHttpRequest();
@@ -332,7 +331,7 @@
                 if (this.readyState == 4 && this.status == 200) {
                     data = JSON.parse(this.responseText);
                     if (params == undefined) {
-                        console.log("sent data successfully");
+                        console.log("got data successfully");
                         callback();
                     }
                     else {
