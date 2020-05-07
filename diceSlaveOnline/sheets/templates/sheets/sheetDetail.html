@@ -302,13 +302,13 @@
         }
 
         function view() {
-            console.log(data);
             for(let i = 0; i < document.getElementsByClassName('getInfo').length; i++) {
                 var field = document.getElementsByClassName('getInfo')[i].getAttribute('onclick')
                 field = field.split("'")[1];
                 console.log(document.getElementsByClassName('getInfo')[i].children);
                 document.getElementsByClassName('getInfo')[i].children[1].innerHTML = data['sheet'][0]['fields'][field];
             }
+            console.log("displayed data successfully");
         }
 
         function edit() {
@@ -317,6 +317,7 @@
             var xhr = new XMLHttpRequest();
             xhr.onreadystatechange = function() {
                 if (this.readyState == 4 && this.status == 200) {
+                    console.log("sent data successfully");
                     get(view);
                 }
             }
@@ -331,6 +332,7 @@
                 if (this.readyState == 4 && this.status == 200) {
                     data = JSON.parse(this.responseText);
                     if (params == undefined) {
+                        console.log("sent data successfully");
                         callback();
                     }
                     else {
