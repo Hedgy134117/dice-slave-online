@@ -284,16 +284,18 @@
         var data = null;
         get(function a() { });
 
-        function sideEditor(content) {
-            var xhr = new XMLHttpRequest();
-            xhr.onreadystatechange = function() {
-                if (this.readyState == 4 && this.status == 200) {
-                    document.getElementById('description').innerHTML = JSON.parse(this.responseText)[content];
-                }
+        var descriptions = null
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                 descriptions = JSON.parse(this.responseText);
             }
-            xhr.open("GET", "{% static 'sheets/valueDetails.json' %}", true);
-            xhr.send();
+        }
+        xhr.open("GET", "{% static 'sheets/valueDetails.json' %}", true);
+        xhr.send();
 
+        function sideEditor(content) {
+            document.getElementById('description').innerHTML = descriptions[content];
             document.getElementById('side-editor').style = "display: block;";
             document.getElementById('value').innerHTML = content;
             document.getElementById("newValue").value = data['sheet'][0]['fields'][content];
