@@ -20,18 +20,18 @@
             <div id="character" style="display: block">
                 <div class="column">
                     <div class="info">
-                        <h2 class="getInfo" onclick="get(sideEditor, 'Class')"><b>Class: </b><span>{{ sheet.Class }}</span></h2>
-                        <h2 class="getInfo" onclick="get(sideEditor, 'background')"><b>Background: </b><span>{{ sheet.background }}</span></h2>
-                        <h2 class="getInfo" onclick="get(sideEditor, 'race')"><b>Race: </b><span>{{ sheet.race }}</span></h2>
-                        <h2 class="getInfo" onclick="get(sideEditor, 'xp')"><b>XP: </b><span>{{ sheet.xp }}</span></h2>
-                        <h2 class="getInfo" onclick="get(sideEditor, 'level')"><b>Level: </b><span>{{ sheet.level }}</span></h2>
-                        <h2 class="getInfo" onclick="get(sideEditor, 'hitDice')"><b>Hit Dice: </b><span>{{ sheet.hitDice }}</span></h2>
+                        <h2><b>Class: </b><span>{{ sheet.Class }}</span></h2>
+                        <h2><b>Background: </b><span>{{ sheet.background }}</span></h2>
+                        <h2><b>Race: </b><span>{{ sheet.race }}</span></h2>
+                        <h2 class="getInfo" onclick="get(sideEditor, 'xp')"><b>XP: </b><span>{{ sheet.xp }}</span> <img src="{% static 'sheets/pen.png' %}"></h2>
+                        <h2 class="getInfo" onclick="get(sideEditor, 'level')"><b>Level: </b><span>{{ sheet.level }}</span> <img src="{% static 'sheets/pen.png' %}"></h2>
+                        <h2><b>Hit Dice: </b><span>{{ sheet.hitDice }}</span></h2>
                     </div>
                     <div class="money">
-                        <h2>{{ sheet.copper }} <b>copper</b></h2>
-                        <h2>{{ sheet.silver }} <b>silver</b></h2>
-                        <h2>{{ sheet.gold }} <b>gold</b></h2>
-                        <h2>{{ sheet.platinum }} <b>platinum</b></h2>
+                        <h2 class="getInfo" onclick="get(sideEditor, 'copper')"><b>Copper: </b><span>{{ sheet.copper }}</span> <img src="{% static 'sheets/pen.png' %}"></h2>
+                        <h2 class="getInfo" onclick="get(sideEditor, 'silver')"><b>Silver: </b><span>{{ sheet.silver }}</span> <img src="{% static 'sheets/pen.png' %}"></h2>
+                        <h2 class="getInfo" onclick="get(sideEditor, 'gold')"><b>Gold: </b><span>{{ sheet.gold }}</span> <img src="{% static 'sheets/pen.png' %}"></h2>
+                        <h2 class="getInfo" onclick="get(sideEditor, 'platinum')"><b>Platinum: </b><span>{{ sheet.platinum }}</span> <img src="{% static 'sheets/pen.png' %}"></h2>
                     </div>
                     <div class="stats">
                         <h2><b>Strength:</b> {{ sheet.strength }} + {{ sheet.strengthMod }}</h2>
@@ -156,7 +156,12 @@
                     <h2><b>AC:</b> {{ sheet.armorClass }}</h2>
                     <h2><b>Initiative:</b> {{ sheet.initiative }}</h2>
                     <h2><b>Speed:</b> {{ sheet.speed }}</h2>
-                    <h2><b>HP:</b> {{ sheet.hitPoints }} / {{ sheet.maxHitPoints }}</h2>
+                    <h2><b>HP:</b> 
+                        <span class="getInfo" onclick="get(sideEditor, 'hitPoints')"><b></b><span>{{ sheet.hitPoints }}</span> <img src="{% static 'sheets/pen.png' %}"></span> 
+                        / 
+                        <span class="getInfo" onclick="get(sideEditor, 'maxHitPoints')"><b></b><span>{{ sheet.maxHitPoints }}</span> <img src="{% static 'sheets/pen.png' %}"></span>
+                    
+                    </h2>
                     {% if sheet.sStrength %}
                     <h2><b>Strength Saving Throw</b></h2>
                     {% endif %}
@@ -259,10 +264,12 @@
         </div>
 
         {% if sheet.author == request.user %}
-        <div id="side-editor">
-            <label id="value"></label>
+        <div id="side-editor" style="display: none;">
+            <img src="{% static 'sheets/x.png' %}" onclick="document.getElementById('side-editor').style = 'display: none;'">
+            <h2 id="value"></h2>
             <input id="newValue" />
             <input type="submit" onclick="edit()" />
+            <p id="description"></p>
         </div>
         {% endif %}
     </div>
@@ -278,6 +285,16 @@
         get(function a() { });
 
         function sideEditor(content) {
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    document.getElementById('description').innerHTML = JSON.parse(this.responseText)[content];
+                }
+            }
+            xhr.open("GET", "{% static 'sheets/valueDetails.json' %}", true);
+            xhr.send();
+
+            document.getElementById('side-editor').style = "display: block;";
             document.getElementById('value').innerHTML = content;
             document.getElementById("newValue").value = data['sheet'][0]['fields'][content];
         }

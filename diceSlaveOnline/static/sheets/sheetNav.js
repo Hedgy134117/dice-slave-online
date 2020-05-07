@@ -19,4 +19,5 @@ function page(openPage) {
             }
         }
     }
+    document.getElementById('side-editor').style = "display: none;"
 }

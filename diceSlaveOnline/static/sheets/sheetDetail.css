@@ -33,8 +33,41 @@ input[type=checkbox][readonly] {
     pointer-events: none;
 }
 
+#side-editor {
+    background-color: var(--element-bg);
 
-#main-content {
-    display: grid;
-    grid-template-columns: 75% 25%;
+    position: absolute;
+    right: 2vw;
+    height: 75vh;
+    padding-left: 12px;
+    padding-right: 12px;
+}
+
+#side-editor p {
+    position: absolute;
+    padding-right: 12px;
+}
+
+#side-editor img {
+    padding-top: 12px;
+
+    float: left;
+    /* position: relative; */
+    width: 20px;
+    height: 20px;
+    /* right: 45%; */
+}
+
+#side-editor img:hover {
+    cursor: pointer;
+}
+
+#side-editor input {
+    padding: 12px;
+    font-size: 16px;
+}
+
+img {
+    width: 15px;
+    height: 15px;
 }
