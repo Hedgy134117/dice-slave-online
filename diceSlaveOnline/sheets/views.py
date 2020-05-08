@@ -19,16 +19,8 @@ def sheetList(request):
 
 def sheetDetail(request, slug):
     sheet = Sheet.objects.get(slug=slug)
-    itemList = Item.objects.all()
-    equipment = []
-    for item in itemList:
-        if item.sht == sheet:
-            equipment.append(item)
-    spellList = Spell.objects.all().order_by('level')
-    spells = []
-    for spell in spellList:
-        if spell.sht == sheet:
-            spells.append(spell)
+    equipment = Item.objects.filter(sht=sheet)
+    spells = Spell.objects.filter(sht=sheet)
 
     return render(
         request, 'sheets/sheetDetail.html', {
@@ -233,21 +225,9 @@ def ajaxEdit(request, slug):
     response['hello'] = 'hello'
     return JsonResponse(response)
 
-def ajaxSheetDetail(request, slug):
+def ajaxSheetDetail(request, slug, value):
     sheet = Sheet.objects.filter(slug=slug)
-    itemList = Item.objects.all()
-    equipment = []
-    for item in itemList:
-        if item.sht == sheet:
-            equipment.append(item)
-    spellList = Spell.objects.all().order_by('level')
-    spells = []
-    for spell in spellList:
-        if spell.sht == sheet:
-            spells.append(spell)
-
+    
     response = {}
-    response['sheet'] = json.loads(serializers.serialize('json', sheet))
-    response['equipment'] = equipment
-    response['spells'] = spells
+    response['sheet'] = json.loads(exec('sheet.' + value))
     return JsonResponse(response)

@@ -22,6 +22,6 @@ urlpatterns = [
     path('removeSpell/<str:name>/<slug:slug>/', views.removeSpell, name='removeSpell'),
 
     path('<slug:slug>/', views.sheetDetail, name="detail"),
-    path('<slug:slug>/get/', views.ajaxSheetDetail, name='ajaxDetail'),
+    path('<slug:slug>/get/<str:value>', views.ajaxSheetDetail, name='ajaxDetail'),
     path('<slug:slug>/post/', views.ajaxEdit, name="ajaxEdit"),
 ]
