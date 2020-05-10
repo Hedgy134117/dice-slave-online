@@ -225,9 +225,9 @@ def ajaxEdit(request, slug):
     response['hello'] = 'hello'
     return JsonResponse(response)
 
-def ajaxSheetDetail(request, slug, value):
+def ajaxSheetDetail(request, slug):
     sheet = Sheet.objects.filter(slug=slug)
     
     response = {}
-    response['sheet'] = sheet
+    response['sheet'] = serializers.serialize("json", sheet)
     return JsonResponse(response)
