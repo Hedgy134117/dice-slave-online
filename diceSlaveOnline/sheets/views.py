@@ -229,5 +229,5 @@ def ajaxSheetDetail(request, slug):
     sheet = Sheet.objects.filter(slug=slug)
     
     response = {}
-    response['sheet'] = serializers.serialize("json", sheet)
+    response['sheet'] = json.loads(serializers.serialize("json", sheet))
     return JsonResponse(response)
