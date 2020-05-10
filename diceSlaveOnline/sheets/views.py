@@ -229,5 +229,5 @@ def ajaxSheetDetail(request, slug, value):
     sheet = Sheet.objects.filter(slug=slug)
     
     response = {}
-    response['sheet'] = json.loads(exec('sheet.' + value))
+    response['sheet'] = sheet
     return JsonResponse(response)
