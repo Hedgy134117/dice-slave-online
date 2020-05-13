@@ -12,7 +12,7 @@
             {% for sheet in sheets %}
                 {% if sheet.sheetGroupValue == group.SheetGroupName and sheet.hidden == False %}
                     <div class="button">
-                        <h2><a href="{% url 'sheets:detail' slug='sheet.slug' slug=sheet.slug %}">{{ sheet.name }}</a></h2>
+                        <h2><a href="{% url 'sheets:detail' slug='sheet.slug' slug=sheet.slug %}">{{ sheet.name }}</a> <span>by {{ sheet.author }}</span></h2>
                     </div>
                 {% endif %}
             {% endfor %}
