@@ -71,3 +71,22 @@ img {
     width: 15px;
     height: 15px;
 }
+
+
+@media screen and (max-width: 1000px) {
+    .column {
+        float: none;
+        width: 100%;
+    }
+    .info, .money, .stats {
+        float: none;
+        width: 100%;
+    }
+    .money, .stats {
+        margin-top: 50px;
+    }
+    .skills > .column {
+        float: left;
+        width: 50%;
+    }
+}
