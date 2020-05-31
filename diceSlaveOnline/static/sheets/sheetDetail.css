@@ -89,4 +89,30 @@ img {
         float: left;
         width: 50%;
     }
+
+    #side-editor {
+        background-color: var(--element-bg);
+        position: fixed;
+        right: 0;
+        top: 0;
+        height: 100%;
+        width: 100%;
+        padding-left: 12px;
+        padding-right: 12px;  
+    }
+    #side-editor p {
+        position: absolute;
+        padding-right: 12px;
+        padding-left: 12px;
+    }
+    #side-editor img {
+        padding-top: 12px;
+        padding-left: 24px;
+    
+        float: left;
+        /* position: relative; */
+        width: 20px;
+        height: 20px;
+        /* right: 45%; */
+    }
 }
