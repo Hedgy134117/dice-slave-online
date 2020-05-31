@@ -74,6 +74,14 @@ img {
 
 
 @media screen and (max-width: 1000px) {
+    #sheetNav {
+        padding-left: 0;
+        flex-wrap: wrap;
+    }
+    #sheetNav button {
+        margin: 12px;
+    }
+
     .column {
         float: none;
         width: 100%;
