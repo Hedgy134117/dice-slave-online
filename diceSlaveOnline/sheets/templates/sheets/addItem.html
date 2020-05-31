@@ -1,14 +1,21 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}Add Item{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'sheets/sheetForms.css' %}">
+{% endblock %}
 
 {% block content %}
 <div>
     <h2>Add a new item</h2>
     <form action="{% url 'sheets:addItem' slug %}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        {{ form }}
-        <input type="submit" value="Add">
+        <table>
+            {{ form.as_table }}
+        </table>
     </form>
+    <div class="button"><h2><a onclick="this.closest('form').submit();return false;">Add</a></h2></div>
 </div>
 {% endblock %}

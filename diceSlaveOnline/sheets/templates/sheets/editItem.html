@@ -2,13 +2,19 @@
 
 {% block title %}Edit Sheet{% endblock %}
 
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'sheets/sheetForms.css' %}">
+{% endblock %}
+
 {% block content %}
     <div>
         <h2>Edit an Item</h2>
         <form action="{% url 'sheets:editItem' item.name slug %}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
-            {{ form }}
-            <input type="submit" value="Edit">
+            <table>
+                {{ form }}
+            </table>
         </form>
+        <div class="button"><h2><a onclick="this.closest('form').submit();return false;">Add</a></h2></div>
     </div>
 {% endblock %}
