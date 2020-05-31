@@ -152,6 +152,11 @@
                         </div>
                     </div>
                 </div>
+                {% if sheet.author == request.user %}
+                    <div class="button">
+                        <h2><a href="{% url 'sheets:edit' slug %}">Edit</a></h2>
+                    </div>
+                {% endif %}
             </div>
             <div id="fighting" style="display: none">
                 <div class="column">
@@ -275,12 +280,6 @@
         </div>
         {% endif %}
     </div>
-
-    {% if sheet.author == request.user %}
-        <div class="button">
-            <h2><a href="{% url 'sheets:edit' slug %}">Edit</a></h2>
-        </div>
-    {% endif %}
 
     <script>
         var data = null;
