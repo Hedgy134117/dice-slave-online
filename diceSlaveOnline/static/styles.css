@@ -50,3 +50,10 @@ body {
     color: var(--bg-color);
     cursor: pointer;
 }
+
+
+@media screen and (max-width: 1000px) {
+    #nav li, #nav li.nav-left {
+        float: none;
+    }
+}
