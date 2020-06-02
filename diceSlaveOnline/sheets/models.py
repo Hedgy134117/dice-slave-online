@@ -20,8 +20,6 @@ class Sheet(models.Model):
 
     sheetGroup = models.ForeignKey("SheetGroup", on_delete=models.CASCADE, default=1)
 
-    slug = models.SlugField(default="")
-
     Class = models.CharField(max_length=100, default="")
     background = models.CharField(max_length=100)
     race = models.CharField(max_length=100)
