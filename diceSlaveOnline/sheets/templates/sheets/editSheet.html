@@ -10,7 +10,7 @@
 
 {% block content %}
     <div>
-        <form action="{% url 'sheets:edit' slug %}" method="post" enctype="multipart/form-data">
+        <form action="{% url 'sheets:edit' id %}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
             <p>{{ form.errors }}</p>
             <h1>Name: {{ form.name }}</h1>

@@ -184,7 +184,7 @@
                 </div>
                 {% if sheet.author == request.user %}
                     <div class="button">
-                        <h2><a href="{% url 'sheets:edit' id %}">Edit</a></h2>
+                        <h2><a href="{% url 'sheets:edit' id=id %}">Edit</a></h2>
                     </div>
                 {% endif %}
             </div>
