@@ -14,7 +14,7 @@
     <div>
     {% for sheet in sheets %}
         <div class="button">
-            <h2><a href="{% url 'sheets:detail' slug='sheet.slug' slug=sheet.slug %}">{{ sheet.name }}</a> <span>in {{ sheet.sheetGroup }}</span></h2>
+            <h2><a href="{% url 'sheets:detail' sheet.id %}">{{ sheet.name }}</a> <span>in {{ sheet.sheetGroup }}</span></h2>
         </div>
     {% endfor %}
     </div>
