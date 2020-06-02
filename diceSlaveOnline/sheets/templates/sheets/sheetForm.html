@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}Add Skill{% endblock %}
+{% block title %}Add Item{% endblock %}
 
 {% block css %}
 <link rel="stylesheet" type="text/css" href="{% static 'sheets/sheetForms.css' %}">
@@ -9,13 +9,13 @@
 
 {% block content %}
 <div>
-    <h2>Add a new spell</h2>
-    <form action="{% url 'sheets:addSpell' id %}" method="post" enctype="multipart/form-data">
+    <h2>{{ action }} a {{ thing }}</h2>
+    <form action="{{ url }}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <table>
             {{ form.as_table }}
         </table>
-        <div class="button"><h2><a onclick="this.closest('form').submit();return false;">Add</a></h2></div>
+        <div class="button"><h2><a onclick="this.closest('form').submit();return false;">{{ action }}</a></h2></div>
     </form>
 </div>
 {% endblock %}

@@ -184,7 +184,7 @@
                 </div>
                 {% if sheet.author == request.user %}
                     <div class="button">
-                        <h2><a href="{% url 'sheets:edit' slug %}">Edit</a></h2>
+                        <h2><a href="{% url 'sheets:edit' id %}">Edit</a></h2>
                     </div>
                 {% endif %}
             </div>
@@ -230,8 +230,10 @@
                                 <div class="item">
                                     <p><a href="{{ item.reference }}">{{ item.name }}</a> {{ item.amount }}</p>
                                 {% if user.is_authenticated %}
-                                    <p><a href="{% url 'sheets:editItem' item.name slug %}">Edit</a></p>
-                                    <p><a href="{% url 'sheets:removeItem' item.name slug %}">Remove</a></p>
+                                    {% if sheet.author == request.user %}
+                                        <p><a href="{% url 'sheets:editItem' item.id id %}">Edit</a></p>
+                                        <p><a href="{% url 'sheets:removeItem' item.id id %}">Remove</a></p>
+                                    {% endif %}
                                 {% endif %}
                                 </div>
                             {% endif %}
@@ -245,7 +247,8 @@
                                 <p>{{ spell.get_level_display }}</p>
                                 {% if user.is_authenticated %}
                                     {% if sheet.author == request.user %}
-                                        <p><a href="{% url 'sheets:removeSpell' spell.name slug %}">Remove</a></p>
+                                        <p><a href="{% url 'sheets:editSpell' spell.id id %}">Edit</a></p>
+                                        <p><a href="{% url 'sheets:removeSpell' spell.id id %}">Remove</a></p>
                                     {% endif %}
                                 {% endif %}
                             </div>
@@ -261,15 +264,15 @@
                             <p><a href="{{ item.reference }}">{{ item.name }}</a></p>
                             <p>{{ item.amount }}</p>
                         {% if user.is_authenticated %}
-                            <p><a href="{% url 'sheets:editItem' item.name slug %}">Edit</a></p>
-                            <p><a href="{% url 'sheets:removeItem' item.name slug %}">Remove</a></p>
+                            <p><a href="{% url 'sheets:editItem' item.id id %}">Edit</a></p>
+                            <p><a href="{% url 'sheets:removeItem' item.id id %}">Remove</a></p>
                         {% endif %}
                         </div>
                     {% endif %}
                 {% endfor %}
                 {% if user.is_authenticated %}
                     {% if sheet.author == request.user %}
-                        <p><a href="{% url 'sheets:addItem' slug %}">Add</a></p>
+                        <p><a href="{% url 'sheets:addItem' id %}">Add</a></p>
                     {% endif %}
                 {% endif %}
             </div>
@@ -281,8 +284,8 @@
                             <p>{{ spell.get_level_display }}</p>
                             {% if user.is_authenticated %}
                                 {% if sheet.author == request.user %}
-                                    <p><a href="{% url 'sheets:editSpell' spell.name slug %}">Edit</a></p>
-                                    <p><a href="{% url 'sheets:removeSpell' spell.name slug %}">Remove</a></p>
+                                    <p><a href="{% url 'sheets:editSpell' spell.id id %}">Edit</a></p>
+                                    <p><a href="{% url 'sheets:removeSpell' spell.id id %}">Remove</a></p>
                                 {% endif %}
                             {% endif %}
                         </div>
@@ -290,7 +293,7 @@
                 {% endfor %}
                 {% if user.is_authenticated %}
                     {% if sheet.author == request.user %}
-                        <p><a href="{% url 'sheets:addSpell' slug %}">Add</a></p>
+                        <p><a href="{% url 'sheets:addSpell' id %}">Add</a></p>
                     {% endif %}
                 {% endif %}
             </div>
@@ -347,7 +350,7 @@
                     get(view);
                 }
             }
-            xhr.open("POST", "/sheets/" + '{{ slug }}' + "/post/", true);
+            xhr.open("POST", "/sheets/" + '{{ id }}' + "/post/", true);
             xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
             xhr.send("value=" + value + "&newValue=" + newValue);
         }
@@ -366,10 +369,10 @@
                     }
                 }
             };
-            xhr.open("GET", "/sheets/" + '{{ slug }}' + "/get/", true);
+            xhr.open("GET", "/sheets/" + '{{ id }}' + "/get/", true);
             xhr.send();
         }
-        </script>
+    </script>
     <script src="{% static 'sheets/sheetNav.js' %}"></script>
 
 {% endblock %}

@@ -11,14 +11,30 @@ from django.core.management import call_command
 
 import json
 
-# Create your views here.
+
 def sheetList(request):
     sheets = Sheet.objects.all().order_by('name')
     groups = SheetGroup.objects.all()
     return render(request, 'sheets/sheetList.html', { 'sheets': sheets, 'groups': groups })
 
-def sheetDetail(request, slug):
-    sheet = Sheet.objects.get(slug=slug)
+def createGroup(request):
+    form = forms.CreateGroup()
+
+    if request.method == 'POST':
+        form = forms.CreateGroup(request.POST)
+
+        if form.is_valid():
+            instance = form.save(commit=False)
+            instance.owner = request.user
+            instance.save()
+            return redirect('sheets:list')
+    else:
+        form = forms.CreateGroup()
+    return render(request, 'sheets/createGroup.html', { 'form': form })
+
+# ---------- SHEET ---------- # 
+def sheetDetail(request, id):
+    sheet = Sheet.objects.get(id=id)
     equipment = Item.objects.filter(sht=sheet)
     spells = Spell.objects.filter(sht=sheet)
 
@@ -26,7 +42,7 @@ def sheetDetail(request, slug):
         request, 'sheets/sheetDetail.html', {
             'sheet': sheet,
             'equipment': equipment,
-            'slug': slug,
+            'id': id,
             'request': request,
             'spells': spells,
         })
@@ -47,11 +63,11 @@ def createSheet(request):
         form = forms.CreateSheet()
     return render(request, 'sheets/createSheet.html', { 'form': form })
 
-def editSheet(request, slug):
+def editSheet(request, id):
     call_command('makemigrations')
     call_command('migrate')
 
-    sheet = Sheet.objects.get(slug=slug)
+    sheet = Sheet.objects.get(id=id)
 
     if request.user == sheet.author:
         if request.method == 'POST':
@@ -61,31 +77,43 @@ def editSheet(request, slug):
                 instance = form.save(commit=False)
                 instance.author = request.user
                 instance.save()
-                return redirect('sheets:detail', slug=slug)
+                return redirect('sheets:detail', id=id)
         else:
             form = forms.CreateSheet(instance=sheet)
 
-        return render(request, 'sheets/editSheet.html', { 'form': form, 'slug': slug, 'sheet': sheet })
+        return render(request, 'sheets/editSheet.html', { 'form': form, 'id': id, 'sheet': sheet })
     else:
         return redirect('sheets:list')
 
-def createGroup(request):
-    form = forms.CreateGroup()
+@csrf_exempt
+def ajaxEdit(request, id):
+    value = request.POST.get('value')
+    newValue = request.POST.get('newValue')
+    
+    print(value, newValue)
+    sheet = Sheet.objects.get(id=id)
 
-    if request.method == 'POST':
-        form = forms.CreateGroup(request.POST)
-
-        if form.is_valid():
-            instance = form.save(commit=False)
-            instance.owner = request.user
-            instance.save()
-            return redirect('sheets:list')
+    if not newValue.lower().replace(' ', '').isalpha():
+        exec('sheet.' + value + " = " + newValue)
     else:
-        form = forms.CreateGroup()
-    return render(request, 'sheets/createGroup.html', { 'form': form })
+        exec('sheet.' + value + " = '" + newValue + "'")
+    sheet.save()
 
-def addItem(request, slug):
-    sheet = Sheet.objects.get(slug=slug)
+
+    response = {}
+    response['hello'] = 'hello'
+    return JsonResponse(response)
+
+def ajaxSheetDetail(request, id):
+    sheet = Sheet.objects.filter(id=id)
+    
+    response = {}
+    response['sheet'] = json.loads(serializers.serialize("json", sheet))
+    return JsonResponse(response)
+
+# ---------- ITEMS ---------- # 
+def addItem(request, id):
+    sheet = Sheet.objects.get(id=id)
     form = forms.AddItem()
 
     if request.user == sheet.author:
@@ -94,24 +122,24 @@ def addItem(request, slug):
 
             if form.is_valid():
                 instance = form.save(commit=False)
-                instance.sht = Sheet.objects.get(slug=slug)
+                instance.sht = Sheet.objects.get(id=id)
 
                 if Item.objects.filter(sht=instance.sht, name=instance.name).exists():
-                    return redirect('sheets:detail', slug=slug)
+                    return redirect('sheets:detail', id=id)
 
                 instance.save()
 
-                return redirect('sheets:detail', slug=slug)
+                return redirect('sheets:detail', id=id)
         else:
             form = forms.AddItem()
-            form.sht = Sheet.objects.get(slug=slug)
-        return render(request, 'sheets/addItem.html', { 'form': form, 'slug': slug })
+            form.sht = Sheet.objects.get(id=id)
+        return render(request, 'sheets/addItem.html', { 'form': form, 'id': id })
     else:
         return redirect('sheets:list')
 
-def editItem(request, name, slug):
-    sheet = Sheet.objects.get(slug=slug)
-    item = Item.objects.get(name=name, sht=sheet)
+def editItem(request, itemID, sheetID):
+    sheet = Sheet.objects.get(id=sheetID)
+    item = Item.objects.get(id=itemID)
 
     if request.user == sheet.author:
         if request.method == 'POST':
@@ -122,20 +150,21 @@ def editItem(request, name, slug):
                 instance.sht = sheet
                 item.delete()
                 instance.save()
-                return redirect('sheets:detail', slug=slug)
+                return redirect('sheets:detail', id=sheetID)
         else:
             form = forms.AddItem(instance=item)
-            return render(request, 'sheets/editItem.html', { 'form': form, 'item': item, 'slug': slug })
+            return render(request, 'sheets/editItem.html', { 'form': form, 'item': item, 'id': sheetID })
     else:
         return redirect('sheets:list')
 
-def removeItem(request, name, slug):
-    sheet = Sheet.objects.get(slug=slug)
-    item = Item.objects.get(name=name, sht=sheet)
+def removeItem(request, itemID, sheetID):
+    sheet = Sheet.objects.get(id=sheetID)
+    item = Item.objects.get(id=itemID)
 
     item.delete()
-    return redirect('sheets:detail', slug=slug)
+    return redirect('sheets:detail', id=sheetID)
 
+# ---------- (UNUSED) SKILLS ---------- # 
 def addSkill(request, slug):
     sheet = Sheet.objects.get(slug=slug)
 
@@ -161,8 +190,9 @@ def removeSkill(request, name, slug):
     skill.delete()
     return redirect('sheets:detail', slug=slug)
 
-def addSpell(request, slug):
-    sheet = Sheet.objects.get(slug=slug)
+# ---------- SPELLS ---------- # 
+def addSpell(request, id):
+    sheet = Sheet.objects.get(id=id)
 
     if request.user == sheet.author:
         if request.method == 'POST':
@@ -172,16 +202,16 @@ def addSpell(request, slug):
                 instance = form.save(commit=False)
                 instance.sht = sheet
                 instance.save()
-                return redirect('sheets:detail', slug=slug)
+                return redirect('sheets:detail', id=id)
         else:
             form = forms.AddSpell()
-            return render(request, 'sheets/addSpell.html', { 'form': form, 'slug': slug })
+            return render(request, 'sheets/addSpell.html', { 'form': form, 'id': id })
     else:
         return redirect('sheets:list')
 
-def editSpell(request, name, slug):
-    sheet = Sheet.objects.get(slug=slug)
-    spell = Spell.objects.get(name=name, sht=sheet)
+def editSpell(request, spellID, sheetID):
+    sheet = Sheet.objects.get(id=sheetID)
+    spell = Spell.objects.get(id=spellID)
 
     if request.user == sheet.author:
         if request.method == 'POST':
@@ -192,42 +222,16 @@ def editSpell(request, name, slug):
                 instance.sht = sheet
                 spell.delete()
                 instance.save()
-                return redirect('sheets:detail', slug=slug)
+                return redirect('sheets:detail', id=sheetID)
         else:
             form = forms.AddSpell(instance=spell)
-            return render(request, 'sheets/editSpell.html', { 'form': form, 'spell': spell, 'slug': slug })
+            return render(request, 'sheets/editSpell.html', { 'form': form, 'spell': spell, 'id': sheetID })
     else:
         return redirect('sheets:list')
 
-def removeSpell(request, name, slug):
-    sheet = Sheet.objects.get(slug=slug)
-    spell = Spell.objects.get(name=name, sht=sheet)
+def removeSpell(request, spellID, sheetID):
+    sheet = Sheet.objects.get(id=sheetID)
+    spell = Spell.objects.get(id=spellID)
 
     spell.delete()
-    return redirect('sheets:detail', slug=slug)
-
-@csrf_exempt
-def ajaxEdit(request, slug):
-    value = request.POST.get('value')
-    newValue = request.POST.get('newValue')
-    
-    print(value, newValue)
-    sheet = Sheet.objects.get(slug=slug)
-
-    if not newValue.lower().replace(' ', '').isalpha():
-        exec('sheet.' + value + " = " + newValue)
-    else:
-        exec('sheet.' + value + " = '" + newValue + "'")
-    sheet.save()
-
-
-    response = {}
-    response['hello'] = 'hello'
-    return JsonResponse(response)
-
-def ajaxSheetDetail(request, slug):
-    sheet = Sheet.objects.filter(slug=slug)
-    
-    response = {}
-    response['sheet'] = json.loads(serializers.serialize("json", sheet))
-    return JsonResponse(response)
+    return redirect('sheets:detail', id=sheetID)
