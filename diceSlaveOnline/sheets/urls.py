@@ -8,7 +8,7 @@ urlpatterns = [
     path('createGroup/', views.createGroup, name='createGroup'),
     
     # ---------- SHEET ---------- # 
-    path('<id>/', views.sheetDetail, name="detail"),
+    path('sheet/<id>/', views.sheetDetail, name="detail"),
     path('create/', views.createSheet, name='create'),
     path('edit/<id>/', views.editSheet, name='edit'),
     path('<id>/get/', views.ajaxSheetDetail, name='ajaxDetail'),

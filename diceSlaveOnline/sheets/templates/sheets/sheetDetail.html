@@ -23,7 +23,7 @@
 
             {% if sheet.author == request.user %}
                 <div id="side-editor" style="display: none;">
-                    <img src="{% static 'sheets/x.png' %}" onclick="document.getElementById('side-editor').style = 'display: none;'">
+                    <img class="xIcon" src="{% static 'sheets/x.png' %}" onclick="document.getElementById('side-editor').style = 'display: none;'">
                     <h2 id="value"></h2>
                     <input id="newValue" />
                     <input type="submit" onclick="edit()" />
@@ -39,30 +39,30 @@
                         <h2><b>Race: </b><span>{{ sheet.race }}</span></h2>
                         <h2 class="getInfo" onclick="sideEditor('xp')">
                             <b>XP: </b><span>{{ sheet.xp }}</span> 
-                            {% if sheet.author == request.user %}<img src="{% static 'sheets/pen.png' %}">{% endif %}
+                            {% if sheet.author == request.user %}<img class="editIcon" src="{% static 'sheets/pen.png' %}">{% endif %}
                         </h2>
                         <h2 class="getInfo" onclick="sideEditor('level')">
                             <b>Level: </b><span>{{ sheet.level }}</span> 
-                            {% if sheet.author == request.user %}<img src="{% static 'sheets/pen.png' %}">{% endif %}
+                            {% if sheet.author == request.user %}<img class="editIcon" src="{% static 'sheets/pen.png' %}">{% endif %}
                         </h2>
                         <h2><b>Hit Dice: </b><span>{{ sheet.hitDice }}</span></h2>
                     </div>
                     <div class="money">
                         <h2 class="getInfo" onclick="sideEditor('copper')">
                             <b>Copper: </b><span>{{ sheet.copper }}</span> 
-                            {% if sheet.author == request.user %}<img src="{% static 'sheets/pen.png' %}">{% endif %}
+                            {% if sheet.author == request.user %}<img class="editIcon" src="{% static 'sheets/pen.png' %}">{% endif %}
                         </h2>
                         <h2 class="getInfo" onclick="sideEditor('silver')">
                             <b>Silver: </b><span>{{ sheet.silver }}</span> 
-                            {% if sheet.author == request.user %}<img src="{% static 'sheets/pen.png' %}">{% endif %}
+                            {% if sheet.author == request.user %}<img class="editIcon" src="{% static 'sheets/pen.png' %}">{% endif %}
                         </h2>
                         <h2 class="getInfo" onclick="sideEditor('gold')">
                             <b>Gold: </b><span>{{ sheet.gold }}</span> 
-                            {% if sheet.author == request.user %}<img src="{% static 'sheets/pen.png' %}">{% endif %}
+                            {% if sheet.author == request.user %}<img class="editIcon" src="{% static 'sheets/pen.png' %}">{% endif %}
                         </h2>
                         <h2 class="getInfo" onclick="sideEditor('platinum')">
                             <b>Platinum: </b><span>{{ sheet.platinum }}</span> 
-                            {% if sheet.author == request.user %}<img src="{% static 'sheets/pen.png' %}">{% endif %}
+                            {% if sheet.author == request.user %}<img class="editIcon" src="{% static 'sheets/pen.png' %}">{% endif %}
                         </h2>
                     </div>
                     <div class="stats">
@@ -196,12 +196,12 @@
                     <h2><b>HP:</b> 
                         <span class="getInfo" onclick="sideEditor('hitPoints')"><b></b>
                             <span>{{ sheet.hitPoints }}</span> 
-                            {% if sheet.author == request.user %}<img src="{% static 'sheets/pen.png' %}">{% endif %}
+                            {% if sheet.author == request.user %}<img class="editIcon" src="{% static 'sheets/pen.png' %}">{% endif %}
                         </span> 
                         / 
                         <span class="getInfo" onclick="sideEditor('maxHitPoints')"><b></b>
                             <span>{{ sheet.maxHitPoints }}</span> 
-                            {% if sheet.author == request.user %}<img src="{% static 'sheets/pen.png' %}">{% endif %}
+                            {% if sheet.author == request.user %}<img class="editIcon" src="{% static 'sheets/pen.png' %}">{% endif %}
                         </span>
                     </h2>
                     {% if sheet.sStrength %}

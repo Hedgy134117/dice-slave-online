@@ -20,8 +20,6 @@
                 <ul id="sheetNav">
                     <li><button type="button" onclick="page('character')">Character</button></li>
                     <li><button type="button" onclick="page('fighting')">Fighting</button></li>
-                    <li><button type="button"  onclick="page('equipment')">Equipment</button></li>
-                    <li><button type="button" onclick="page('spellcasting')">Spellcasting</button></li>
                     <li><button type="button" onclick="page('personality')">Personality</button></li>
                 </ul>
                 <div id="character" style="display: block">
@@ -160,44 +158,6 @@
                     <h2><b>{{ form.sIntelligence}} Intelligence Saving Throw</b></h2>
                     <h2><b>{{ form.sWisdom }} Wisdom Saving Throw</b></h2>
                     <h2><b>{{ form.sCharisma }} Charisma Saving Throw</b></h2>
-                </div>
-                <div id="equipment" style="display: none">
-                    {% for item in equipment %}
-                        <div class="item">
-                            <p>{{ item.amount }} {{ item.name }}</p>
-                            {% if user.is_authenticated %}
-                                {% if form.author == request.user %}
-                                    <p><a href="{% url 'sheets:editItem' item.name slug %}">Edit</a></p>
-                                    <p><a href="{% url 'sheets:removeItem' item.name slug %}">Remove</a></p>
-                                {% endif %}
-                            {% endif %}
-                        </div>
-                    {% endfor %}
-                    {% if user.is_authenticated %}
-                        {% if form.author == request.user %}
-                            <p><a href="{% url 'sheets:addItem' slug %}">Add</a></p>
-                        {% endif %}
-                    {% endif %}
-                </div>
-                <div id="spellcasting" style="display: none">
-                    {% for spell in spells %}
-                        {% if spell.sht == sheet %}
-                        <div class="spell">
-                            <p><a href="{{ spell.reference }}">{{ spell.name }}</a></p>
-                            <p>{{ spell.get_level_display }}</p>
-                            {% if user.is_authenticated %}
-                                {% if form.author == request.user %}
-                                    <p><a href="{% url 'sheets:removeSpell' spell.name slug %}">Remove</a></p>
-                                {% endif %}
-                            {% endif %}
-                        </div>
-                        {% endif %}
-                    {% endfor %}
-                    {% if user.is_authenticated %}
-                        {% if form.author == request.user %}
-                            <p><a href="{% url 'sheets:addSpell' slug %}">Add</a></p>
-                        {% endif %}
-                    {% endif %}
                 </div>
                 <div id="personality" style="display: none">
                     <p><b>Personality Traits: </b>{{ form.personalityTraits }}</p>

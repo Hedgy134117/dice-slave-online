@@ -67,7 +67,7 @@ input[type=checkbox][readonly] {
     font-size: 16px;
 }
 
-img {
+.xIcon, .editIcon {
     width: 15px;
     height: 15px;
 }
