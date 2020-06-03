@@ -9,7 +9,7 @@
 
 {% block content %}
 <div>
-    <h2>{{ action }} a {{ thing }}</h2>
+    <h2>{{ title }}</h2>
     <form action="{{ url }}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <table>

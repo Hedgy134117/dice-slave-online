@@ -8,6 +8,7 @@ from .models import Sheet, SheetGroup, Item, Skill, Spell
 from . import forms
 
 from django.core.management import call_command
+from django.urls import reverse
 
 import json
 
@@ -113,6 +114,10 @@ def ajaxSheetDetail(request, id):
 
 # ---------- ITEMS ---------- # 
 def addItem(request, id):
+    title = "Add an Item"
+    action = "Add"
+    url = reverse('sheets:addItem', args=[id])
+
     sheet = Sheet.objects.get(id=id)
     form = forms.AddItem()
 
@@ -133,11 +138,15 @@ def addItem(request, id):
         else:
             form = forms.AddItem()
             form.sht = Sheet.objects.get(id=id)
-        return render(request, 'sheets/addItem.html', { 'form': form, 'id': id })
+        return render(request, 'sheets/sheetForm.html', { 'form': form, 'title': title, 'action': action, 'url': url })
     else:
         return redirect('sheets:list')
 
 def editItem(request, itemID, sheetID):
+    title = "Edit an Item"
+    action = "Edit"
+    url = reverse('sheets:editItem', args=[itemID, sheetID])
+
     sheet = Sheet.objects.get(id=sheetID)
     item = Item.objects.get(id=itemID)
 
@@ -153,7 +162,7 @@ def editItem(request, itemID, sheetID):
                 return redirect('sheets:detail', id=sheetID)
         else:
             form = forms.AddItem(instance=item)
-            return render(request, 'sheets/editItem.html', { 'form': form, 'item': item, 'id': sheetID })
+            return render(request, 'sheets/sheetForm.html', { 'form': form, 'title': title, 'action': action, 'url': url })
     else:
         return redirect('sheets:list')
 
@@ -192,6 +201,10 @@ def removeSkill(request, name, slug):
 
 # ---------- SPELLS ---------- # 
 def addSpell(request, id):
+    title = "Add a Spell"
+    action = "Add"
+    url = reverse('sheets:addSpell', args=[id])
+
     sheet = Sheet.objects.get(id=id)
 
     if request.user == sheet.author:
@@ -205,11 +218,15 @@ def addSpell(request, id):
                 return redirect('sheets:detail', id=id)
         else:
             form = forms.AddSpell()
-            return render(request, 'sheets/addSpell.html', { 'form': form, 'id': id })
+            return render(request, 'sheets/sheetForm.html', { 'form': form, 'title': title, 'action': action, 'url': url })
     else:
         return redirect('sheets:list')
 
 def editSpell(request, spellID, sheetID):
+    title = "Edit a Spell"
+    action = "Edit"
+    url = reverse('sheets:editSpell', args=[spellID, sheetID])
+
     sheet = Sheet.objects.get(id=sheetID)
     spell = Spell.objects.get(id=spellID)
 
@@ -225,7 +242,7 @@ def editSpell(request, spellID, sheetID):
                 return redirect('sheets:detail', id=sheetID)
         else:
             form = forms.AddSpell(instance=spell)
-            return render(request, 'sheets/editSpell.html', { 'form': form, 'spell': spell, 'id': sheetID })
+            return render(request, 'sheets/sheetForm.html', { 'form': form, 'title': title, 'action': action, 'url': url })
     else:
         return redirect('sheets:list')
 
