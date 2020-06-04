@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Create Group{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'sheets/sheetForms.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div>
+        <h2>Create a new Group</h2>
+        <form action="{% url 'sheets:createGroup' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <table>
+                {{ form.as_table }}
+            </table>
+            <div class="button"><h2><a onclick="this.closest('form').submit();return false;">Create</a></h2></div>
+        </form>
+    </div>
+{% endblock %}

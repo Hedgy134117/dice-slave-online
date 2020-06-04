@@ -1,0 +1,42 @@
+label {
+    display: block;
+    padding: 5px 0px 5px 0px;
+    font-size: 24px;
+}
+
+form input[type='text'], form input[type='number'], form input[type='password'] {
+    margin: 5px 0px 5px 0px;
+    padding: 10px;
+    width: 50%;
+
+    background-color: #f1f1f1;
+    border: none;
+    border-bottom: 2px solid #8860d0;
+    -webkit-transiton: 0.25s;
+    transition: 0.25s;
+    border-radius: 4px;
+}
+
+form input[type='text']:focus, form input[type='number']:focus, form input[type='password']:focus {
+    border-bottom: 4px solid #8860d0;
+}
+
+input[type='submit'] {
+    margin: 10px;
+    margin-bottom: 0px;
+    padding: 10px;
+    width: 100%;
+}
+
+.double-form p input {
+    width: 25%;
+}
+
+.long-form p input {
+    width: 90%;
+}
+
+input[type='checkbox'] {
+    width: 25px;
+    height: 25px;
+}

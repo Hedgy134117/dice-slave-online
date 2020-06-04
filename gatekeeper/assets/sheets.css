@@ -1,0 +1,89 @@
+.sheets {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 30px;
+    }
+
+@media (pointer:coarse) {
+    .sheets {grid-template-columns: 1fr;}
+}
+
+.sheet {
+    padding: 10px;
+    margin: 20px auto 20px auto;
+}
+
+.sheet a {
+    color: #454545;
+    text-decoration: none;
+    padding: 5px;
+    text-decoration: none;
+}
+
+.sheet p {
+    color: #7F7F7F;
+}
+
+.stat {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+}
+
+@media (pointer:coarse) {
+    .stat { display: block; }
+}
+
+.stat-main {
+    text-align: center;
+    padding: 5px;
+    width: 100%;
+}
+
+.stat-section {
+      padding: 10px;
+      margin: 10px;
+      min-width: 300px;
+}
+
+progress[value] {
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+progress[value]::-webkit-progress-bar {
+    background-color: #d9d9d9;
+}
+
+progress[value]::-webkit-progress-value {
+    background-color: #8860d0;
+}
+
+.item {
+    display: grid;
+    grid-template-columns: 50% 25% 25%;
+    grid-template-areas: "name edit remove"
+}
+
+.item-name {
+    grid-area: name;
+}
+
+.item-edit {
+    grid-area: edit;
+}
+
+.item-remove {
+    grid-area: remove;
+}
+
+.skill {
+    display: grid;
+    grid-template-columns: 75% 25%;
+}
+
+.spell {
+    display: grid;
+    grid-template-columns: 50% 25% 25%;
+}

@@ -1,0 +1,178 @@
+{% extends 'base.html' %}
+
+{% block title %}Edit Sheet{% endblock %}
+
+{% load static %}
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'sheets/sheetDetail.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'sheets/editSheet.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div>
+        <form action="{% url 'sheets:edit' id %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <p>{{ form.errors }}</p>
+            <h1>Name: {{ form.name }}</h1>
+            <p>Hidden: {{ form.hidden }}</p>
+            <h1>Group: {{ form.sheetGroup }}</h1>
+            <div>
+                <ul id="sheetNav">
+                    <li><button type="button" onclick="page('character')">Character</button></li>
+                    <li><button type="button" onclick="page('fighting')">Fighting</button></li>
+                    <li><button type="button" onclick="page('personality')">Personality</button></li>
+                </ul>
+                <div id="character" style="display: block">
+                    <div class="column">
+                        <div class="info">
+                            <h2><b>Class: </b>{{ form.Class }}</h2>
+                            <h2><b>Background: </b>{{ form.background }}</h2>
+                            <h2><b>Race: </b>{{ form.race }}</h2>
+                            <h2><b>XP: </b>{{ form.xp }}</h2>
+                            <h2><b>Level: </b>{{ form.level }}</h2>
+                            <h2><b>Hit Dice:</b> {{ form.hitDice }}</h2>
+                        </div>
+                        <div class="money">
+                            <h2 class="small-input">{{ form.copper }} <b>copper</b></h2>
+                            <h2 class="small-input">{{ form.silver }} <b>silver</b></h2>
+                            <h2 class="small-input">{{ form.gold }} <b>gold</b></h2>
+                            <h2 class="small-input">{{ form.platinum }} <b>platinum</b></h2>
+                        </div>
+                        <div class="stats">
+                            <h2 class="small-input"><b>Strength:</b> {{ form.strength }} + {{ form.strengthMod }}</h2>
+                            <h2 class="small-input"><b>Dexterity:</b> {{ form.dexterity }} + {{ form.dexterityMod }}</h2>
+                            <h2 class="small-input"><b>Constitution:</b> {{ form.constitution }} + {{ form.constitutionMod }}</h2>
+                            <h2 class="small-input"><b>Intelligence:</b> {{ form.intelligence }} + {{ form.intelligenceMod }}</h2>
+                            <h2 class="small-input"><b>Wisdom:</b> {{ form.wisdom }} + {{ form.wisdomMod }}</h2>
+                            <h2 class="small-input"><b>Charisma:</b> {{ form.charisma }} + {{ form.charismaMod }}</h2>
+                            <h2 class="small-input"><b>Proficiency:</b> {{ form.proficiency }}</h2>
+                        </div>
+                    </div>
+                    <div class="column">
+                        <div class="skills">
+                            <div class="column">
+                                <div class="skill">
+                                    <p>{{ form.acrobatics }}</p>
+                                    <p>-</p>
+                                    <p>Acrobatics</p>
+                                </div>
+                                <div class="skill">
+                                    <p>{{ form.animalHandling }}</p>
+                                    <p>-</p>
+                                    <p>Aimal Handling</p>
+                                </div>
+                                <div class="skill">
+                                    <p>{{ form.arcana }}</p>
+                                    <p>-</p>
+                                    <p>Arcana</p>
+                                </div>
+                                <div class="skill">
+                                    <p>{{ form.athletics }}</p>
+                                    <p>-</p>
+                                    <p>Athletics</p>
+                                </div>
+                                <div class="skill">
+                                    <p>{{ form.deception }}</p>
+                                    <p>-</p>
+                                    <p>Deception</p>
+                                </div>
+                                <div class="skill">
+                                    <p>{{ form.history }}</p>
+                                    <p>-</p>
+                                    <p>History</p>
+                                </div>
+                                <div class="skill">
+                                    <p>{{ form.insight }}</p>
+                                    <p>-</p>
+                                    <p>Insight</p>
+                                </div>
+                                <div class="skill">
+                                    <p>{{ form.intimidation }}</p>
+                                    <p>-</p>
+                                    <p>Intimidation</p>
+                                </div>
+                                <div class="skill">
+                                    <p>{{ form.investigation}}</p>
+                                    <p>-</p>
+                                    <p>Investigation</p>
+                                </div>
+                            </div>
+                            <div class="column">
+                                <div class="skill">
+                                    <p>{{ form.medicine }}</p>
+                                    <p>-</p>
+                                    <p>Medicine</p>
+                                </div>
+                                <div class="skill">
+                                    <p>{{ form.nature }}</p>
+                                    <p>-</p>
+                                    <p>Nature</p>
+                                </div>
+                                <div class="skill">
+                                    <p>{{ form.perception }}</p>
+                                    <p>-</p>
+                                    <p>Perception</p>
+                                </div>
+                                <div class="skill">
+                                    <p>{{ form.performance }}</p>
+                                    <p>-</p>
+                                    <p>Performance</p>
+                                </div>
+                                <div class="skill">
+                                    <p>{{ form.persuasion }}</p>
+                                    <p>-</p>
+                                    <p>Persuasion</p>
+                                </div>
+                                <div class="skill">
+                                    <p>{{ form.religion }}</p>
+                                    <p>-</p>
+                                    <p>Religion</p>
+                                </div>
+                                <div class="skill">
+                                    <p>{{ form.sleightOfHand }}</p>
+                                    <p>-</p>
+                                    <p>Sleight of Hand</p>
+                                </div>
+                                <div class="skill">
+                                    <p>{{ form.stealth }}</p>
+                                    <p>-</p>
+                                    <p>Stealth</p>
+                                </div>
+                                <div class="skill">
+                                    <p>{{ form.survival }}</p>
+                                    <p>-</p>
+                                    <p>Survival</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="fighting" style="display: none">
+                    <h2><b>AC:</b> {{ form.armorClass }}</h2>
+                    <h2><b>Initiative:</b> {{ form.initiative }}</h2>
+                    <h2><b>Speed:</b> {{ form.speed }}</h2>
+                    <h2><b>HP:</b> {{ form.hitPoints }} / {{ form.maxHitPoints }}</h2>
+                    <h2><b>{{ form.sStrength }} Strength Saving Throw</b></h2>
+                    <h2><b>{{ form.sDexterity}} Dexterity Saving Throw</b></h2>
+                    <h2><b>{{ form.sConstitution }} Constitution Saving Throw</b></h2>
+                    <h2><b>{{ form.sIntelligence}} Intelligence Saving Throw</b></h2>
+                    <h2><b>{{ form.sWisdom }} Wisdom Saving Throw</b></h2>
+                    <h2><b>{{ form.sCharisma }} Charisma Saving Throw</b></h2>
+                </div>
+                <div id="personality" style="display: none">
+                    <p><b>Personality Traits: </b>{{ form.personalityTraits }}</p>
+                    <p><b>Ideals: </b>{{ form.ideals }}</p>
+                    <p><b>Bonds: </b>{{ form.bonds }}</p>
+                    <p><b>Flaws: </b>{{ form.flaws }}</p>
+                    <p><b>Features & Traits: </b>{{ form.featuresTraits }}</p>
+                    <p><b>Other Proficiences: </b>{{ form.otherProficiencies }}</p>
+                    <p><b>Languages: </b>{{ form.languages }}</p>
+                </div>
+            </div>
+
+            <br />
+            <div class="button"><h2><a onclick="this.closest('form').submit();return false;">Finish</a></h2></div>
+        </form>
+    </div>
+    <script src="{% static 'sheets/sheetNav.js' %}"></script>
+{% endblock %}
