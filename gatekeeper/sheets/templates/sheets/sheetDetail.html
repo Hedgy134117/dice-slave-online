@@ -273,6 +273,7 @@
                         <p>{{ item.amount }}</p>
                         <p>{{ item.weight }}</p>
                         <p>{{ item.cost }}</p>
+                        {% if sheet.author == request.user %}<img class="editIcon" src="{% static 'sheets/pen.png' %}">{% endif %}
                     <!-- {% if user.is_authenticated %}
                         <p><a href="{% url 'sheets:editItem' item.id id %}">Edit</a></p>
                         <p><a href="{% url 'sheets:removeItem' item.id id %}">Remove</a></p>
