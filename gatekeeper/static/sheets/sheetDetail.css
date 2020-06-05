@@ -33,7 +33,7 @@ input[type=checkbox][readonly] {
     pointer-events: none;
 }
 
-#side-editor {
+.side-editor {
     background-color: var(--element-bg);
 
     position: absolute;
@@ -43,12 +43,12 @@ input[type=checkbox][readonly] {
     padding-right: 12px;
 }
 
-#side-editor p {
+.side-editor p {
     position: absolute;
     padding-right: 12px;
 }
 
-#side-editor img {
+.side-editor img {
     padding-top: 12px;
 
     float: left;
@@ -58,11 +58,11 @@ input[type=checkbox][readonly] {
     /* right: 45%; */
 }
 
-#side-editor img:hover {
+.side-editor img:hover {
     cursor: pointer;
 }
 
-#side-editor input {
+.side-editor input {
     padding: 12px;
     font-size: 16px;
 }
@@ -72,6 +72,20 @@ input[type=checkbox][readonly] {
     height: 15px;
 }
 
+
+#equipment-editor div {
+    display: flex;
+    flex-direction: column;
+}
+
+#equipment-editor input {
+    margin-top: 12px;
+    margin-bottom: 12px;
+}
+
+#equipment-editor input:first-of-type {
+    margin-top: 40px;
+}
 
 @media screen and (max-width: 1000px) {
     #sheetNav {
@@ -98,7 +112,7 @@ input[type=checkbox][readonly] {
         width: 50%;
     }
 
-    #side-editor {
+    .side-editor {
         background-color: var(--element-bg);
         position: fixed;
         right: 0;
@@ -108,12 +122,12 @@ input[type=checkbox][readonly] {
         padding-left: 12px;
         padding-right: 12px;  
     }
-    #side-editor p {
+    .side-editor p {
         position: absolute;
         padding-right: 12px;
         padding-left: 12px;
     }
-    #side-editor img {
+    .side-editor img {
         padding-top: 12px;
         padding-left: 24px;
     

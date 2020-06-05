@@ -132,6 +132,8 @@ class Item(models.Model):
     name = models.CharField(max_length=100)
     amount = models.IntegerField(default=1)
     reference = models.URLField(max_length=200, verbose_name="Link for Reference", blank=True, null=True, default="https://roll20.net/compendium/dnd5e/Items%20List#content")
+    weight = models.FloatField(default=0)
+    cost = models.CharField(max_length=50, default="1 gp")
 
     type_choices = (
         ('weapon', 'Weapon'),
