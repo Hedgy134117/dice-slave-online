@@ -173,6 +173,28 @@ def removeItem(request, itemID, sheetID):
     item.delete()
     return redirect('sheets:detail', id=sheetID)
 
+def ajaxItem(request, id):
+    item = Item.objects.filter(id=id)
+    response = {}
+    response['item'] = json.loads(serializers.serialize('json', item))
+    return JsonResponse(response)
+
+@csrf_exempt
+def ajaxItemEdit(request, id):
+    name = request.POST.get('name')
+    amount = request.POST.get('amount')
+    weight = request.POST.get('weight')
+    cost = request.POST.get('cost')
+    item = Item.objects.get(id=id)
+    
+    item.name = name
+    item.amount = amount
+    item.weight = weight
+    item.cost = cost
+    item.save()
+    
+    return JsonResponse({'success': True})
+
 # ---------- (UNUSED) SKILLS ---------- # 
 def addSkill(request, slug):
     sheet = Sheet.objects.get(slug=slug)

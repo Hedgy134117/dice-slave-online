@@ -18,6 +18,8 @@ urlpatterns = [
     path('addItem/<id>/', views.addItem, name='addItem'),
     path('editItem/<itemID>/<sheetID>/', views.editItem, name='editItem'),
     path('removeItem/<itemID>/<sheetID>/', views.removeItem, name='removeItem'),
+    path('items/<id>/get/', views.ajaxItem, name='ajaxItem'),
+    path('items/<id>/post/', views.ajaxItemEdit, name='ajaxItemEdit'),
 
     # ---------- (UNUSED) SKILLS ---------- # 
     path('addSkill/<slug:slug>/', views.addSkill, name='addSkill'),

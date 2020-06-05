@@ -19,5 +19,7 @@ function page(openPage) {
             }
         }
     }
-    document.getElementById('side-editor').style = "display: none;"
+    for (var i = 0; i < document.getElementsByClassName('side-editor').length; i++) {
+        document.getElementsByClassName('side-editor')[i].style = "display: none;";
+    }
 }
