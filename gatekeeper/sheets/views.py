@@ -195,6 +195,12 @@ def ajaxItemEdit(request, id):
     
     return JsonResponse({'success': True})
 
+def ajaxItemRemove(request, id):
+    item = Item.objects.get(id=id)
+    item.delete()
+
+    return JsonResponse({'success': True})
+
 # ---------- (UNUSED) SKILLS ---------- # 
 def addSkill(request, slug):
     sheet = Sheet.objects.get(slug=slug)

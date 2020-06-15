@@ -37,6 +37,7 @@
                         <input id="equipment-editor-cost" />
                     </div>
                     <input type="submit" onclick="editEquipment()" />
+                    <input type="button" class="delete" value="Delete" onclick="removeEquipment()" />
                 </div>
             {% endif %}
 
@@ -273,11 +274,10 @@
                         <p>{{ item.amount }}</p>
                         <p>{{ item.weight }}</p>
                         <p>{{ item.cost }}</p>
-                        {% if sheet.author == request.user %}<img class="editIcon" src="{% static 'sheets/pen.png' %}">{% endif %}
-                    <!-- {% if user.is_authenticated %}
-                        <p><a href="{% url 'sheets:editItem' item.id id %}">Edit</a></p>
-                        <p><a href="{% url 'sheets:removeItem' item.id id %}">Remove</a></p>
-                        {% endif %} -->
+                        {% if sheet.author == request.user %}
+                            <img class="editIcon" src="{% static 'sheets/pen.png' %}"> 
+                            <!-- <p><a href="{% url 'sheets:removeItem' item.id id %}">Remove</a></p> -->
+                        {% endif %}
                     </div>
                 {% endfor %}
                 {% if user.is_authenticated %}
@@ -410,6 +410,18 @@
             itemEditRequest.onreadystatechange = function() {
                 if (this.readyState == 4 && this.status == 200) {
                     getEquipment(item['pk'], updateEquipment);
+                }
+            }
+        }
+
+        function removeEquipment() {
+            var itemRemoveRequest = new XMLHttpRequest();
+            itemRemoveRequest.open('GET', '/sheets/items/' + item['pk'] + '/remove', true);
+            itemRemoveRequest.send();
+            itemRemoveRequest.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    document.getElementById('item' + item['pk']).remove();
+                    document.getElementById('equipment-editor').style = 'display: none;';
                 }
             }
         }

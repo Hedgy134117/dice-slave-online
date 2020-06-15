@@ -72,6 +72,14 @@ input[type=checkbox][readonly] {
     height: 15px;
 }
 
+.delete {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+
+    background-color: #f88379;
+}
+
 
 #equipment-editor div {
     display: flex;
