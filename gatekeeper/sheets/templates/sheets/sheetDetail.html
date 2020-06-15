@@ -31,13 +31,13 @@
                 <div id="equipment-editor" class="side-editor" style="display: none;">
                     <img class="xIcon" src="{% static 'sheets/x.png' %}" onclick="document.getElementById('equipment-editor').style = 'display: none;'">
                     <div>
-                        <input id="equipment-editor-name" />
-                        <input id="equipment-editor-amount" />
-                        <input id="equipment-editor-weight" />
-                        <input id="equipment-editor-cost" />
+                        <input id="equipment-editor-name" placeholder="Name" />
+                        <input id="equipment-editor-amount" placeholder="Amount" />
+                        <input id="equipment-editor-weight" placeholder="Weight" />
+                        <input id="equipment-editor-cost" placeholder="Cost" />
                     </div>
-                    <input type="submit" onclick="editEquipment()" />
-                    <input type="button" class="delete" value="Delete" onclick="removeEquipment()" />
+                    <input id='equipment-editor-submit' type="submit" onclick="editEquipment()" />
+                    <input id='equipment-editor-delete' type="button" class="delete" value="Delete" onclick="removeEquipment()" />
                 </div>
             {% endif %}
 
@@ -282,7 +282,9 @@
                 {% endfor %}
                 {% if user.is_authenticated %}
                     {% if sheet.author == request.user %}
-                        <p><a href="{% url 'sheets:addItem' id %}">Add</a></p>
+                        <div id="add-item-button" class="button">
+                            <h2><a onclick="equipmentCreator()">Add</a></h2>
+                        </div>
                     {% endif %}
                 {% endif %}
             </div>
@@ -398,6 +400,23 @@
             }
         }
 
+        function addEquipment() {
+            var name = document.getElementById('equipment-editor-name').value;
+            var amount = document.getElementById('equipment-editor-amount').value;
+            var weight = document.getElementById('equipment-editor-weight').value;
+            var cost = document.getElementById('equipment-editor-cost').value;
+            itemAddRequest = new XMLHttpRequest();
+            itemAddRequest.open('POST', '/sheets/items/{{ id }}/add/', true);
+            itemAddRequest.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+            itemAddRequest.send('name=' + name + '&amount=' + amount + '&weight=' + weight + '&cost=' + cost);
+            itemAddRequest.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    data = JSON.parse(this.responseText);
+                    getEquipment(data['id'], updateEquipment);
+                }
+            }
+        }
+
         function editEquipment() {
             var name = document.getElementById('equipment-editor-name').value;
             var amount = document.getElementById('equipment-editor-amount').value;
@@ -427,13 +446,65 @@
         }
 
         function updateEquipment() {
-            var itemElements = document.getElementById('item' + item['pk']).childNodes;
-            console.log(itemElements);
-            console.log(itemElements[1].childNodes);
-            itemElements[1].childNodes[0].innerHTML = item['fields']['name'];
-            itemElements[3].innerHTML = item['fields']['amount'];
-            itemElements[5].innerHTML = item['fields']['weight'];
-            itemElements[7].innerHTML = item['fields']['cost'];
+            // If updating an item
+            try {
+                var itemElements = document.getElementById('item' + item['pk']).childNodes;
+                itemElements[1].childNodes[0].innerHTML = item['fields']['name'];
+                itemElements[3].innerHTML = item['fields']['amount'];
+                itemElements[5].innerHTML = item['fields']['weight'];
+                itemElements[7].innerHTML = item['fields']['cost'];
+            // If creating an item
+            } catch (error) {
+                /*
+                    Structure:
+                    <div class="item" id=("item" + id) onclick="getEquipment(id, equipmentEditor)">
+                        <p>Name</p>
+                        <p>Amount</p>
+                        <p>Weight</p>
+                        <p>Cost</p>
+                        <img class="editIcon" src="/static/sheets/pen.png">
+                    </div>
+                */
+                var equipment = document.getElementById('equipment');
+
+                // <div ...>
+                var itemContainer = document.createElement('div');
+                itemContainer.setAttribute('class', 'item');
+                itemContainer.id = 'item' + item['pk'];
+                itemContainer.setAttribute('onclick', "getEquipment('" + item['pk'] + "', equipmentEditor)");
+
+                // <p>Name</p>
+                var name = document.createElement('p');
+                name.innerHTML = item['fields']['name'];
+                itemContainer.appendChild(name);
+
+                // <p>Amount</p>
+                var amount = document.createElement('p');
+                amount.innerHTML = item['fields']['amount'];
+                itemContainer.appendChild(amount);
+
+                // <p>Weight</p>
+                var weight = document.createElement('p');
+                weight.innerHTML = item['fields']['weight'];
+                itemContainer.appendChild(weight);
+
+                // <p>Cost</p>
+                var cost = document.createElement('p');
+                cost.innerHTML = item['fields']['cost'];
+                itemContainer.appendChild(cost);
+
+                // <img ...>
+                var edit = document.createElement('img');
+                edit.setAttribute('class', 'editIcon');
+                edit.src = "{% static 'sheets/pen.png' %}";
+                itemContainer.appendChild(edit);
+
+                // Add to all equipment
+                document.getElementById('equipment').insertBefore(itemContainer, document.getElementById('add-item-button'));
+                
+                // Open equipment editor to prevent accidental duplicates
+                equipmentEditor(); 
+            }
         }
 
         function equipmentEditor() {
@@ -442,6 +513,18 @@
             document.getElementById('equipment-editor-amount').value = item['fields']['amount'];
             document.getElementById('equipment-editor-weight').value = item['fields']['weight'];
             document.getElementById('equipment-editor-cost').value = item['fields']['cost'];
+            document.getElementById('equipment-editor-submit').setAttribute('onclick', 'editEquipment()');
+            document.getElementById('equipment-editor-delete').style = 'display: block';
+        }
+
+        function equipmentCreator() {
+            document.getElementById('equipment-editor').style = 'display: block;';
+            document.getElementById('equipment-editor-name').value = '';
+            document.getElementById('equipment-editor-amount').value = '';
+            document.getElementById('equipment-editor-weight').value = '';
+            document.getElementById('equipment-editor-cost').value = '';
+            document.getElementById('equipment-editor-submit').setAttribute('onclick', 'addEquipment()');
+            document.getElementById('equipment-editor-delete').style = 'display: none;';
         }
     </script>
     <script src="{% static 'sheets/sheetNav.js' %}"></script>

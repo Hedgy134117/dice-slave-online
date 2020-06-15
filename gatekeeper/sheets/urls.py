@@ -19,6 +19,7 @@ urlpatterns = [
     path('editItem/<itemID>/<sheetID>/', views.editItem, name='editItem'),
     path('removeItem/<itemID>/<sheetID>/', views.removeItem, name='removeItem'),
     path('items/<id>/get/', views.ajaxItem, name='ajaxItem'),
+    path('items/<id>/add/', views.ajaxAddItem, name='ajaxAddItem'),
     path('items/<id>/post/', views.ajaxItemEdit, name='ajaxItemEdit'),
     path('items/<id>/remove/', views.ajaxItemRemove, name='ajaxItemRemove'),
 
