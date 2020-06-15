@@ -180,6 +180,25 @@ def ajaxItem(request, id):
     return JsonResponse(response)
 
 @csrf_exempt
+def ajaxAddItem(request, id):
+    name = request.POST.get('name')
+    amount = request.POST.get('amount')
+    weight = request.POST.get('weight')
+    cost = request.POST.get('cost')
+
+    form = forms.AddItem()
+    instance = form.save(commit=False)
+    instance.sht = Sheet.objects.get(id=id)
+    instance.name = name
+    instance.amount = amount
+    instance.weight = weight
+    instance.cost = cost
+    instance.save()
+
+    return JsonResponse({'id': instance.id})
+
+
+@csrf_exempt
 def ajaxItemEdit(request, id):
     name = request.POST.get('name')
     amount = request.POST.get('amount')
