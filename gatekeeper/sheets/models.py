@@ -80,6 +80,7 @@ class Sheet(models.Model):
     speed = models.IntegerField()
     maxHitPoints = models.IntegerField()
     hitPoints = models.IntegerField()
+    tempHitPoints = models.IntegerField(default=0)
     hitDice = models.CharField(max_length=250)
     sDeathSave1 = models.BooleanField(default=False)
     sDeathSave2 = models.BooleanField(default=False)
@@ -101,7 +102,7 @@ class Sheet(models.Model):
         return str(self.sheetGroup)
 
 class Spell(models.Model):
-    sht = models.ForeignKey(Sheet, on_delete=models.CASCADE, blank=True, null=True, editable=False)
+    sht = models.ForeignKey(Sheet, on_delete=models.CASCADE, blank=True, null=True, editable=True)
     name = models.CharField(max_length=50)
     reference = models.URLField(max_length=200, verbose_name="Link for Reference")
 
@@ -128,7 +129,7 @@ class Spell(models.Model):
 
 
 class Item(models.Model):
-    sht = models.ForeignKey(Sheet, on_delete=models.CASCADE, blank=True, null=True, editable=False)
+    sht = models.ForeignKey(Sheet, on_delete=models.CASCADE, blank=True, null=True, editable=True)
     name = models.CharField(max_length=100)
     amount = models.IntegerField(default=1)
     reference = models.URLField(max_length=200, verbose_name="Link for Reference", blank=True, null=True, default="https://roll20.net/compendium/dnd5e/Items%20List#content")
@@ -140,6 +141,8 @@ class Item(models.Model):
         ('item', 'Item'),
     )
     Type = models.CharField(max_length=100, choices=type_choices, default='item')
+    damage = models.CharField(max_length=7, default='1d6')
+    proficient = models.BooleanField(default=False)
     equipped = models.BooleanField(default=False)
 
 
