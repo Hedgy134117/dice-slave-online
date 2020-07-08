@@ -9,6 +9,7 @@ urlpatterns = [
     
     # ---------- SHEET ---------- # 
     path('sheet/<id>/', views.sheetDetail, name="detail"),
+    path('sheetNew/<id>/', views.sheetDetail_new, name='newDetail'),
     path('create/', views.createSheet, name='create'),
     path('edit/<id>/', views.editSheet, name='edit'),
     path('<id>/get/', views.ajaxSheetDetail, name='ajaxDetail'),

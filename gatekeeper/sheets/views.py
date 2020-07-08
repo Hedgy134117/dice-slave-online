@@ -48,6 +48,25 @@ def sheetDetail(request, id):
             'spells': spells,
         })
 
+def sheetDetail_new(request, id):
+    sheet = Sheet.objects.get(id=id)
+    equipment = Item.objects.filter(sht=sheet).order_by('-name')
+    spells = {}
+    for spell in Spell.objects.filter(sht=sheet):
+        if spell.get_level_display() in spells:
+            spells[spell.get_level_display()].append(spell)
+        else:
+            spells[spell.get_level_display()] = [spell]
+
+    return render(
+        request, 'sheets/sheetDetail_new.html', {
+            'sheet': sheet,
+            'equipment': equipment,
+            'id': id,
+            'request': request,
+            'spells': spells,
+        })
+
 def createSheet(request):
     form = forms.CreateSheet()
     # for group in SheetGroup.objects.all().order_by('name'):
@@ -196,7 +215,6 @@ def ajaxAddItem(request, id):
     instance.save()
 
     return JsonResponse({'id': instance.id})
-
 
 @csrf_exempt
 def ajaxItemEdit(request, id):
