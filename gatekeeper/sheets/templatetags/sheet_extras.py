@@ -19,7 +19,7 @@ def skill(id, stat, name):
     if tempValue >= 0:
         value = '+ ' + str(tempValue)
     else:
-        value = '- ' + str(tempValue)
+        value = '' + str(tempValue)
     
     return value
 
@@ -37,7 +37,7 @@ def saving_throw(id, stat):
     if tempValue >= 0:
         value = '+ ' + str(tempValue)
     else:
-        value = '- ' + str(tempValue)
+        value = '' + str(tempValue)
     
     return value
 
@@ -51,6 +51,6 @@ def item(strength, prof, isProf):
     if tempValue >= 0:
         value = '+ ' + str(tempValue)
     else:
-        value = '- ' + str(tempValue)
+        value = '' + str(tempValue)
 
     return value

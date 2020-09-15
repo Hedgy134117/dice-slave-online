@@ -213,6 +213,10 @@
                             <span>{{ sheet.maxHitPoints }}</span> 
                             {% if sheet.author == request.user %}<img class="editIcon" src="{% static 'sheets/pen.png' %}">{% endif %}
                         </span>
+                        <span class="getInfo" onclick="get(sheetEditor, 'tempHitPoints')"><b></b>
+                            <span>{{ sheet.tempHitPoints }}</span>
+                            {% if sheet.author == request.user %}<img class="editIcon" src="{% static 'sheets/pen.png' %}">{% endif %}
+                        </span>
                     </h2>
                     {% if sheet.sStrength %}
                     <h2><b>Strength Saving Throw</b></h2>
@@ -320,9 +324,6 @@
             </div>
         </div>
     </div>
-
-    <h1 style='text-align: center;'>Want to see a preview of the new sheet view? Click <a href="{% url 'sheets:newDetail' sheet.id %}">Here</a></h1>
-    <p style='text-align: center;'>(it's still a work in progress, so it's not a replacement for this view)</p>
 
     <!-- Sheet AJAX -->
     <script>

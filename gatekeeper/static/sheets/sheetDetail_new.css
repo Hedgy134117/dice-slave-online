@@ -142,6 +142,7 @@
     display: flex;
     flex-direction: column;
     overflow: auto;
+    border-bottom: 1px solid black;
 }
 
 #attacking-physical span {

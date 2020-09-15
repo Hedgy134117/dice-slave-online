@@ -6,5 +6,6 @@
     "gold":"With one gold piece, a character can buy a belt pouch, 50 feet of rope, or a goat. A skilled (but not exceptional) artisan can earn one gold piece a day. The gold piece is the standard unit of measure for wealth, even if the coin itself is not commonly used. When merchants discuss deals that involve goods or services worth hundreds or thousands of gold pieces, the transactions dont usually involve the exchange of individual coins. Rather, the gold piece is a standard measure of value, and the actual exchange is in gold bars, letters of credit, or valuable goods.",
     "platinum":"The platinum piece originates from fallen empires and lost kingdoms, and they sometimes arouse suspicion and skepticism when used in transactions. A platinum piece is worth 10 gold pieces.",
     "hitPoints":"Your character's hit points define how tough your character is in combat and other dangerous situations. Your hit points are determined by your Hit Dice.",
-    "maxHitPoints":"The max amount of hit points your character has."
+    "maxHitPoints":"The max amount of hit points your character has.",
+    "tempHitPoints": "The amount of temporary hit points your character has."
 }
